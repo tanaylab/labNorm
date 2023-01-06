@@ -20,7 +20,9 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
 <!-- badges: end -->
 
-The goal of `labNorm` is to easily compute normalized values for standard lab results. 
+`labNorm` provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in ["Personalized lab test models to quantify disease potentials in healthy individuals"](https://doi.org/10.1038/s41591-021-01468-6). 
+
+Allows users to easily obtain normalized values for standard lab results, and to visualize their distributions. For more information go to: https://tanaylab.weizmann.ac.il/labs/
 
 ## Installation
 
@@ -32,4 +34,27 @@ retmotes::install_github("tanaylab/labNorm")
 
 ## Example
 
+Normalize Hemoglobin values to age and sex: 
 
+```{r}
+library(labNorm)
+hemoglobin_data$quantile <- ln_normalize(
+    hemoglobin_data$value,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin"
+)
+head(hemoglobin_data)
+```
+
+Plot the quantiles vs values for age 50-60: 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+hemoglobin_data %>%
+    filter(age >= 50 & age <= 60) %>%
+    ggplot(aes(x = value, y = quantile, color = sex)) +
+    geom_point() +
+    theme_classic()
+```
