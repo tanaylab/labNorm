@@ -1,10 +1,10 @@
 #' Normalize lab values to age and gender
 #'
 #' @description Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" <doi:10.1038/s41591-021-01468-6>. \cr
-#' Breifly, 2.1B lab measurments taken from 2.8M individuals in the years 2002-2019 were filtered from severe chronic diseases and medication effects to generate a reference distribution for each lab. The reference distribution is then used in this function to give each lab measurment a normalized value between 0 and 1, which is the quantile of the lab value in the reference distribution. \cr
+#' The reference distribution used in this function are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution.
 #' \cr
-#' The reference distributions which are stored in the package itself are in the resolution of 20 quantile bins, and therefore can have an error of up to 5 quantiles (0.05). The full reference distributions can be used after downloading the data using the \code{ln_download_data()} function.
-#' \cr The list of supported labs can be found below or by running \code{LAB_INFO$short_name}.
+#' The reference distribution used in the function has a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. The full reference distributions can be used after downloading the data using the \code{ln_download_data()} function. \cr
+#' The list of supported labs can be found below or by running \code{LAB_INFO$short_name}.
 #'
 #' @section labs:
 #' The following labs are supported:

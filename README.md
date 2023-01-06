@@ -11,19 +11,21 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
 <!-- badges: end -->
 
-`labNorm` provides functions for normalizing standard laboratory
-measurements (e.g. hemoglobin, cholesterol levels) according to age and
-gender, based on the algorithms described in [“Personalized lab test
+`labNorm` is an R package that provides functions for normalizing
+standard laboratory measurements (e.g. hemoglobin, cholesterol levels)
+according to age and gender. These normalizations are based on the
+algorithms described in the research paper [“Personalized lab test
 models to quantify disease potentials in healthy
 individuals”](https://doi.org/10.1038/s41591-021-01468-6).
 
-Allows users to easily obtain normalized values for standard lab
-results, and to visualize their distributions. For more information go
-to: <https://tanaylab.weizmann.ac.il/labs/>
+This package allows users to easily obtain normalized values for their
+lab results and to visualize the distribution of these values. For more
+information go to: <https://tanaylab.weizmann.ac.il/labs/>
 
 ## Installation
 
-You can install the development version of labNorm like so:
+You can install the development version of `labNorm` from GitHub using
+the `remotes` package:
 
 ``` r
 retmotes::install_github("tanaylab/labNorm")
@@ -31,16 +33,19 @@ retmotes::install_github("tanaylab/labNorm")
 
 ## Example
 
-Normalize Hemoglobin values to age and sex:
+Normalize hemoglobin values for a group of subjects:
 
 ``` r
 library(labNorm)
+
+# Add a column for the normalized values
 hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$value,
     hemoglobin_data$age,
     hemoglobin_data$sex,
     "Hemoglobin"
 )
+
 head(hemoglobin_data)
 #>   age  sex  value  quantile
 #> 1  20 male  5.590 0.0232022
@@ -64,6 +69,7 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+
 hemoglobin_data %>%
     filter(age >= 50 & age <= 60) %>%
     ggplot(aes(x = value, y = quantile, color = sex)) +
