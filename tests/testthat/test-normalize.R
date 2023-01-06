@@ -1,3 +1,5 @@
+options(labNorm.use_low_res = TRUE)
+
 test_that("ln_normalize returns values", {
     expect_type(ln_normalize(c(1, 2, 3), c(25, 30, 35), c("male", "female", "male"), "Hemoglobin"), "double")
 })

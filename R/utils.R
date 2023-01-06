@@ -12,24 +12,30 @@ load_quantiles <- function(fn, alert = TRUE) {
 }
 
 get_quantiles <- function() {
+    if (is.null(getOption("labNorm.use_low_res"))) {
+        options(labNorm.use_low_res = FALSE)
+    }
+    if (!is.null(getOption("labNorm.use_low_res")) && getOption("labNorm.use_low_res")) {
+        return(LAB_QUANTILES)
+    }
     quantiles <- NULL
     if (!is.null(the$quantiles)) {
         quantiles <- the$quantiles
     } else {
         fn <- "high_res_labs.rds"
-        if (!is.null(getOption("ln_dir")) && file.exists(file.path(getOption("ln_dir"), fn))) {
-            quantiles <- load_quantiles(file.path(getOption("ln_dir"), fn))
+        if (!is.null(getOption("labNorm.dir")) && file.exists(file.path(getOption("labNorm.dir"), fn))) {
+            quantiles <- load_quantiles(file.path(getOption("labNorm.dir"), fn))
         } else if (file.exists(file.path(rappdirs::user_data_dir("Labnorm"), fn))) {
             quantiles <- load_quantiles(file.path(rappdirs::user_data_dir("Labnorm"), fn))
         } else if (file.exists(fn)) {
             quantiles <- load_quantiles(fn)
-        } else {
-            if (interactive() && !the$asked_to_download) {
+        } else {            
+            if (interactive() && !the$asked_to_download && !getOption("labNorm.use_low_res")) {
                 the$asked_to_download <- TRUE
                 # ask the user if they want to download the quantiles
                 if (the$yesno2("The high resolution reference distributions are not available. Would you like to download them now?\n(this question will only be asked once per session)")) {
                     ln_download_data()
-                    quantiles <- load_quantiles(file.path(getOption("ln_dir"), fn), alert = FALSE)
+                    quantiles <- load_quantiles(file.path(getOption("labNorm.dir"), fn), alert = FALSE)
                 }
             }
         }

@@ -1,3 +1,5 @@
+options(labNorm.use_low_res = TRUE)
+
 test_that("LAB_INFO and LAB_QUANTILES match", {
     expect_true(all.equal(LAB_INFO$short_name, names(LAB_QUANTILES)))
 })

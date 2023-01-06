@@ -34,7 +34,7 @@ The list of supported labs can be found below or by running \code{LAB_INFO$short
 \section{reference distribution}{
 
 The reference distribution used in the function has a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. The full reference distributions can be used after downloading the data using the \code{ln_download_data()} function. \cr
-The function would first look for the downloaded values at \code{getOption("ln_dir")}, then at \code{rappdirs::user_data_dir("Labnorm")}, then at the current working directory. If the data is not found, the lower resolution distribution. \cr
+The function would first look for the downloaded values at \code{getOption("labNorm.dir")}, then at \code{rappdirs::user_data_dir("Labnorm")}, then at the current working directory. If the data is not found, the lower resolution distribution. \cr
 You can check if the high resolution data was downloaded using \code{ln_is_high_res()}.
 }
 

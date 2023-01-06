@@ -1,7 +1,7 @@
 #' Download high-resolution reference distributions
 #'
 #' @description The data would be downloaded to the directory specified by the \code{dir} parameter. Note
-#' that if you specified a directory different from the default, you will need to set \code{options(ln_dir = dir)} in order for the package to use the downloaded data in future sessions.
+#' that if you specified a directory different from the default, you will need to set \code{options(labNorm.dir = dir)} in order for the package to use the downloaded data in future sessions.
 #' \cr
 #' Default directories are:
 #'
@@ -58,8 +58,8 @@ ln_download_data <- function(dir = NULL) {
     cli::cli_alert_success("Data downloaded succesfully to {.field {dir}}.")
 
     if (!default_dir) {
-        cli::cli_alert_info("The data was downloaded to {.field {dir}}. You will need to set {.code options(ln_dir = '{dir}')} in order for the package to use the downloaded data in future sessions.")
+        cli::cli_alert_info("The data was downloaded to {.field {dir}}. You will need to set {.code options(labNorm.dir = '{dir}')} in order for the package to use the downloaded data in future sessions.")
     }
 
-    options(ln_dir = dir)
+    options(labNorm.dir = dir)
 }

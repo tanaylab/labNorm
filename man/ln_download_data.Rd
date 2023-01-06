@@ -19,7 +19,7 @@ True if the data was downloaded, false otherwise.
 }
 \description{
 The data would be downloaded to the directory specified by the \code{dir} parameter. Note
-that if you specified a directory different from the default, you will need to set \code{options(ln_dir = dir)} in order for the package to use the downloaded data in future sessions.
+that if you specified a directory different from the default, you will need to set \code{options(labNorm.dir = dir)} in order for the package to use the downloaded data in future sessions.
 \cr
 Default directories are:
 \itemize{

@@ -1,3 +1,5 @@
+options(labNorm.use_low_res = TRUE)
+
 test_that("unit conversion works", {
     # emulate a dataset with different units
     hemoglobin_diff_units <- hemoglobin_data
