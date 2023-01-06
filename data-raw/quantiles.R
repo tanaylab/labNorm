@@ -148,6 +148,16 @@ create_labs_data <- function() {
     usethis::use_data(LAB_QUANTILES, UNITS_CONVERSION, overwrite = TRUE, internal = TRUE, compress = "xz")
 }
 
+create_high_res_labs_data <- function() {
+    LAB_QUANTILES <- plyr::llply(features$quantile_file, function(lab) {
+        readr::read_rds(file.path("data-raw", "large", paste0(lab, ".rds")))
+    })
+
+    names(LAB_QUANTILES) <- features$feature_name
+
+    readr::write_rds(LAB_QUANTILES, "data-raw/high_res_labs.rds", compress = "xz", compression = 9)
+}
+
 create_lab_info <- function() {
     LAB_INFO <- as.data.frame(features) %>%
         select(short_name = feature_name, long_name = full_name, units, default_units)
@@ -228,4 +238,5 @@ plot_all_large_vs_small <- function(raw_quantiles_dir = "/net/mraid14/export/tgd
 # import_all_labs()
 create_labs_data()
 create_lab_info()
+create_high_res_labs_data()
 # plot_all_large_vs_small()

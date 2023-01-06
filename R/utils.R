@@ -1,3 +1,64 @@
+the <- new.env(parent = emptyenv())
+the$asked_to_download <- FALSE
+the$alerted_about_download <- FALSE
+the$yesno2 <- yesno::yesno2 # used inside an environment so that it can be mocked
+
+load_quantiles <- function(fn, alert = TRUE) {
+    the$quantiles <- readRDS(fn)
+    if (alert) {
+        cli::cli_alert("Loading quantiles from {.file {fn}}.")
+    }
+    return(the$quantiles)
+}
+
+get_quantiles <- function() {
+    quantiles <- NULL
+    if (!is.null(the$quantiles)) {
+        quantiles <- the$quantiles
+    } else {
+        fn <- "high_res_labs.rds"
+        if (!is.null(getOption("ln_dir")) && file.exists(file.path(getOption("ln_dir"), fn))) {
+            quantiles <- load_quantiles(file.path(getOption("ln_dir"), fn))
+        } else if (file.exists(file.path(rappdirs::user_data_dir("Labnorm"), fn))) {
+            quantiles <- load_quantiles(file.path(rappdirs::user_data_dir("Labnorm"), fn))
+        } else if (file.exists(fn)) {
+            quantiles <- load_quantiles(fn)
+        } else {
+            if (interactive() && !the$asked_to_download) {
+                the$asked_to_download <- TRUE
+                # ask the user if they want to download the quantiles
+                if (the$yesno2("The high resolution reference distributions are not available. Would you like to download them now?\n(this question will only be asked once per session)")) {
+                    ln_download_data()
+                    quantiles <- load_quantiles(file.path(getOption("ln_dir"), fn), alert = FALSE)
+                }
+            }
+        }
+    }
+
+    if (is.null(quantiles)) {
+        if (!the$alerted_about_download) {
+            cli::cli_alert("Using default quantiles. For higher resolution quantiles, run {.code ln_download_data()}. This message will only be shown once per session.")
+            the$alerted_about_download <- TRUE
+        }
+        quantiles <- LAB_QUANTILES
+    }
+
+    return(quantiles)
+}
+
+#' Check if data was downloaded
+#'
+#' @return True if the data was downloaded, false otherwise.
+#' @rdname ln_download_data
+ln_is_high_res <- function() {
+    quantiles <- get_quantiles()
+    if (identical(quantiles, LAB_QUANTILES)) {
+        return(FALSE)
+    } else {
+        return(TRUE)
+    }
+}
+
 validate_lab <- function(lab) {
     if (!(lab %in% LAB_INFO$short_name)) {
         cli::cli_abort("Lab {.field {lab}} is not available. Available labs can be found in {.code LAB_INFO$short_name}. Examples are {.field Hemoglobin} and {.field Creatinine}.", call = parent.frame(1))

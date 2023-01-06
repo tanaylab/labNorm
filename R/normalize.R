@@ -3,8 +3,13 @@
 #' @description Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" <doi:10.1038/s41591-021-01468-6>. \cr
 #' The reference distribution used in this function are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution.
 #' \cr
-#' The reference distribution used in the function has a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. The full reference distributions can be used after downloading the data using the \code{ln_download_data()} function. \cr
 #' The list of supported labs can be found below or by running \code{LAB_INFO$short_name}.
+#'
+#' @section reference distribution:
+#' The reference distribution used in the function has a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. The full reference distributions can be used after downloading the data using the \code{ln_download_data()} function. \cr
+#' The function would first look for the downloaded values at \code{getOption("ln_dir")}, then at \code{rappdirs::user_data_dir("Labnorm")}, then at the current working directory. If the data is not found, the lower resolution distribution. \cr
+#' You can check if the high resolution data was downloaded using \code{ln_is_high_res()}.
+#'
 #'
 #' @section labs:
 #' The following labs are supported:
@@ -82,7 +87,7 @@
 #' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
 #' @param units the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{LAB_INFO$default_units}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.
 #'
-#' @return a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used.
+#' @return a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_is_high_res()}.
 #'
 #' @examples
 #'
@@ -162,9 +167,11 @@ ln_normalize <- function(values, age, sex, lab, units = NULL) {
     sexes <- unique(sex)
     normalized <- rep(NA, length(values))
 
+    quantiles <- get_quantiles()
+
     for (cur_age in ages) {
         for (cur_sex in sexes) {
-            func <- LAB_QUANTILES[[lab]][[paste0(cur_age, ".", cur_sex)]]
+            func <- quantiles[[lab]][[paste0(cur_age, ".", cur_sex)]]
             cur_values <- values[age == cur_age & sex == cur_sex]
             normalized[age == cur_age & sex == cur_sex] <- func(cur_values)
         }
