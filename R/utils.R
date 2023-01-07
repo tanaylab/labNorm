@@ -29,7 +29,7 @@ get_quantiles <- function() {
             quantiles <- load_quantiles(file.path(rappdirs::user_data_dir("Labnorm"), fn))
         } else if (file.exists(fn)) {
             quantiles <- load_quantiles(fn)
-        } else {            
+        } else {
             if (interactive() && !the$asked_to_download && !getOption("labNorm.use_low_res")) {
                 the$asked_to_download <- TRUE
                 # ask the user if they want to download the quantiles

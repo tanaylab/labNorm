@@ -11,15 +11,15 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
 <!-- badges: end -->
 
-`labNorm` is an R package that provides functions for normalizing
-standard laboratory measurements (e.g. hemoglobin, cholesterol levels)
-according to age and gender. These normalizations are based on the
-algorithms described in the research paper [“Personalized lab test
-models to quantify disease potentials in healthy
+`labNorm` provides functions for normalizing standard laboratory
+measurements (e.g. hemoglobin, cholesterol levels) according to age and
+gender. These normalizations are based on the algorithms described in
+the research paper [“Personalized lab test models to quantify disease
+potentials in healthy
 individuals”](https://doi.org/10.1038/s41591-021-01468-6).
 
 This package allows users to easily obtain normalized values for their
-lab results and to visualize the distribution of these values. For more
+lab results and to project them on the population distribution. For more
 information go to: <https://tanaylab.weizmann.ac.il/labs/>
 
 ## Installation
@@ -45,6 +45,7 @@ hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$sex,
     "Hemoglobin"
 )
+#> → Using default quantiles. For higher resolution quantiles, run `ln_download_data()`. This message will only be shown once per session.
 
 head(hemoglobin_data)
 #>   age  sex  value  quantile

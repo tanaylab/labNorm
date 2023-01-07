@@ -14,6 +14,7 @@
 #'
 #'
 #' @param dir the directory to download the data to. If \code{NULL} and the user approves, the data will be downloaded to the package directory, using \code{rappdirs::user_data_dir("labnorm")}, otherwise - a temporary directory would be used.
+#' @param load load the data after downloading it.
 #'
 #' @return None.
 #'
@@ -23,7 +24,7 @@
 #' }
 #'
 #' @export
-ln_download_data <- function(dir = NULL) {
+ln_download_data <- function(dir = NULL, load = TRUE) {
     default_dir <- FALSE
     if (is.null(dir)) {
         dir <- rappdirs::user_data_dir("labNorm")
@@ -62,4 +63,9 @@ ln_download_data <- function(dir = NULL) {
     }
 
     options(labNorm.dir = dir)
+
+    if (load) {
+        cli::cli_alert("Loading the data into the environment.")
+        the$quantiles <- readRDS(file.path(dir, "high_res_labs.rds"))
+    }
 }
