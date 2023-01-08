@@ -1,11 +1,15 @@
-setup_test <- function() {
+setup_test <- function(...) {
     default_dir <- rappdirs::user_data_dir("labNorm")
     dir.create(default_dir, recursive = TRUE, showWarnings = FALSE)
     if (file.exists(file.path(default_dir, "high_res_labs.rds"))) {
         file.remove(file.path(default_dir, "high_res_labs.rds"))
     }
 
+    withr::defer(the$yesno2 <- yesno::yesno2)
     the$yesno2 <- function(prompt) TRUE
+
+    # Test function
+    ln_download_data(...)
 
     return(default_dir)
 }
@@ -16,9 +20,6 @@ test_that("ln_download_data downloads to default directory if approved", {
     # Set up test
     default_dir <- setup_test()
 
-    # Test function
-    ln_download_data()
-
     # Check that the data file was downloaded to the default directory
     expect_true(file.exists(file.path(default_dir, "high_res_labs.rds")))
 
@@ -26,6 +27,7 @@ test_that("ln_download_data downloads to default directory if approved", {
     expect_equal(the$quantiles, readRDS(file.path(getOption("labNorm.dir"), "high_res_labs.rds")))
 
     # Clean up
+    the$yesno2 <- yesno::yesno2 # Reset the function
     unlink(default_dir, recursive = TRUE, force = TRUE)
 })
 
@@ -36,14 +38,13 @@ test_that("ln_download_data downloads to temp dir if not approved or if dir not 
     # Set up test
     default_dir <- setup_test()
 
-    # Test function
-    ln_download_data()
-
     # Check that the data file was downloaded to a temporary directory
     expect_true(file.exists(file.path(getOption("labNorm.dir"), "high_res_labs.rds")))
 
     # Check that the quantile data was read and stored correctly
     expect_equal(the$quantiles, readRDS(file.path(getOption("labNorm.dir"), "high_res_labs.rds")))
+
+    the$yesno2 <- yesno::yesno2 # Reset the function
 })
 
 # Test that the function sets the `labNorm.dir` option correctly.
@@ -51,10 +52,7 @@ test_that("ln_download_data sets labNorm.dir option correctly", {
     skip_on_cran()
 
     # Set up test
-    default_dir <- setup_test()
-
-    # Test function
-    ln_download_data()
+    default_dir <- setup_test(load = FALSE)
 
     # Check that the `labNorm.dir` option was set correctly
     expect_equal(getOption("labNorm.dir"), default_dir)

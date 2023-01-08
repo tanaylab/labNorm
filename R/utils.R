@@ -15,9 +15,11 @@ get_quantiles <- function() {
     if (is.null(getOption("labNorm.use_low_res"))) {
         options(labNorm.use_low_res = FALSE)
     }
+
     if (!is.null(getOption("labNorm.use_low_res")) && getOption("labNorm.use_low_res")) {
         return(LAB_QUANTILES)
     }
+
     quantiles <- NULL
     if (!is.null(the$quantiles)) {
         quantiles <- the$quantiles
@@ -50,19 +52,6 @@ get_quantiles <- function() {
     }
 
     return(quantiles)
-}
-
-#' Check if data was downloaded
-#'
-#' @return True if the data was downloaded, false otherwise.
-#' @rdname ln_download_data
-ln_is_high_res <- function() {
-    quantiles <- get_quantiles()
-    if (identical(quantiles, LAB_QUANTILES)) {
-        return(FALSE)
-    } else {
-        return(TRUE)
-    }
 }
 
 validate_lab <- function(lab) {
@@ -100,6 +89,19 @@ get_lab_info <- function(lab) {
     LAB_INFO[LAB_INFO$short_name == lab, ]
 }
 
+#' Check if data was downloaded
+#'
+#' @return True if the data was downloaded, false otherwise.
+#' @rdname ln_download_data
+ln_is_high_res <- function() {
+    quantiles <- get_quantiles()
+    if (identical(quantiles, LAB_QUANTILES)) {
+        return(FALSE)
+    } else {
+        return(TRUE)
+    }
+}
+
 #' Get available units for a lab
 #'
 #' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
@@ -111,5 +113,6 @@ get_lab_info <- function(lab) {
 #'
 #' @export
 ln_lab_units <- function(lab) {
+    validate_lab(lab)
     get_lab_info(lab)$units[[1]]
 }
