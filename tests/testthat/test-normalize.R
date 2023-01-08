@@ -53,3 +53,23 @@ test_that("normalization works with different units", {
 
     expect_equal(q, LAB_QUANTILES[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
 })
+
+test_that("ln_normalize works with high resolution", {
+    skip_on_cran()
+
+    hemoglobin_50 <- hemoglobin_data %>%
+        filter(age == 50, sex == "male")
+
+    withr::local_options(labNorm.use_low_res = FALSE)
+    withr::defer(the$yesno2 <- yesno::yesno2)
+    the$yesno2 <- function(prompt) TRUE
+
+    q <- ln_normalize(
+        hemoglobin_50$value,
+        hemoglobin_50$age,
+        hemoglobin_50$sex,
+        "Hemoglobin"
+    )
+
+    expect_equal(q, the$quantiles[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
+})

@@ -1,6 +1,6 @@
 Package: labNorm
 Title: Normalize Laboratory Measurements by Age and Gender
-Version: 0.0.0.9000
+Version: 1.0.0
 Authors@R: c(
     person("Aviezer", "Lifshitz", , "aviezer.lifshitz@weizmann.ac.il", role = c("aut", "cre")),
     person("Netta", "Mendelson-Cohen", , "netta.mendelsoncohen@weizmann.ac.il", role = "aut"),    
@@ -19,10 +19,12 @@ RoxygenNote: 7.2.3
 Imports: 
     cli,
     dplyr,
+    forcats,
     ggplot2,
     glue,
     purrr,
     rappdirs,
+    scales,
     stats,
     tibble,
     utils,

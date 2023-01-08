@@ -13,8 +13,12 @@ A data frame with 65 rows and 4 columns:
 \item{long_name}{Long lab name}
 \item{units}{a list column with all the units available for the lab}
 \item{default_units}{the default units for the lab}
+\item{low_male,high_male,low_female,high_female}{the reference ranges for the lab, taken from the American Board of Internal Medicine. Can be NA if the lab does not have reference ranges.}
 }
 }
+}
+\source{
+American Board of Internal Medicine. ABIM Laboratory Test Reference Ranges — July 2021. \url{https://www.abim.org/~/media/ABIM\%20Public/Files/pdf/exam/laboratory-reference-ranges.pdf} (2021).
 }
 \usage{
 LAB_INFO

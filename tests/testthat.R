@@ -9,5 +9,4 @@
 library(testthat)
 library(labNorm)
 
-options(labNorm.use_low_res = TRUE)
 test_check("labNorm")

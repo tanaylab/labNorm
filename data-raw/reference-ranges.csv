@@ -1,0 +1,66 @@
+"feature_name","low_male","high_male","low_female","high_female"
+"WBC",4.4,11,4.4,11
+"RBC",4.5,5.9,4.1,5.1
+"Hemoglobin",14,18,12,16
+"Hematocrit",42,50,37,47
+"Platelets",150,450,150,450
+"MCV",80,96,80,96
+"MCH",28,33,28,33
+"MCHC",33,36,33,36
+"RDW",12,15,12,15
+"MPV",9,10,9,10
+"Albumin",3.5,5.5,3.5,5.5
+"Total Cholesterol",NA,200,NA,200
+"Triglycerides",NA,150,NA,150
+"BMI",NA,NA,NA,NA
+"Iron",50,150,50,150
+"Transferrin",200,400,200,400
+"Ferritin",24,336,11,307
+"Total Globulin",2,3.5,2,3.5
+"Fibrinogen",200,400,200,400
+"Lymphocytes, Abs",1,4,1,4
+"Lymphocytes, %",30,45,30,45
+"Neutrophils, Abs",2,8.25,2,8.25
+"Neutrophils, %",50,70,50,70
+"Monocytes, Abs",NA,NA,NA,NA
+"Monocytes, %",0,6,0,6
+"Eosinophils, Abs",0,0.5,0,0.5
+"Eosinophils, %",0,3,0,3
+"Basophils, Abs",NA,NA,NA,NA
+"Basophils, %",0,1,0,1
+"Glucose",70,99,70,99
+"Urea",7,28,7,28
+"Creatinine",0.7,1.3,0.5,1.1
+"Uric Acid",3,7,3,7
+"Calcium",8.6,10.2,8.6,10.2
+"Phosphorus",3,4.5,3,4.5
+"Total Protein",5.5,9,5.5,9
+"HDL Cholesterol",NA,40,NA,50
+"LDL Cholesterol",NA,100,NA,100
+"Alk. Phosphatase",30,120,30,120
+"AST",10,40,10,40
+"ALT",10,40,10,40
+"GGT",9,50,8,40
+"LDH",105,333,105,333
+"CPK",55,170,30,135
+"Total Bilirubin",0.3,1,0.3,1
+"Direct Bilirubin",0.1,0.3,0.1,0.3
+"Hemoglobin A1c",4,5.6,4,5.6
+"Sodium",136,145,136,145
+"Potassium",3.5,5,3.5,5
+"Vitamin D (25-OH)",30,60,30,60
+"TSH",0.5,4,0.5,4
+"T3, Free",3.5,6.5,3.5,6.5
+"T4, Free",10.3,23.2,10.3,23.2
+"Blood Pressure, Systolic",NA,130,NA,130
+"Blood Pressure, Diastolic",NA,NA,NA,NA
+"Vitamin B12",200,800,200,800
+"PSA",0,3.5,0,3.5
+"ESR",0,15,0,20
+"CRP",NA,0.8,NA,0.8
+"Amylase",25,125,25,125
+"Folic Acid",4.1,20.4,4.1,20.4
+"Magnesium",1.2,2.6,1.2,2.6
+"Indirect Bilirubin",0.2,0.7,0.2,0.7
+"LH",2,9,NA,NA
+"Estradiol",73.4,184,36.7,660

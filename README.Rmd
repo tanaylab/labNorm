@@ -62,3 +62,9 @@ hemoglobin_data %>%
     geom_point() +
     theme_classic()
 ```
+
+Plot the age/sex distribution of Hemoglobin: 
+
+```{r, fig.width=8, fig.height=4}
+ln_plot_dist("Hemoglobin")
+```
