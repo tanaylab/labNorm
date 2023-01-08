@@ -25,7 +25,7 @@
 #' # Set the ylim
 #' ln_plot_dist("BMI", ylim = c(8, 50))
 #'
-#' # Project the distribution of three Hemoglobin values#'
+#' # Project the distribution of three Hemoglobin values
 #' ln_plot_dist("Hemoglobin", patients = dplyr::sample_n(hemoglobin_data, 3))
 #'
 #' # Change the quantiles

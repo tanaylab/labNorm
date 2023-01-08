@@ -79,3 +79,11 @@ hemoglobin_data %>%
 ```
 
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+
+Plot the age/sex distribution of Hemoglobin:
+
+``` r
+ln_plot_dist("Hemoglobin")
+```
+
+<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
