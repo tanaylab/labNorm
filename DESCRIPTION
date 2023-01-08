@@ -19,10 +19,12 @@ RoxygenNote: 7.2.3
 Imports: 
     cli,
     dplyr,
+    forcats,
     ggplot2,
     glue,
     purrr,
     rappdirs,
+    scales,
     stats,
     tibble,
     utils,

@@ -91,7 +91,12 @@ ln_is_high_res <- function() {
 #' @examples
 #' ln_quantile_value(c(0, 0.03, 0.5, 0.97, 1), 50, "male", "WBC")
 #'
-#' ln_quantile_value(c(0, 0.03, 0.1, 0.4, 0.5, 0.6, 0.9, 0.97, 1), c(50, 60), c("male", "female"), "Glucose")
+#' ln_quantile_value(
+#'     c(0, 0.03, 0.1, 0.4, 0.5, 0.6, 0.9, 0.97, 1),
+#'     c(50, 60),
+#'     c("male", "female"),
+#'     "Glucose"
+#' )
 #'
 #' @inheritParams ln_normalize
 #' @export
@@ -107,7 +112,7 @@ ln_quantile_value <- function(quantiles, age, sex, lab) {
     all_quantiles <- get_quantiles()
 
     res <- params %>%
-        purrr:::pmap_dfr(function(...) {
+        purrr::pmap_dfr(function(...) {
             .x <- tibble(...)
             func <- all_quantiles[[lab]][[paste0(.x$age, ".", .x$sex)]]
             func_env <- environment(func)

@@ -11,7 +11,10 @@ ln_plot_dist(
     "#B0B9D0", "#D7DCE7"),
   sex = NULL,
   patients = NULL,
-  patient_color = "yellow"
+  patient_color = "yellow",
+  patient_point_size = 2,
+  ylim = NULL,
+  show_reference = TRUE
 )
 }
 \arguments{
@@ -26,6 +29,12 @@ ln_plot_dist(
 \item{patients}{(optional) a data frame of patients to plot as dots over the distribution. See the \code{df} parameter of \code{ln_normalize_multi} for details.}
 
 \item{patient_color}{(optional) the color of the patient dots. Default is "yellow".}
+
+\item{patient_point_size}{(optional) the size of the patient dots. Default is 2.}
+
+\item{ylim}{(optional) a vector of length 2 with the lower and upper limits of the plot. Default would be determined based on the median value of the upper and lower percentiles of the lab in each age.}
+
+\item{show_reference}{(optional) if TRUE, plot two lines of the upper and lower reference ranges. Default is TRUE.}
 }
 \value{
 a \code{ggplot2} object
@@ -34,14 +43,20 @@ a \code{ggplot2} object
 Plot age-sex distribution of a lab
 }
 \examples{
+\dontshow{
+set.seed(60427)
+}
 
 ln_plot_dist("Hemoglobin")
 
 # Plot only females
-ln_plot_dist("Creatinine", sex = "female")
+ln_plot_dist("Creatinine", sex = "female", ylim = c(0, 2))
 
-# Project the distribution of two Hemoglobin values
-ln_plot_dist("Hemoglobin", patients = hemoglobin_data \%>\% sample_n(2))
+# Set the ylim
+ln_plot_dist("BMI", ylim = c(8, 50))
+
+# Project the distribution of three Hemoglobin values#'
+ln_plot_dist("Hemoglobin", patients = dplyr::sample_n(hemoglobin_data, 3))
 
 # Change the quantiles
 ln_plot_dist("Hemoglobin",
