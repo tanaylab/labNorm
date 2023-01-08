@@ -5,7 +5,8 @@ library(glue)
 features <- readr::read_csv("data-raw/quantile2feature.csv", show_col_types = FALSE) %>%
     mutate(feature_name = ifelse(is.na(feature_name), quantile_file, feature_name)) %>%
     mutate(feature_name = ifelse(feature_name == "", quantile_file, feature_name)) %>%
-    mutate(full_name = ifelse(is.na(full_name), feature_name, full_name))
+    mutate(full_name = ifelse(is.na(full_name), feature_name, full_name)) %>%
+    left_join(readr::read_csv("data-raw/reference-ranges.csv", show_col_types = FALSE))
 
 features$units <- strsplit(features$units, "\\|")
 features$units <- lapply(features$units, function(x) gsub("\"", "", x))
@@ -160,7 +161,7 @@ create_high_res_labs_data <- function() {
 
 create_lab_info <- function() {
     LAB_INFO <- as.data.frame(features) %>%
-        select(short_name = feature_name, long_name = full_name, units, default_units)
+        select(short_name = feature_name, long_name = full_name, units, default_units, low_male, high_male, low_female, high_female)
 
     usethis::use_data(LAB_INFO, overwrite = TRUE, internal = FALSE, compress = "xz")
 }

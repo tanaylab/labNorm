@@ -18,7 +18,7 @@ ln_normalize_multi(df)
 
 \item{lab}{the lab name. See \code{LAB_INFO$short_name} for a list of available labs.}
 
-\item{units}{the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{LAB_INFO$default_units}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.}
+\item{units}{the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{ln_lab_default_units(lab)}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.}
 
 \item{df}{a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.}
 }
