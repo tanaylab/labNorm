@@ -14,8 +14,8 @@ validate_units <- function(units, lab) {
 }
 
 validate_age_and_sex <- function(age, sex) {
-    if (any(age < 20 | age > 99)) {
-        cli::cli_abort("Invalid age. Age must be between 20 and 99.", call = parent.frame(1))
+    if (any(age < 20 | age > 89)) {
+        cli::cli_abort("Invalid age. Age must be between 20 and 89.", call = parent.frame(1))
     }
 
     if (!all(sex %in% c("male", "female"))) {

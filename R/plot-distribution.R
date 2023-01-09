@@ -1,13 +1,13 @@
 #' Plot age-sex distribution of a lab
 #'
 #' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
-#' @param quantiles a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}.
+#' @param quantiles a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}. Note that if only the low-resolution version of the quantiles, quantiles below 0.05 and above 0.95 would be rounded to 0.05 and 0.95 respectively, and the same would be done for quantiles below 0.01 and above 0.99 when the high-resolution version is available.
 #' @param pal a vector of colors to use for the quantiles. Should be of length \code{length(quantiles) - 1}.
 #' @param sex Plot only a single sex ("male" or "female"). If NULL - \code{ggplot2::facet_grid} would be used to plot both sexes. Default is NULL.
 #' @param patients (optional) a data frame of patients to plot as dots over the distribution. See the \code{df} parameter of \code{ln_normalize_multi} for details.
 #' @param patient_color (optional) the color of the patient dots. Default is "yellow".
 #' @param patient_point_size (optional) the size of the patient dots. Default is 2.
-#' @param ylim (optional) a vector of length 2 with the lower and upper limits of the plot. Default would be determined based on the median value of the upper and lower percentiles of the lab in each age.
+#' @param ylim (optional) a vector of length 2 with the lower and upper limits of the plot. Default would be determined based on the values of the upper and lower percentiles of the lab in each age.
 #' @param show_reference (optional) if TRUE, plot two lines of the upper and lower reference ranges. Default is TRUE.
 #'
 #' @return a \code{ggplot2} object
@@ -53,6 +53,15 @@ ln_plot_dist <- function(lab,
     validate_lab(lab)
     validate_quantiles(quantiles)
 
+    if (ln_is_high_res()) {
+        min_q <- 0.01
+        max_q <- 0.99
+    } else {
+        min_q <- 0.05
+        max_q <- 0.95
+    }
+    quantiles <- pmin(max_q, pmax(min_q, quantiles))
+
     # make sure the palette is the right length
     if (length(pal) != length(quantiles) - 1) {
         cli::cli_abort("The length of the {.field pal} should be one less than the length of {.field quantiles}.")
@@ -74,7 +83,7 @@ ln_plot_dist <- function(lab,
     quantiles <- sort(quantiles)
 
     # get the data
-    df_full <- ln_quantile_value(sort(unique(c(0.01, quantiles, 0.5, 0.99))), 20:99, c("male", "female"), lab)
+    df_full <- ln_quantile_value(sort(unique(c(min_q, quantiles, 0.5, max_q))), 20:89, c("male", "female"), lab)
 
     # get reference ranges
     lab_info <- get_lab_info(lab)
@@ -119,8 +128,8 @@ ln_plot_dist <- function(lab,
 
     if (is.null(ylim)) {
         ylim <- c(
-            median(df_full %>% filter(quantile == 0.01) %>% pull(value)),
-            median(df_full %>% filter(quantile == 0.99) %>% pull(value))
+            min(min(df_full %>% filter(quantile == min_q) %>% pull(value)), min(refs_df$yintercept)),
+            max(max(df_full %>% filter(quantile == max_q) %>% pull(value)), max(refs_df$yintercept))
         )
     } else {
         if (length(ylim) != 2) {

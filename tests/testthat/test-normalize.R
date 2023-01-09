@@ -38,7 +38,7 @@ test_that("normalization works with different units", {
     hemoglobin_50 <- hemoglobin_data %>%
         filter(age == 50, sex == "male")
 
-    hemoglobin_diff_units <- hemoglobin_50
+    hemoglobin_diff_units <- hemoglobin_50[1:2, ]
 
     hemoglobin_diff_units$value[1] <- hemoglobin_diff_units$value[1] * 10
     hemoglobin_diff_units$value[2] <- hemoglobin_diff_units$value[2] / 1.61
@@ -51,7 +51,7 @@ test_that("normalization works with different units", {
         c("mg/mL", "mmol/L")
     )
 
-    expect_equal(q, LAB_QUANTILES[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
+    expect_equal(q, LAB_QUANTILES[["Hemoglobin"]][["50.male"]](hemoglobin_50$value[1:2]))
 })
 
 test_that("ln_normalize works with high resolution", {

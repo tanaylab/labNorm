@@ -5,13 +5,20 @@ test_that("LAB_INFO and LAB_QUANTILES match", {
 })
 
 test_that("LAB_QUANTILES are valid", {
-    field_names <- expand.grid(sex = c("female", "male"), age = 20:99) %>%
+    field_names <- expand.grid(sex = c("female", "male"), age = 20:89) %>%
         mutate(s = paste0(age, ".", sex)) %>%
         pull(s)
+
     purrr::map(LAB_QUANTILES, function(x) {
         expect_true(all(names(x) %in% field_names))
         expect_true(all(field_names %in% names(x)))
-        expect_true(all(sapply(x, is.function)))
+        purrr::walk(x, function(y) {
+            if (is.function(y)) {
+                expect_true(is.function(y))
+            } else {
+                expect_true(is.na(y))
+            }
+        })
     })
 })
 

@@ -20,7 +20,7 @@ ln_plot_dist(
 \arguments{
 \item{lab}{the lab name. See \code{LAB_INFO$short_name} for a list of available labs.}
 
-\item{quantiles}{a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}.}
+\item{quantiles}{a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}. Note that if only the low-resolution version of the quantiles, quantiles below 0.05 and above 0.95 would be rounded to 0.05 and 0.95 respectively, and the same would be done for quantiles below 0.01 and above 0.99 when the high-resolution version is available.}
 
 \item{pal}{a vector of colors to use for the quantiles. Should be of length \code{length(quantiles) - 1}.}
 
@@ -32,7 +32,7 @@ ln_plot_dist(
 
 \item{patient_point_size}{(optional) the size of the patient dots. Default is 2.}
 
-\item{ylim}{(optional) a vector of length 2 with the lower and upper limits of the plot. Default would be determined based on the median value of the upper and lower percentiles of the lab in each age.}
+\item{ylim}{(optional) a vector of length 2 with the lower and upper limits of the plot. Default would be determined based on the values of the upper and lower percentiles of the lab in each age.}
 
 \item{show_reference}{(optional) if TRUE, plot two lines of the upper and lower reference ranges. Default is TRUE.}
 }
@@ -55,7 +55,7 @@ ln_plot_dist("Creatinine", sex = "female", ylim = c(0, 2))
 # Set the ylim
 ln_plot_dist("BMI", ylim = c(8, 50))
 
-# Project the distribution of three Hemoglobin values#'
+# Project the distribution of three Hemoglobin values
 ln_plot_dist("Hemoglobin", patients = dplyr::sample_n(hemoglobin_data, 3))
 
 # Change the quantiles

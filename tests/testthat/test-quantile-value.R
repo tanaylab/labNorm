@@ -18,13 +18,13 @@ test_that("correct number of rows returned for multiple quantiles and ages/sexes
 
 test_that("correct lab values are returned for single quantile", {
     res <- ln_quantile_value(0.5, 50, "male", "WBC")
-    expect_lt(abs(res$value[1] - 7.19426), 1e-5)
+    expect_equal(res$value[1], 7.182971, tolerance = 1e-5)
 })
 
 test_that("correct lab values are returned for multiple quantiles", {
     res <- ln_quantile_value(c(0.1, 0.9), 50, "male", "WBC")
-    expect_lt(abs(res$value[1] - 5.11420), 1e-5)
-    expect_lt(abs(res$value[2] - 10.48735), 1e-5)
+    expect_equal(res$value[1], 5.08879, tolerance = 1e-5)
+    expect_equal(res$value[2], 10.38806, tolerance = 1e-5)
 })
 
 test_that("correct units are returned", {
@@ -35,4 +35,9 @@ test_that("correct units are returned", {
 test_that("correct lab name is returned", {
     res <- ln_quantile_value(0.5, 50, "male", "WBC")
     expect_equal(res$lab[1], "WBC")
+})
+
+test_that("NAs are returned for edge quantiles", {
+    res <- ln_quantile_value(c(0, 1), 50, "male", "WBC")
+    expect_equal(res$value, as.numeric(c(NA, NA)))
 })

@@ -82,12 +82,13 @@
 #' }
 #'
 #' @param values a vector of lab values
-#' @param age a vector of ages between (20-99). Can be a single value if all values are the same age.
+#' @param age a vector of ages between (20-89). Can be a single value if all values are the same age.
 #' @param sex a vector of either "male" or "female". Can be a single value if all values are the same sex.
 #' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
 #' @param units the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{ln_lab_default_units(lab)}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.
 #'
-#' @return a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_is_high_res()}.
+#' @return a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_is_high_res()}. \cr
+#' If the quantile information is not available (e.g. "Estradiol" for male patients), then the function will return \code{NA}.
 #'
 #' @examples
 #'
@@ -172,8 +173,13 @@ ln_normalize <- function(values, age, sex, lab, units = NULL) {
     for (cur_age in ages) {
         for (cur_sex in sexes) {
             func <- quantiles[[lab]][[paste0(cur_age, ".", cur_sex)]]
+            # test if func is a function
             cur_values <- values[age == cur_age & sex == cur_sex]
-            normalized[age == cur_age & sex == cur_sex] <- func(cur_values)
+            if (is.function(func)) {
+                normalized[age == cur_age & sex == cur_sex] <- func(cur_values)
+            } else {
+                normalized[age == cur_age & sex == cur_sex] <- NA
+            }
         }
     }
 

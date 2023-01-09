@@ -4,16 +4,18 @@
 \alias{ln_quantile_value}
 \title{Compute the lab value for a given quantile}
 \usage{
-ln_quantile_value(quantiles, age, sex, lab)
+ln_quantile_value(quantiles, age, sex, lab, allow_edge_quantiles = FALSE)
 }
 \arguments{
 \item{quantiles}{a vector of quantiles (in the range 0-1) to compute the lab value for.}
 
-\item{age}{a vector of ages between (20-99). Can be a single value if all values are the same age.}
+\item{age}{a vector of ages between (20-89). Can be a single value if all values are the same age.}
 
 \item{sex}{a vector of either "male" or "female". Can be a single value if all values are the same sex.}
 
 \item{lab}{The lab name.}
+
+\item{allow_edge_quantiles}{If \code{TRUE} (default) then the function will return the value for the edge quantiles (>0.05 or <0.95 for the low-res version, <0.01 or >0.99 for the high-res version) even though they are not reliable. If \code{FALSE} then the function will return \code{NA} for those quantiles.}
 }
 \value{
 a data frame which contains the values for each combination of quantile, age and sex.
@@ -29,7 +31,8 @@ The data frame has the the following columns:
 }
 }
 \description{
-This function computes the lab value for given quantiles in the default units for the lab. Default units can be found using the function \code{ln_lab_default_units}. In cases where the original data had only a single value, NA is returned.
+This function computes the lab value for given quantiles in the default units for the lab. Default units can be found using the function \code{ln_lab_default_units}. In case where no quantile is available for a given lab, age, and sex the function returns \code{NA}. \cr
+Note that the values very high or low quantiles (e.g. >0.95,<0.05 on the low resolution version, >0.99,<0.01 on the high resolution version) are not reliable as they can represent technical outliers of the data.
 }
 \examples{
 ln_quantile_value(c(0, 0.03, 0.5, 0.97, 1), 50, "male", "WBC")

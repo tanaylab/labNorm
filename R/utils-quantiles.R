@@ -69,10 +69,13 @@ ln_is_high_res <- function() {
 
 #' Compute the lab value for a given quantile
 #'
-#' @description This function computes the lab value for given quantiles in the default units for the lab. Default units can be found using the function \code{ln_lab_default_units}. In cases where the original data had only a single value, NA is returned.
+#' @description This function computes the lab value for given quantiles in the default units for the lab. Default units can be found using the function \code{ln_lab_default_units}. In case where no quantile is available for a given lab, age, and sex the function returns \code{NA}. \cr
+#' Note that the values very high or low quantiles (e.g. >0.95,<0.05 on the low resolution version, >0.99,<0.01 on the high resolution version) are not reliable as they can represent technical outliers of the data.
+#'
 #'
 #' @param quantiles a vector of quantiles (in the range 0-1) to compute the lab value for.
 #' @param lab The lab name.
+#' @param allow_edge_quantiles If \code{TRUE} (default) then the function will return the value for the edge quantiles (>0.05 or <0.95 for the low-res version, <0.01 or >0.99 for the high-res version) even though they are not reliable. If \code{FALSE} then the function will return \code{NA} for those quantiles.
 #'
 #' @return a data frame which contains the values for each combination of quantile, age and sex.
 #' The data frame has the the following columns:
@@ -100,7 +103,7 @@ ln_is_high_res <- function() {
 #'
 #' @inheritParams ln_normalize
 #' @export
-ln_quantile_value <- function(quantiles, age, sex, lab) {
+ln_quantile_value <- function(quantiles, age, sex, lab, allow_edge_quantiles = FALSE) {
     validate_lab(lab)
 
     validate_quantiles(quantiles)
@@ -111,18 +114,30 @@ ln_quantile_value <- function(quantiles, age, sex, lab) {
 
     all_quantiles <- get_quantiles()
 
+    if (ln_is_high_res()) {
+        qmin <- 0.01
+        qmax <- 0.99
+    } else {
+        qmin <- 0.05
+        qmax <- 0.95
+    }
+
     res <- params %>%
         purrr::pmap_dfr(function(...) {
             .x <- tibble(...)
             func <- all_quantiles[[lab]][[paste0(.x$age, ".", .x$sex)]]
-            func_env <- environment(func)
-            all_vals <- func_env$x
-            all_quants <- func_env$y
-            if (is.null(all_vals) || is.null(all_quants)) {
-                values <- rep(NA, length(quantiles))
-            } else {
+            if (is.function(func)) {
+                func_env <- environment(func)
+                all_vals <- func_env$x
+                all_quants <- func_env$y
                 func_quant_to_val <- approxfun(x = all_quants, y = all_vals, rule = 2)
                 values <- func_quant_to_val(quantiles)
+            } else {
+                values <- rep(NA, length(quantiles))
+            }
+
+            if (!allow_edge_quantiles) {
+                values[quantiles < qmin | quantiles > qmax] <- NA
             }
 
             data.frame(age = .x$age, sex = .x$sex, quantile = quantiles, value = values, unit = ln_lab_default_units(lab), lab = lab)

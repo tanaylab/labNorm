@@ -12,7 +12,7 @@ ln_normalize_multi(df)
 \arguments{
 \item{values}{a vector of lab values}
 
-\item{age}{a vector of ages between (20-99). Can be a single value if all values are the same age.}
+\item{age}{a vector of ages between (20-89). Can be a single value if all values are the same age.}
 
 \item{sex}{a vector of either "male" or "female". Can be a single value if all values are the same sex.}
 
@@ -23,7 +23,8 @@ ln_normalize_multi(df)
 \item{df}{a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.}
 }
 \value{
-a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_is_high_res()}.
+a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_is_high_res()}. \cr
+If the quantile information is not available (e.g. "Estradiol" for male patients), then the function will return \code{NA}.
 }
 \description{
 Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr
