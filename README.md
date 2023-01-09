@@ -48,13 +48,13 @@ hemoglobin_data$quantile <- ln_normalize(
 #> → Using default quantiles. For higher resolution quantiles, run `ln_download_data()`. This message will only be shown once per session.
 
 head(hemoglobin_data)
-#>   age  sex  value  quantile
-#> 1  20 male  5.590 0.0232022
-#> 2  20 male 14.210 0.2289049
-#> 3  20 male 14.600 0.3279873
-#> 4  20 male 14.975 0.4478623
-#> 5  20 male 15.100 0.5007307
-#> 6  20 male 15.155 0.5155682
+#>   age    sex value   quantile
+#> 1  20   male  9.39 0.03838718
+#> 2  20   male 14.03 0.18914947
+#> 3  20   male 14.44 0.28589076
+#> 4  20   male 15.80 0.75032395
+#> 5  20 female 12.06 0.24222206
+#> 6  20 female 12.89 0.55270091
 ```
 
 Plot the quantiles vs values for age 50-60:

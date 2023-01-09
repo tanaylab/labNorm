@@ -91,6 +91,9 @@
 #' If the quantile information is not available (e.g. "Estradiol" for male patients), then the function will return \code{NA}.
 #'
 #' @examples
+#' \dontshow{
+#' options(labNorm.use_low_res = TRUE)
+#' }
 #'
 #' # Normalize Hemoglobin values to age and sex
 #' hemoglobin_data$quantile <- ln_normalize(

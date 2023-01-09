@@ -92,10 +92,10 @@ ln_is_high_res <- function() {
 #'
 #'
 #' @examples
-#' ln_quantile_value(c(0, 0.03, 0.5, 0.97, 1), 50, "male", "WBC")
+#' ln_quantile_value(c(0.05, 0.5, 0.95), 50, "male", "WBC")
 #'
 #' ln_quantile_value(
-#'     c(0, 0.03, 0.1, 0.4, 0.5, 0.6, 0.9, 0.97, 1),
+#'     c(0, 0.05, 0.1, 0.4, 0.5, 0.6, 0.9, 1),
 #'     c(50, 60),
 #'     c("male", "female"),
 #'     "Glucose"

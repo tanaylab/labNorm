@@ -112,6 +112,9 @@ The following labs are supported:
 }
 
 \examples{
+\dontshow{
+options(labNorm.use_low_res = TRUE)
+}
 
 # Normalize Hemoglobin values to age and sex
 hemoglobin_data$quantile <- ln_normalize(
