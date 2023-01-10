@@ -43,71 +43,71 @@ You can check if the high resolution data was downloaded using \code{ln_is_high_
 
 The following labs are supported:
 \describe{
-\item{WBC}{White Blood Cells (WBC)}
-\item{RBC}{Red Blood Cells (RBC)}
-\item{Hemoglobin}{}
-\item{Hematocrit}{}
-\item{Platelets}{}
-\item{MCV}{Mean Corpuscular Volume (MCV)}
-\item{MCH}{Mean Corpuscular Hemoglobin (MCH)}
-\item{MCHC}{Mean Corpuscular Hemoglobin Concentration (MCHC)}
-\item{RDW}{Red cell Distribution Width (RDW)}
-\item{MPV}{Mean Platelet Volume (MPV)}
-\item{Albumin}{}
-\item{Total Cholesterol}{}
-\item{Triglycerides}{}
-\item{BMI}{Body Mass Index (BMI)}
-\item{Iron}{}
-\item{Transferrin}{}
-\item{Ferritin}{}
-\item{Total Globulin}{}
-\item{Fibrinogen}{}
-\item{Lymphocytes, Abs}{Lymphocytes, Absolute}
-\item{Lymphocytes, \%}{}
-\item{Neutrophils, Abs}{Neutrophils, Absolute}
-\item{Neutrophils, \%}{}
-\item{Monocytes, Abs}{Monocytes, Absolute}
-\item{Monocytes, \%}{}
-\item{Eosinophils, Abs}{Eosinophils, Absolute}
-\item{Eosinophils, \%}{}
-\item{Basophils, Abs}{Basophils, Absolute}
-\item{Basophils, \%}{}
-\item{Glucose}{Glucose, Fasting}
-\item{Urea}{}
-\item{Creatinine}{}
-\item{Uric Acid}{}
-\item{Calcium}{}
-\item{Phosphorus}{}
-\item{Total Protein}{}
-\item{HDL Cholesterol}{}
-\item{LDL Cholesterol}{}
-\item{Alk. Phosphatase}{Alkaline Phosphatase (AP)}
-\item{AST}{Aspartate aminotransferase (AST)}
-\item{ALT}{Alanine aminotransferase (ALT)}
-\item{GGT}{Gamma-glutamyltransferase (GGT)}
-\item{LDH}{Lactate dehydrogenase (LDH)}
-\item{CPK}{Creatine Phospho-Kinase (CPK)}
-\item{Total Bilirubin}{}
-\item{Direct Bilirubin}{}
-\item{Hemoglobin A1c}{}
-\item{Sodium}{}
-\item{Potassium}{}
-\item{Vitamin D (25-OH)}{Vitamin D, 25-Hydroxy}
-\item{TSH}{Thyroid-Stimulating Hormone (TSH)}
-\item{T3, Free}{Triiodothyronine (T3), Free}
-\item{T4, Free}{Thyroxine (T4), Free (Direct)}
-\item{Blood Pressure, Systolic}{Systolic Blood Pressure}
-\item{Blood Pressure, Diastolic}{Diastolic Blood Pressure}
-\item{Vitamin B12}{}
-\item{PSA}{Prostate Specific Antigen (PSA)}
-\item{ESR}{Erythrocyte Sedimentation Rate (ESR)}
-\item{CRP}{C-Reactive Protein, Quant (CRP)}
-\item{Amylase}{}
-\item{Folic Acid}{}
-\item{Magnesium}{}
-\item{Indirect Bilirubin}{}
-\item{LH}{Luteinizing Hormone (LH)}
-\item{Estradiol}{Estradiol (E2)}
+\item{WBC}
+\item{RBC}
+\item{Hemoglobin}
+\item{Hematocrit}
+\item{Platelets}
+\item{MCV}
+\item{MCH}
+\item{MCHC}
+\item{RDW}
+\item{MPV}
+\item{Albumin}
+\item{Total Cholesterol}
+\item{Triglycerides}
+\item{BMI}
+\item{Iron}
+\item{Transferrin}
+\item{Ferritin}
+\item{Total Globulin}
+\item{Fibrinogen}
+\item{Lymphocytes, Abs}
+\item{Lymphocytes, \%}
+\item{Neutrophils, Abs}
+\item{Neutrophils, \%}
+\item{Monocytes, Abs}
+\item{Monocytes, \%}
+\item{Eosinophils, Abs}
+\item{Eosinophils, \%}
+\item{Basophils, Abs}
+\item{Basophils, \%}
+\item{Glucose}
+\item{Urea}
+\item{Creatinine}
+\item{Uric Acid}
+\item{Calcium}
+\item{Phosphorus}
+\item{Total Protein}
+\item{HDL Cholesterol}
+\item{LDL Cholesterol}
+\item{Alk. Phosphatase}
+\item{AST}
+\item{ALT}
+\item{GGT}
+\item{LDH}
+\item{CPK}
+\item{Total Bilirubin}
+\item{Direct Bilirubin}
+\item{Hemoglobin A1c}
+\item{Sodium}
+\item{Potassium}
+\item{Vitamin D (25-OH)}
+\item{TSH}
+\item{T3, Free}
+\item{T4, Free}
+\item{Blood Pressure, Systolic}
+\item{Blood Pressure, Diastolic}
+\item{Vitamin B12}
+\item{PSA}
+\item{ESR}
+\item{CRP}
+\item{Amylase}
+\item{Folic Acid}
+\item{Magnesium}
+\item{Indirect Bilirubin}
+\item{LH}
+\item{Estradiol}
 }
 }
 

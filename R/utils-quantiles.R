@@ -1,14 +1,9 @@
-the <- new.env(parent = emptyenv())
-the$asked_to_download <- FALSE
-the$alerted_about_download <- FALSE
-the$yesno2 <- yesno::yesno2 # used inside an environment so that it can be mocked
-
 load_quantiles <- function(fn, alert = TRUE) {
-    the$quantiles <- readRDS(fn)
+    pkgenv$quantiles <- readRDS(fn)
     if (alert) {
         cli::cli_alert("Loading quantiles from {.file {fn}}.")
     }
-    return(the$quantiles)
+    return(pkgenv$quantiles)
 }
 
 get_quantiles <- function() {
@@ -21,8 +16,8 @@ get_quantiles <- function() {
     }
 
     quantiles <- NULL
-    if (!is.null(the$quantiles)) {
-        quantiles <- the$quantiles
+    if (!is.null(pkgenv$quantiles)) {
+        quantiles <- pkgenv$quantiles
     } else {
         fn <- "high_res_labs.rds"
         if (!is.null(getOption("labNorm.dir")) && file.exists(file.path(getOption("labNorm.dir"), fn))) {
@@ -32,10 +27,10 @@ get_quantiles <- function() {
         } else if (file.exists(fn)) {
             quantiles <- load_quantiles(fn)
         } else {
-            if (interactive() && !the$asked_to_download && !getOption("labNorm.use_low_res")) {
-                the$asked_to_download <- TRUE
+            if (interactive() && !pkgenv$asked_to_download && !getOption("labNorm.use_low_res")) {
+                pkgenv$asked_to_download <- TRUE
                 # ask the user if they want to download the quantiles
-                if (the$yesno2("The high resolution reference distributions are not available. Would you like to download them now?\n(this question will only be asked once per session)")) {
+                if (pkgenv$yesno2("The high resolution reference distributions are not available. Would you like to download them now?\n(this question will only be asked once per session)")) {
                     ln_download_data()
                     quantiles <- load_quantiles(file.path(getOption("labNorm.dir"), fn), alert = FALSE)
                 }
@@ -44,9 +39,9 @@ get_quantiles <- function() {
     }
 
     if (is.null(quantiles)) {
-        if (!the$alerted_about_download) {
+        if (!pkgenv$alerted_about_download) {
             cli::cli_alert("Using default quantiles. For higher resolution quantiles, run {.code ln_download_data()}. This message will only be shown once per session.")
-            the$alerted_about_download <- TRUE
+            pkgenv$alerted_about_download <- TRUE
         }
         quantiles <- LAB_QUANTILES
     }

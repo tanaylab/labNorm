@@ -29,7 +29,7 @@ ln_download_data <- function(dir = NULL, load = TRUE) {
     if (is.null(dir)) {
         dir <- rappdirs::user_data_dir("labNorm")
         # ask the user if they want to download to the specified directory
-        if (interactive() && the$yesno2(glue::glue("Would you like to use the default directory {dir}?\n(if you choose 'No', the file would be downloaded to a temporary directory)"))) {
+        if (interactive() && pkgenv$yesno2(glue::glue("Would you like to use the default directory {dir}?\n(if you choose 'No', the file would be downloaded to a temporary directory)"))) {
             # create the directory if it doesn't exist
             if (!dir.exists(dir)) {
                 dir.create(dir, recursive = TRUE)
@@ -66,6 +66,6 @@ ln_download_data <- function(dir = NULL, load = TRUE) {
 
     if (load) {
         cli::cli_alert("Loading the data into the environment.")
-        the$quantiles <- readRDS(file.path(dir, "high_res_labs.rds"))
+        pkgenv$quantiles <- readRDS(file.path(dir, "high_res_labs.rds"))
     }
 }
