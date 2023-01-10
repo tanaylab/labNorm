@@ -41,73 +41,73 @@ You can check if the high resolution data was downloaded using \code{ln_is_high_
 
 \section{labs}{
 
-The following labs are supported:
-\describe{
-\item{WBC}
-\item{RBC}
-\item{Hemoglobin}
-\item{Hematocrit}
-\item{Platelets}
-\item{MCV}
-\item{MCH}
-\item{MCHC}
-\item{RDW}
-\item{MPV}
-\item{Albumin}
-\item{Total Cholesterol}
-\item{Triglycerides}
-\item{BMI}
-\item{Iron}
-\item{Transferrin}
-\item{Ferritin}
-\item{Total Globulin}
-\item{Fibrinogen}
-\item{Lymphocytes, Abs}
-\item{Lymphocytes, \%}
-\item{Neutrophils, Abs}
-\item{Neutrophils, \%}
-\item{Monocytes, Abs}
-\item{Monocytes, \%}
-\item{Eosinophils, Abs}
-\item{Eosinophils, \%}
-\item{Basophils, Abs}
-\item{Basophils, \%}
-\item{Glucose}
-\item{Urea}
-\item{Creatinine}
-\item{Uric Acid}
-\item{Calcium}
-\item{Phosphorus}
-\item{Total Protein}
-\item{HDL Cholesterol}
-\item{LDL Cholesterol}
-\item{Alk. Phosphatase}
-\item{AST}
-\item{ALT}
-\item{GGT}
-\item{LDH}
-\item{CPK}
-\item{Total Bilirubin}
-\item{Direct Bilirubin}
-\item{Hemoglobin A1c}
-\item{Sodium}
-\item{Potassium}
-\item{Vitamin D (25-OH)}
-\item{TSH}
-\item{T3, Free}
-\item{T4, Free}
-\item{Blood Pressure, Systolic}
-\item{Blood Pressure, Diastolic}
-\item{Vitamin B12}
-\item{PSA}
-\item{ESR}
-\item{CRP}
-\item{Amylase}
-\item{Folic Acid}
-\item{Magnesium}
-\item{Indirect Bilirubin}
-\item{LH}
-\item{Estradiol}
+The following labs are supported: \cr
+\itemize{
+\item WBC
+\item RBC
+\item Hemoglobin
+\item Hematocrit
+\item Platelets
+\item MCV
+\item MCH
+\item MCHC
+\item RDW
+\item MPV
+\item Albumin
+\item Total Cholesterol
+\item Triglycerides
+\item BMI
+\item Iron
+\item Transferrin
+\item Ferritin
+\item Total Globulin
+\item Fibrinogen
+\item Lymphocytes, Abs
+\item Lymphocytes, \%
+\item Neutrophils, Abs
+\item Neutrophils, \%
+\item Monocytes, Abs
+\item Monocytes, \%
+\item Eosinophils, Abs
+\item Eosinophils, \%
+\item Basophils, Abs
+\item Basophils, \%
+\item Glucose
+\item Urea
+\item Creatinine
+\item Uric Acid
+\item Calcium
+\item Phosphorus
+\item Total Protein
+\item HDL Cholesterol
+\item LDL Cholesterol
+\item Alk. Phosphatase
+\item AST
+\item ALT
+\item GGT
+\item LDH
+\item CPK
+\item Total Bilirubin
+\item Direct Bilirubin
+\item Hemoglobin A1c
+\item Sodium
+\item Potassium
+\item Vitamin D (25-OH)
+\item TSH
+\item T3, Free
+\item T4, Free
+\item Blood Pressure, Systolic
+\item Blood Pressure, Diastolic
+\item Vitamin B12
+\item PSA
+\item ESR
+\item CRP
+\item Amylase
+\item Folic Acid
+\item Magnesium
+\item Indirect Bilirubin
+\item LH
+\item Estradiol
 }
 }
 

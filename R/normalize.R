@@ -12,74 +12,74 @@
 #'
 #'
 #' @section labs:
-#' The following labs are supported:
-#' \describe{
-#'   \item{WBC}
-#'   \item{RBC}
-#'   \item{Hemoglobin}
-#'   \item{Hematocrit}
-#'   \item{Platelets}
-#'   \item{MCV}
-#'   \item{MCH}
-#'   \item{MCHC}
-#'   \item{RDW}
-#'   \item{MPV}
-#'   \item{Albumin}
-#'   \item{Total Cholesterol}
-#'   \item{Triglycerides}
-#'   \item{BMI}
-#'   \item{Iron}
-#'   \item{Transferrin}
-#'   \item{Ferritin}
-#'   \item{Total Globulin}
-#'   \item{Fibrinogen}
-#'   \item{Lymphocytes, Abs}
-#'   \item{Lymphocytes, %}
-#'   \item{Neutrophils, Abs}
-#'   \item{Neutrophils, %}
-#'   \item{Monocytes, Abs}
-#'   \item{Monocytes, %}
-#'   \item{Eosinophils, Abs}
-#'   \item{Eosinophils, %}
-#'   \item{Basophils, Abs}
-#'   \item{Basophils, %}
-#'   \item{Glucose}
-#'   \item{Urea}
-#'   \item{Creatinine}
-#'   \item{Uric Acid}
-#'   \item{Calcium}
-#'   \item{Phosphorus}
-#'   \item{Total Protein}
-#'   \item{HDL Cholesterol}
-#'   \item{LDL Cholesterol}
-#'   \item{Alk. Phosphatase}
-#'   \item{AST}
-#'   \item{ALT}
-#'   \item{GGT}
-#'   \item{LDH}
-#'   \item{CPK}
-#'   \item{Total Bilirubin}
-#'   \item{Direct Bilirubin}
-#'   \item{Hemoglobin A1c}
-#'   \item{Sodium}
-#'   \item{Potassium}
-#'   \item{Vitamin D (25-OH)}
-#'   \item{TSH}
-#'   \item{T3, Free}
-#'   \item{T4, Free}
-#'   \item{Blood Pressure, Systolic}
-#'   \item{Blood Pressure, Diastolic}
-#'   \item{Vitamin B12}
-#'   \item{PSA}
-#'   \item{ESR}
-#'   \item{CRP}
-#'   \item{Amylase}
-#'   \item{Folic Acid}
-#'   \item{Magnesium}
-#'   \item{Indirect Bilirubin}
-#'   \item{LH}
-#'   \item{Estradiol}
-#' }
+#' The following labs are supported: \cr
+#'
+#'   * WBC
+#'   * RBC
+#'   * Hemoglobin
+#'   * Hematocrit
+#'   * Platelets
+#'   * MCV
+#'   * MCH
+#'   * MCHC
+#'   * RDW
+#'   * MPV
+#'   * Albumin
+#'   * Total Cholesterol
+#'   * Triglycerides
+#'   * BMI
+#'   * Iron
+#'   * Transferrin
+#'   * Ferritin
+#'   * Total Globulin
+#'   * Fibrinogen
+#'   * Lymphocytes, Abs
+#'   * Lymphocytes, %
+#'   * Neutrophils, Abs
+#'   * Neutrophils, %
+#'   * Monocytes, Abs
+#'   * Monocytes, %
+#'   * Eosinophils, Abs
+#'   * Eosinophils, %
+#'   * Basophils, Abs
+#'   * Basophils, %
+#'   * Glucose
+#'   * Urea
+#'   * Creatinine
+#'   * Uric Acid
+#'   * Calcium
+#'   * Phosphorus
+#'   * Total Protein
+#'   * HDL Cholesterol
+#'   * LDL Cholesterol
+#'   * Alk. Phosphatase
+#'   * AST
+#'   * ALT
+#'   * GGT
+#'   * LDH
+#'   * CPK
+#'   * Total Bilirubin
+#'   * Direct Bilirubin
+#'   * Hemoglobin A1c
+#'   * Sodium
+#'   * Potassium
+#'   * Vitamin D (25-OH)
+#'   * TSH
+#'   * T3, Free
+#'   * T4, Free
+#'   * Blood Pressure, Systolic
+#'   * Blood Pressure, Diastolic
+#'   * Vitamin B12
+#'   * PSA
+#'   * ESR
+#'   * CRP
+#'   * Amylase
+#'   * Folic Acid
+#'   * Magnesium
+#'   * Indirect Bilirubin
+#'   * LH
+#'   * Estradiol
+#'
 #'
 #' @param values a vector of lab values
 #' @param age a vector of ages between (20-89). Can be a single value if all values are the same age.

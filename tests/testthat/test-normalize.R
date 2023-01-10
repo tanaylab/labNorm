@@ -61,8 +61,8 @@ test_that("ln_normalize works with high resolution", {
         filter(age == 50, sex == "male")
 
     withr::local_options(labNorm.use_low_res = FALSE)
-    withr::defer(the$yesno2 <- yesno::yesno2)
-    the$yesno2 <- function(prompt) TRUE
+    withr::defer(pkgenv$yesno2 <- yesno::yesno2)
+    pkgenv$yesno2 <- function(prompt) TRUE
 
     q <- ln_normalize(
         hemoglobin_50$value,
@@ -71,5 +71,5 @@ test_that("ln_normalize works with high resolution", {
         "Hemoglobin"
     )
 
-    expect_equal(q, the$quantiles[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
+    expect_equal(q, pkgenv$quantiles[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
 })

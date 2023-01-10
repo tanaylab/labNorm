@@ -5,8 +5,8 @@ setup_test <- function(...) {
         file.remove(file.path(default_dir, "high_res_labs.rds"))
     }
 
-    withr::defer(the$yesno2 <- yesno::yesno2)
-    the$yesno2 <- function(prompt) TRUE
+    withr::defer(pkgenv$yesno2 <- yesno::yesno2)
+    pkgenv$yesno2 <- function(prompt) TRUE
 
     # Test function
     ln_download_data(...)
@@ -25,9 +25,9 @@ test_that("ln_download_data downloads to temp dir if not approved or if dir not 
     expect_true(file.exists(file.path(getOption("labNorm.dir"), "high_res_labs.rds")))
 
     # Check that the quantile data was read and stored correctly
-    expect_equal(the$quantiles, readRDS(file.path(getOption("labNorm.dir"), "high_res_labs.rds")))
+    expect_equal(pkgenv$quantiles, readRDS(file.path(getOption("labNorm.dir"), "high_res_labs.rds")))
 
-    the$yesno2 <- yesno::yesno2 # Reset the function
+    pkgenv$yesno2 <- yesno::yesno2 # Reset the function
 })
 
 # Test that the function sets the `labNorm.dir` option correctly.
