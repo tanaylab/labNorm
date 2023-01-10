@@ -187,7 +187,7 @@ ln_plot_dist <- function(lab,
     }
 
     if (!is.null(patients)) {
-        patients <- validate_patients_df(patients, lab)
+        patients <- validate_patients_df(patients, lab, reference)
         p <- p +
             geom_point(
                 data = patients,
@@ -203,14 +203,14 @@ ln_plot_dist <- function(lab,
     return(p)
 }
 
-validate_patients_df <- function(df, lab) {
+validate_patients_df <- function(df, lab, reference) {
     validate_lab(lab)
     lab_info <- get_lab_info(lab)
     if (!is.data.frame(df)) {
         cli::cli_abort("The {.field patients} should be a data frame.")
     }
 
-    validate_age_and_sex(df$age, df$sex)
+    validate_age_and_sex(df$age, df$sex, reference)
     if (is.null(df$units)) {
         df$units <- lab_info$default_units
     }

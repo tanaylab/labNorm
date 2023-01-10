@@ -48,7 +48,7 @@ ln_quantile_value <- function(quantiles, age, sex, lab, reference = "Clalit", al
 
     params <- expand.grid(age = age, sex = sex)
 
-    validate_age_and_sex(params$age, params$sex)
+    validate_age_and_sex(params$age, params$sex, reference)
 
     if (reference %in% c("Clalit", "UKBB")) {
         if (!has_reference(reference)) {

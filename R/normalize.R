@@ -176,7 +176,7 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
         sex <- rep(sex, length(values))
     }
 
-    validate_age_and_sex(age, sex)
+    validate_age_and_sex(age, sex, reference)
 
     if (length(values) != length(age)) {
         cli::cli_abort("The length of {.field values} must be the same as the length of {.field age}.")
