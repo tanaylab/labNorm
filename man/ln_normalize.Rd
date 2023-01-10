@@ -158,16 +158,17 @@ creatinine_diff_units$quantile <- ln_normalize(
 )
 
 # Use UKBB as reference
-hemoglobin_data$quantile_ukbb <- ln_normalize(
-    hemoglobin_data$value,
-    hemoglobin_data$age,
-    hemoglobin_data$sex,
+hemoglobin_data_ukbb <- hemoglobin_data \%>\% filter(age >= 35 & age <= 80)
+hemoglobin_data_ukbb$quantile_ukbb <- ln_normalize(
+    hemoglobin_data_ukbb$value,
+    hemoglobin_data_ukbb$age,
+    hemoglobin_data_ukbb$sex,
     "Hemoglobin",
     reference = "UKBB"
 )
 
 # plot UKBB vs Clalit
-hemoglobin_data \%>\%
+hemoglobin_data_ukbb \%>\%
     filter(age >= 50 & age <= 60) \%>\%
     ggplot(aes(x = quantile, y = quantile_ukbb, color = sex)) +
     geom_point() +
