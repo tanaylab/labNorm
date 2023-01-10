@@ -1,7 +1,5 @@
-options(labNorm.use_low_res = TRUE)
-
-test_that("LAB_INFO and LAB_QUANTILES match", {
-    expect_true(all.equal(LAB_INFO$short_name, names(LAB_QUANTILES)))
+test_that("LAB_DETAILS and LAB_QUANTILES match", {
+    expect_true(all.equal(LAB_DETAILS$short_name, names(LAB_QUANTILES)))
 })
 
 test_that("LAB_QUANTILES are valid", {
@@ -23,13 +21,13 @@ test_that("LAB_QUANTILES are valid", {
 })
 
 test_that("all default units are in units", {
-    purrr::map2(LAB_INFO$default_units, LAB_INFO$units, function(default_units, units) {
+    purrr::map2(LAB_DETAILS$default_units, LAB_DETAILS$units, function(default_units, units) {
         expect_true(default_units %in% units)
     })
 })
 
-test_that("UNITS_CONVERSION and LAB_INFO are compatible", {
-    purrr::map2(UNITS_CONVERSION, LAB_INFO$units, function(conversion, units) {
+test_that("UNITS_CONVERSION and LAB_DETAILS are compatible", {
+    purrr::map2(UNITS_CONVERSION, LAB_DETAILS$units, function(conversion, units) {
         expect_true(all(names(conversion) %in% units))
         expect_true(all(units %in% names(conversion)))
     })
@@ -42,11 +40,11 @@ test_that("UNITS_CONVERSION are valid", {
 })
 
 test_that("all labs have quantiles", {
-    expect_true(all(names(LAB_QUANTILES) %in% LAB_INFO$short_name))
-    expect_true(all(LAB_INFO$short_name %in% names(LAB_QUANTILES)))
+    expect_true(all(names(LAB_QUANTILES) %in% LAB_DETAILS$short_name))
+    expect_true(all(LAB_DETAILS$short_name %in% names(LAB_QUANTILES)))
 })
 
 test_that("all labs have units conversion", {
-    expect_true(all(names(UNITS_CONVERSION) %in% LAB_INFO$short_name))
-    expect_true(all(LAB_INFO$short_name %in% names(UNITS_CONVERSION)))
+    expect_true(all(names(UNITS_CONVERSION) %in% LAB_DETAILS$short_name))
+    expect_true(all(LAB_DETAILS$short_name %in% names(UNITS_CONVERSION)))
 })

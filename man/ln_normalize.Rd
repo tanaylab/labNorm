@@ -5,43 +5,45 @@
 \alias{ln_normalize_multi}
 \title{Normalize lab values to age and sex}
 \usage{
-ln_normalize(values, age, sex, lab, units = NULL)
+ln_normalize(values, age, sex, lab, units = NULL, reference = "Clalit")
 
-ln_normalize_multi(df)
+ln_normalize_multi(labs_df, reference = "Clalit")
 }
 \arguments{
 \item{values}{a vector of lab values}
 
-\item{age}{a vector of ages between (20-89). Can be a single value if all values are the same age.}
+\item{age}{a vector of ages between 20-89 for "Clalit" reference and 35-80 for "UKBB". Can be a single value if all values are the same age.}
 
 \item{sex}{a vector of either "male" or "female". Can be a single value if all values are the same sex.}
 
-\item{lab}{the lab name. See \code{LAB_INFO$short_name} for a list of available labs.}
+\item{lab}{the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.}
 
 \item{units}{the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{ln_lab_default_units(lab)}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.}
 
-\item{df}{a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.}
+\item{reference}{the reference distribution to use. Can be either "Clalit" or "UKBB" or "Clalit-demo". Please download the Clalit and UKBB reference distributions using \code{ln_download_data()}.}
+
+\item{labs_df}{a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.}
 }
 \value{
-a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_is_high_res()}. \cr
+a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_data_downloaded()}. \cr
+You can force the function to use the lower resolution distribution by setting \code{options(labNorm.use_low_res = TRUE)}. \cr
 If the quantile information is not available (e.g. "Estradiol" for male patients), then the function will return \code{NA}.
 }
 \description{
 Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr
-The reference distribution used in this function are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution.
+The "Clalit" reference distributions are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution. \cr
+The "UKBB" reference distributions are based on the UK-Biobank, a large-scale population-based cohort study of 500K individuals, which underwent the same filtering process as the "Clalit" reference distributions.
 \cr
-The list of supported labs can be found below or by running \code{LAB_INFO$short_name}.
+The list of supported labs can be found below or by running \code{LAB_DETAILS$short_name}.
 }
 \section{reference distribution}{
 
-The reference distribution used in the function has a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. The full reference distributions can be used after downloading the data using the \code{ln_download_data()} function. \cr
-The function would first look for the downloaded values at \code{getOption("labNorm.dir")}, then at \code{rappdirs::user_data_dir("Labnorm")}, then at the current working directory. If the data is not found, the lower resolution distribution. \cr
-You can check if the high resolution data was downloaded using \code{ln_is_high_res()}.
+It is highly reccomended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. \cr
 }
 
 \section{labs}{
 
-The following labs are supported: \cr
+The following labs are supported (note that some labs are missing from the UKBB quantiles): \cr
 \itemize{
 \item WBC
 \item RBC
@@ -112,10 +114,7 @@ The following labs are supported: \cr
 }
 
 \examples{
-\dontshow{
-options(labNorm.use_low_res = TRUE)
-}
-
+\donttest{
 # Normalize Hemoglobin values to age and sex
 hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$value,
@@ -158,13 +157,45 @@ creatinine_diff_units$quantile <- ln_normalize(
     c(rep("umol/L", 500), rep("mmol/L", 500))
 )
 
+# Use UKBB as reference
+hemoglobin_data$quantile_ukbb <- ln_normalize(
+    hemoglobin_data$value,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin",
+    reference = "UKBB"
+)
+
+# plot UKBB vs Clalit
+hemoglobin_data \%>\%
+    filter(age >= 50 & age <= 60) \%>\%
+    ggplot(aes(x = quantile, y = quantile_ukbb, color = sex)) +
+    geom_point() +
+    theme_classic()
+}
+
+\dontshow{
+hemoglobin_data$quantile <- ln_normalize(
+    hemoglobin_data$value,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin",
+    reference = "Clalit-demo"
+)
+}
+
 library(dplyr)
 multi_labs_df <- bind_rows(
     hemoglobin_data \%>\% mutate(lab = "Hemoglobin"),
     creatinine_data \%>\% mutate(lab = "Creatinine")
 )
 
+\donttest{
 multi_labs_df$quantile <- ln_normalize_multi(multi_labs_df)
+}
+\dontshow{
+multi_labs_df$quantile <- ln_normalize_multi(multi_labs_df, reference = "Clalit-demo")
+}
 
 head(multi_labs_df)
 

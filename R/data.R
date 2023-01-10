@@ -2,7 +2,7 @@
 #'
 #' Names of the labs available in the package.
 #'
-#' @format ## `LAB_INFO`
+#' @format ## `LAB_DETAILS`
 #' A data frame with 65 rows and 4 columns:
 #' \describe{
 #'   \item{short_name}{Short lab name}
@@ -13,8 +13,8 @@
 #' }
 #' @source  American Board of Internal Medicine. ABIM Laboratory Test Reference Ranges — July 2021. <https://www.abim.org/~/media/ABIM%20Public/Files/pdf/exam/laboratory-reference-ranges.pdf> (2021).
 #' @examples
-#' head(LAB_INFO)
-"LAB_INFO"
+#' head(LAB_DETAILS)
+"LAB_DETAILS"
 
 #' Example values of Hemoglobin and Creatinine
 #'

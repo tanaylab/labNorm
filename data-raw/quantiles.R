@@ -23,7 +23,7 @@ features$conversion <- strsplit(features$conversion, "\\|")
 #' @param min_n minimal number of values in order to use the quantile
 #'
 #' @return an rds file with the quantiles
-import_lab <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tgdata/users/aviezerl/src/mldpEHR-app/backend/rawdata/lab_quantiles_raw", small_size = 21, min_n = 250) {
+import_lab_clalit <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tgdata/users/aviezerl/src/mldpEHR-app/backend/rawdata/lab_quantiles_raw", small_size = 21, min_n = 250) {
     cli::cli_alert("Importing {.field {lab}}")
     # Read the raw quantiles
     raw_quantiles <- readr::read_csv(file.path(raw_quantiles_dir, paste0(lab, ".csv")), show_col_types = FALSE) %>%
@@ -101,19 +101,84 @@ import_lab <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tgdata/user
 
 #' Import all labs
 #'
-#' @inheritParams import_lab
+#' @inheritParams import_lab_clalit
 #' @param ncores the number of cores to use
 #' @param parallel whether to use parallel processing
-import_all_labs <- function(raw_quantiles_dir = "/net/mraid14/export/tgdata/users/aviezerl/src/mldpEHR-app/backend/rawdata/lab_quantiles_raw", small_size = 21, ncores = 40, parallel = TRUE) {
+import_all_labs_clalit <- function(raw_quantiles_dir = "/net/mraid14/export/tgdata/users/aviezerl/src/mldpEHR-app/backend/rawdata/lab_quantiles_raw", small_size = 21, ncores = 40, parallel = TRUE) {
     doMC::registerDoMC(ncores)
 
     labs <- features$quantile_file
-    plyr::l_ply(labs, import_lab, raw_quantiles_dir = raw_quantiles_dir, small_size = small_size, .parallel = parallel)
+    plyr::l_ply(labs, import_lab_clalit, raw_quantiles_dir = raw_quantiles_dir, small_size = small_size, .parallel = parallel)
 
 
     cli::cli_alert_success("Done importing all labs. Size of small dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/small')$size))}}. Size of large dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/large')$size))}}")
 }
 
+#' Import quantiles from raw data
+#'
+#' @param lab the lab to import
+#' @param raw_quantiles_dir the directory containing the raw quantiles
+#' @param min_n minimal number of values in order to use the quantile
+#'
+#' @return an rds file with the quantiles
+import_lab_ukbb <- function(lab, raw_quantiles_dir = "/net/mraid14/export/data/users/nettam/projects/emr/labs/ukbb.lab.quantiles", min_n = 250) {
+    cli::cli_alert("Importing {.field {lab}}")
+    # Read the raw quantiles
+    raw_quantiles <- readr::read_csv(file.path(raw_quantiles_dir, paste0(lab, ".csv")), show_col_types = FALSE) %>%
+        mutate(
+            sex = factor(sex, levels = c("male", "female"))
+        ) %>%
+        as.data.frame()
+
+    out_fn <- file.path("data-raw", "ukbb", paste0(lab, ".rds"))
+
+    # create directories if they don't exist
+    dir.create(dirname(out_fn), showWarnings = FALSE, recursive = TRUE)
+
+    age_sex <- expand.grid(sex = c("male", "female"), age = levels(cut(35:80, seq(35, 80, 5), right = FALSE)))
+
+    # Create a list of approxfun per age and gender
+    quantiles <- plyr::dlply(age_sex, c("age", "sex"), function(specs) {
+        x <- raw_quantiles %>% filter(age == specs$age, sex == specs$sex)
+
+        if (nrow(x) == 0) {
+            cli::cli_warn("No values at age {.field {specs$age}} and sex {.field {specs$sex}}.")
+            return(NA)
+        }
+        num_vals <- x$n[1]
+        if (num_vals < min_n) {
+            cli::cli_warn("Number of values is less than {.field {min_n}} at age {.field {specs$age}} and sex {.field {specs$sex}}.")
+            return(NA)
+        }
+        func <- approxfun(x = x$value, y = x$quant, rule = 2)
+        if (!all(func(x$value) == x$quant)) {
+            cli::cli_abort("The quantiles do not match for {.field {lab}} at age {.field {specs$age}}")
+        }
+        return(func)
+    })
+    attr(quantiles, "split_type") <- NULL
+    attr(quantiles, "split_labels") <- NULL
+
+    readr::write_rds(quantiles, out_fn, compress = "xz", compression = 9)
+}
+
+#' Import all labs
+#'
+#' @inheritParams import_lab_clalit
+#' @param ncores the number of cores to use
+#' @param parallel whether to use parallel processing
+import_all_labs_ukbb <- function(raw_quantiles_dir = "/net/mraid14/export/data/users/nettam/projects/emr/labs/ukbb.lab.quantiles", ncores = 40, parallel = TRUE) {
+    doMC::registerDoMC(ncores)
+
+    labs <- features$quantile_file
+    labs_ukbb <<- list.files(raw_quantiles_dir, pattern = ".csv", full.names = FALSE) %>% stringr::str_remove(".csv")
+    labs_ukbb <<- labs[labs %in% labs_ukbb]
+    cli::cli_alert_info("The following labs are missing from UKBB: {.val {setdiff(labs, labs_ukbb)}}")
+    plyr::l_ply(labs_ukbb, import_lab_ukbb, raw_quantiles_dir = raw_quantiles_dir, .parallel = parallel)
+
+
+    cli::cli_alert_success("Done importing all ukbb labs. Size of dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/ukbb')$size))}}.")
+}
 
 
 ## Create package data
@@ -149,14 +214,24 @@ create_high_res_labs_data <- function() {
 
     names(LAB_QUANTILES) <- features$feature_name
 
-    readr::write_rds(LAB_QUANTILES, "data-raw/high_res_labs.rds", compress = "xz", compression = 9)
+    readr::write_rds(LAB_QUANTILES, "data-raw/Clalit.rds", compress = "xz", compression = 9)
+}
+
+create_ukbb_labs_data <- function() {
+    LAB_QUANTILES <- plyr::llply(labs_ukbb, function(lab) {
+        readr::read_rds(file.path("data-raw", "ukbb", paste0(lab, ".rds")))
+    })
+
+    names(LAB_QUANTILES) <- features$feature_name[features$quantile_file %in% labs_ukbb]
+
+    readr::write_rds(LAB_QUANTILES, "data-raw/UKBB.rds", compress = "xz", compression = 9)
 }
 
 create_lab_info <- function() {
-    LAB_INFO <- as.data.frame(features) %>%
+    LAB_DETAILS <- as.data.frame(features) %>%
         select(short_name = feature_name, long_name = full_name, units, default_units, low_male, high_male, low_female, high_female)
 
-    usethis::use_data(LAB_INFO, overwrite = TRUE, internal = FALSE, compress = "xz")
+    usethis::use_data(LAB_DETAILS, overwrite = TRUE, internal = FALSE, compress = "xz")
 }
 
 
@@ -229,8 +304,10 @@ plot_all_large_vs_small <- function(raw_quantiles_dir = "/net/mraid14/export/tgd
     return(stats)
 }
 
-import_all_labs()
-create_labs_data()
-create_lab_info()
-create_high_res_labs_data()
+# import_all_labs_clalit()
+import_all_labs_ukbb()
+# create_labs_data()
+# create_lab_info()
+# create_high_res_labs_data()
+create_ukbb_labs_data()
 # plot_all_large_vs_small()
