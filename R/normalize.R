@@ -1,6 +1,6 @@
-#' Normalize lab values to age and gender
+#' Normalize lab values to age and sex
 #'
-#' @description Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" <doi:10.1038/s41591-021-01468-6>. \cr
+#' @description Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" <doi:10.1038/s41591-021-01468-6>. \cr
 #' The reference distribution used in this function are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution.
 #' \cr
 #' The list of supported labs can be found below or by running \code{LAB_INFO$short_name}.
@@ -189,7 +189,7 @@ ln_normalize <- function(values, age, sex, lab, units = NULL) {
     return(normalized)
 }
 
-#' Normalize multiple labs for age and gender to age and gender
+#' Normalize multiple labs for age and sex
 #'
 #' @param df a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.
 #'

@@ -3,7 +3,7 @@
 \name{ln_normalize}
 \alias{ln_normalize}
 \alias{ln_normalize_multi}
-\title{Normalize lab values to age and gender}
+\title{Normalize lab values to age and sex}
 \usage{
 ln_normalize(values, age, sex, lab, units = NULL)
 
@@ -27,7 +27,7 @@ a vector of normalized values. If \code{ln_download_data()} was not run, a lower
 If the quantile information is not available (e.g. "Estradiol" for male patients), then the function will return \code{NA}.
 }
 \description{
-Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr
+Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr
 The reference distribution used in this function are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution.
 \cr
 The list of supported labs can be found below or by running \code{LAB_INFO$short_name}.

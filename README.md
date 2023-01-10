@@ -13,7 +13,7 @@ status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.or
 
 `labNorm` provides functions for normalizing standard laboratory
 measurements (e.g. hemoglobin, cholesterol levels) according to age and
-gender. These normalizations are based on the algorithms described in
+sex. These normalizations are based on the algorithms described in
 the research paper [“Personalized lab test models to quantify disease
 potentials in healthy
 individuals”](https://doi.org/10.1038/s41591-021-01468-6).

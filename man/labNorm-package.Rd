@@ -4,9 +4,11 @@
 \name{labNorm-package}
 \alias{labNorm}
 \alias{labNorm-package}
-\title{labNorm: Normalize Laboratory Measurements by Age and Gender}
+\title{labNorm: Normalize Laboratory Measurements by Age and Sex}
 \description{
-Provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" (Netta Mendelson Cohen, Omer Schwartzman, Ram Jaschek, Aviezer Lifshitz, Michael Hoichman, Ran Balicer, Liran I. Shlush, Gabi Barbash & Amos Tanay, \doi{10.1038/s41591-021-01468-6}). Allows users to easily obtain normalized values for standard lab results, and to visualize their distributions. See more at \url{https://tanaylab.weizmann.ac.il/labs/}.
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
+
+Provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" (Netta Mendelson Cohen, Omer Schwartzman, Ram Jaschek, Aviezer Lifshitz, Michael Hoichman, Ran Balicer, Liran I. Shlush, Gabi Barbash & Amos Tanay, \doi{10.1038/s41591-021-01468-6}). Allows users to easily obtain normalized values for standard lab results, and to visualize their distributions. See more at \url{https://tanaylab.weizmann.ac.il/labs/}.
 }
 \author{
 \strong{Maintainer}: Aviezer Lifshitz \email{aviezer.lifshitz@weizmann.ac.il}
