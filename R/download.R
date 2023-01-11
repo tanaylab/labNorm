@@ -42,37 +42,8 @@ ln_download_data <- function(dir = NULL, load = TRUE) {
         }
     }
 
-    withr::local_options(timeout = 2 * 60 * 60)
-
-    tryCatch(
-        {
-            download.file(
-                "https://labnorm.s3.eu-west-1.amazonaws.com/Clalit.rds",
-                file.path(dir, "Clalit.rds")
-            )
-        },
-        error = function(e) {
-            cli::cli_abort("There was an error downloading the data. Please check your internet connection and try again.")
-        }
-    )
-
-    tryCatch(
-        {
-            download.file(
-                "https://labnorm.s3.eu-west-1.amazonaws.com/UKBB.rds",
-                file.path(dir, "UKBB.rds")
-            )
-        },
-        error = function(e) {
-            cli::cli_abort("There was an error downloading the data. Please check your internet connection and try again.")
-        }
-    )
-
-    cli::cli_alert_success("Data downloaded succesfully to {.field {dir}}.")
-
-    if (!default_dir) {
-        cli::cli_alert_info("The data was downloaded to {.field {dir}}. You will need to set {.code options(labNorm.dir = '{dir}')} in order for the package to use the downloaded data in future sessions.")
-    }
+    download_reference_distributions(dir, "Clalit")
+    download_reference_distributions(dir, "UKBB")
 
     options(labNorm.dir = dir)
 
@@ -80,6 +51,25 @@ ln_download_data <- function(dir = NULL, load = TRUE) {
         cli::cli_alert("Loading the data into the environment.")
         pkgenv$Clalit <- readRDS(file.path(dir, "Clalit.rds"))
         pkgenv$UKBB <- readRDS(file.path(dir, "UKBB.rds"))
+    }
+}
+
+download_reference_distributions <- function(dir, reference) {
+    withr::local_options(timeout = 2 * 60 * 60)
+    tryCatch(
+        {
+            status <- download.file(
+                glue::glue("https://labnorm.s3.eu-west-1.amazonaws.com/{reference}.rds"),
+                file.path(dir, glue::glue("{reference}.rds"))
+            )
+        },
+        error = function(e) {
+            cli::cli_abort("There was an error downloading the data. Please check your internet connection and try again.", frame = parent.frame(1))
+        }
+    )
+
+    if (status != 0) {
+        cli::cli_abort("There was an error downloading the data. Please check your internet connection and try again.", frame = parent.frame(1))
     }
 }
 
