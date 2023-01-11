@@ -1,0 +1,71 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+    collapse = TRUE,
+    comment = "#>",
+    fig.path = "man/figures/README-",
+    out.width = "100%"
+)
+```
+
+# labNorm <img src="man/figures/logo.png" align="right" height="139" />
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
+<!-- badges: end -->
+
+`labNorm` provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex. These normalizations are based on the algorithms described in the research paper ["Personalized lab test models to quantify disease potentials in healthy individuals"](https://doi.org/10.1038/s41591-021-01468-6). 
+
+This package allows users to easily obtain normalized values for their lab results and to project them on the population distribution. It can use reference distributions from Clalit HMO or UKBB. For more information go to: https://tanaylab.weizmann.ac.il/labs/
+
+## Installation
+
+You can install the development version of `labNorm` from GitHub using the `remotes` package:
+
+``` r
+retmotes::install_github("tanaylab/labNorm")
+```
+
+## Example
+
+Normalize hemoglobin values for a group of subjects:
+
+
+```{r}
+library(labNorm)
+
+# Add a column for the normalized values
+hemoglobin_data$quantile <- ln_normalize(
+    hemoglobin_data$value,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin"
+)
+
+head(hemoglobin_data)
+```
+
+Plot the quantiles vs values for age 50-60: 
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+hemoglobin_data %>%
+    filter(age >= 50 & age <= 60) %>%
+    ggplot(aes(x = value, y = quantile, color = sex)) +
+    geom_point() +
+    theme_classic()
+```
+
+Plot the age/sex distribution of Hemoglobin: 
+
+```{r, fig.width=8, fig.height=4}
+ln_plot_dist("Hemoglobin")
+```
