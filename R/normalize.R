@@ -150,6 +150,7 @@
 #'     filter(age >= 50 & age <= 60) %>%
 #'     ggplot(aes(x = quantile, y = quantile_ukbb, color = sex)) +
 #'     geom_point() +
+#'     geom_abline() +
 #'     theme_classic()
 #' }
 #'
