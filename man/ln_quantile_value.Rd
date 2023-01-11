@@ -28,7 +28,7 @@ ln_patients_quantile_value(
 
 \item{age}{a vector of ages to compute the lab values for or a vector with an age for each patient when running \code{ln_patients_quantile_value}.}
 
-\item{sex}{the sexes to compute the lab values for, or a vector with a sex for ecah patient when running \code{ln_patients_quantile_value}. Note that for \code{ln_quantile_value} this parameter can only be either: "male", "female" or c("male", "female")}
+\item{sex}{the sexes to compute the lab values for, or a vector with a sex for each patient when running \code{ln_patients_quantile_value}. Note that for \code{ln_quantile_value} this parameter can only be either: "male", "female" or c("male", "female")}
 
 \item{lab}{The lab name.}
 
