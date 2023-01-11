@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
+[![Codecov test coverage](https://codecov.io/gh/tanaylab/labNorm/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tanaylab/labNorm?branch=main)
+[![R-CMD-check](https://github.com/tanaylab/labNorm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tanaylab/labNorm/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `labNorm` provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex. These normalizations are based on the algorithms described in the research paper ["Personalized lab test models to quantify disease potentials in healthy individuals"](https://doi.org/10.1038/s41591-021-01468-6). 

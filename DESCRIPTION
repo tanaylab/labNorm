@@ -9,6 +9,7 @@ Authors@R: c(
 Description: Provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" (Netta Mendelson Cohen, Omer Schwartzman, Ram Jaschek, Aviezer Lifshitz, Michael Hoichman, Ran Balicer, Liran I. Shlush, Gabi Barbash & Amos Tanay, <doi:10.1038/s41591-021-01468-6>). Allows users to easily obtain normalized values for standard lab results, and to visualize their distributions. See more at <https://tanaylab.weizmann.ac.il/labs/>.
 License: MIT + file LICENSE
 Suggests: 
+    covr,
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

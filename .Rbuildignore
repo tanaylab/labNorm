@@ -6,3 +6,5 @@
 ^dev$
 ^data-raw$
 ^pkgdown$
+^codecov\.yml$
+^\.github$
