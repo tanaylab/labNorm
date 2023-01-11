@@ -15,5 +15,5 @@ test_that("an error is thrown when pal is not a vector", {
 })
 
 test_that("a ggplot object is returned when called with default arguments", {
-    expect_true("ggplot" %in% class(ln_plot_dist("Hemoglobin")))
+    expect_true("ggplot" %in% class(ln_plot_dist("Hemoglobin", reference = "Clalit-demo")))
 })

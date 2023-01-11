@@ -9,9 +9,9 @@ ln_convert_units(values, units, lab)
 \arguments{
 \item{values}{a vector of lab values}
 
-\item{units}{the units of the lab values. See \code{LAB_INFO$units} for a list of available units for each lab. If different values have different units then this should be a vector of the same length as \code{values}.}
+\item{units}{the units of the lab values. See \code{LAB_DETAILS$units} for a list of available units for each lab. If different values have different units then this should be a vector of the same length as \code{values}.}
 
-\item{lab}{the lab name. See \code{LAB_INFO$short_name} for a list of available labs.}
+\item{lab}{the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.}
 }
 \value{
 the values converted to the default units for the lab

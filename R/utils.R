@@ -1,6 +1,6 @@
 validate_lab <- function(lab) {
-    if (!(lab %in% LAB_INFO$short_name)) {
-        cli::cli_abort("Lab {.field {lab}} is not available. Available labs can be found in {.code LAB_INFO$short_name}. Examples are {.field Hemoglobin} and {.field Creatinine}.", call = parent.frame(1))
+    if (!(lab %in% LAB_DETAILS$short_name)) {
+        cli::cli_abort("Lab {.field {lab}} is not available. Available labs can be found in {.code LAB_DETAILS$short_name}. Examples are {.field Hemoglobin} and {.field Creatinine}.", call = parent.frame(1))
     }
 }
 
@@ -13,9 +13,12 @@ validate_units <- function(units, lab) {
     }
 }
 
-validate_age_and_sex <- function(age, sex) {
-    if (any(age < 20 | age > 89)) {
-        cli::cli_abort("Invalid age. Age must be between 20 and 89.", call = parent.frame(1))
+validate_age_and_sex <- function(age, sex, reference) {
+    if (any(age < pkgenv$age_limits[[reference]][1])) {
+        cli::cli_warn("Age must be at least {.val {pkgenv$age_limits[[reference]][1]}} for {.field {reference}}.", call = parent.frame(1))
+    }
+    if (any(age > pkgenv$age_limits[[reference]][2])) {
+        cli::cli_warn("Age must be at most {.val {pkgenv$age_limits[[reference]][2]}} for {.field {reference}}.", call = parent.frame(1))
     }
 
     if (!all(sex %in% c("male", "female"))) {
@@ -28,6 +31,10 @@ validate_age_and_sex <- function(age, sex) {
     }
 }
 
+age_in_range <- function(age, reference) {
+    return(age >= pkgenv$age_limits[[reference]][1] & age <= pkgenv$age_limits[[reference]][2])
+}
+
 validate_quantiles <- function(quantiles) {
     if (any(quantiles < 0) || any(quantiles > 1)) {
         cli::cli_abort("All quantiles must be in the range 0-1.", call = parent.frame(1))
@@ -36,12 +43,12 @@ validate_quantiles <- function(quantiles) {
 
 get_lab_info <- function(lab) {
     validate_lab(lab)
-    LAB_INFO[LAB_INFO$short_name == lab, ]
+    LAB_DETAILS[LAB_DETAILS$short_name == lab, ]
 }
 
 #' Get available units for a lab
 #'
-#' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
+#' @param lab the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.
 #'
 #' @return a vector of available units for the lab
 #'
@@ -55,7 +62,7 @@ ln_lab_units <- function(lab) {
 }
 
 #' Get the default units for a lab
-#' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
+#' @param lab the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.
 #' @return the default units for the lab
 #' @examples
 #' ln_lab_default_units("Hemoglobin")

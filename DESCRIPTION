@@ -1,17 +1,18 @@
 Package: labNorm
-Title: Normalize Laboratory Measurements by Age and Gender
+Title: Normalize Laboratory Measurements by Age and Sex
 Version: 1.0.0
 Authors@R: c(
     person("Aviezer", "Lifshitz", , "aviezer.lifshitz@weizmann.ac.il", role = c("aut", "cre")),
     person("Netta", "Mendelson-Cohen", , "netta.mendelsoncohen@weizmann.ac.il", role = "aut"),    
     person("Weizmann Institute of Science", role = "cph")
   )
-Description: Provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and gender, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" (Netta Mendelson Cohen, Omer Schwartzman, Ram Jaschek, Aviezer Lifshitz, Michael Hoichman, Ran Balicer, Liran I. Shlush, Gabi Barbash & Amos Tanay, <doi:10.1038/s41591-021-01468-6>). Allows users to easily obtain normalized values for standard lab results, and to visualize their distributions. See more at <https://tanaylab.weizmann.ac.il/labs/>.
+Description: Provides functions for normalizing standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" (Netta Mendelson Cohen, Omer Schwartzman, Ram Jaschek, Aviezer Lifshitz, Michael Hoichman, Ran Balicer, Liran I. Shlush, Gabi Barbash & Amos Tanay, <doi:10.1038/s41591-021-01468-6>). Allows users to easily obtain normalized values for standard lab results, and to visualize their distributions. See more at <https://tanaylab.weizmann.ac.il/labs/>.
 License: MIT + file LICENSE
 Suggests: 
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/testthat/start-first: download
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

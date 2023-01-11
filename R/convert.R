@@ -1,8 +1,8 @@
 #' Convert values to the default units for the lab
 #'
 #' @param values a vector of lab values
-#' @param units the units of the lab values. See \code{LAB_INFO$units} for a list of available units for each lab. If different values have different units then this should be a vector of the same length as \code{values}.
-#' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
+#' @param units the units of the lab values. See \code{LAB_DETAILS$units} for a list of available units for each lab. If different values have different units then this should be a vector of the same length as \code{values}.
+#' @param lab the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.
 #'
 #' @return the values converted to the default units for the lab
 #'

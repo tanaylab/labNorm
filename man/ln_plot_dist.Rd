@@ -7,6 +7,7 @@
 ln_plot_dist(
   lab,
   quantiles = c(0.03, 0.1, 0.15, 0.25, 0.35, 0.65, 0.75, 0.85, 0.9, 0.97),
+  reference = "Clalit",
   pal = c("#D7DCE7", "#B0B9D0", "#8997B9", "#6274A2", "#3B528B", "#6274A2", "#8997B9",
     "#B0B9D0", "#D7DCE7"),
   sex = NULL,
@@ -18,9 +19,11 @@ ln_plot_dist(
 )
 }
 \arguments{
-\item{lab}{the lab name. See \code{LAB_INFO$short_name} for a list of available labs.}
+\item{lab}{the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.}
 
-\item{quantiles}{a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}. Note that if only the low-resolution version of the quantiles, quantiles below 0.05 and above 0.95 would be rounded to 0.05 and 0.95 respectively, and the same would be done for quantiles below 0.01 and above 0.99 when the high-resolution version is available.}
+\item{quantiles}{a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}. Note that if \code{reference="Clalit-demo"}, quantiles below 0.05 and above 0.95 would be rounded to 0.05 and 0.95 respectively, and the same would be done for quantiles below 0.01 and above 0.99 when the high-resolution version is available.}
+
+\item{reference}{the reference distribution to use. Can be either "Clalit" or "UKBB" or "Clalit-demo". Please download the Clalit and UKBB reference distributions using \code{ln_download_data()}.}
 
 \item{pal}{a vector of colors to use for the quantiles. Should be of length \code{length(quantiles) - 1}.}
 
@@ -43,10 +46,10 @@ a \code{ggplot2} object
 Plot age-sex distribution of a lab
 }
 \examples{
-\dontshow{
-set.seed(60427)
-}
 
+set.seed(60427)
+
+\donttest{
 ln_plot_dist("Hemoglobin")
 
 # Plot only females
@@ -69,5 +72,14 @@ ln_plot_dist(
     quantiles = c(0.03, 0.1, 0.25, 0.5, 0.75, 0.9, 0.97),
     pal = c("red", "orange", "yellow", "green", "blue", "purple")
 )
+
+# Change the reference distribution
+ln_plot_dist("Hemoglobin", reference = "UKBB")
+}
+
+# on the demo data
+\dontshow{
+ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
+}
 
 }

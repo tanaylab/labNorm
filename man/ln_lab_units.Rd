@@ -10,7 +10,7 @@ ln_lab_units(lab)
 ln_lab_default_units(lab)
 }
 \arguments{
-\item{lab}{the lab name. See \code{LAB_INFO$short_name} for a list of available labs.}
+\item{lab}{the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.}
 }
 \value{
 a vector of available units for the lab

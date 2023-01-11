@@ -1,7 +1,7 @@
 #' Plot age-sex distribution of a lab
 #'
-#' @param lab the lab name. See \code{LAB_INFO$short_name} for a list of available labs.
-#' @param quantiles a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}. Note that if only the low-resolution version of the quantiles, quantiles below 0.05 and above 0.95 would be rounded to 0.05 and 0.95 respectively, and the same would be done for quantiles below 0.01 and above 0.99 when the high-resolution version is available.
+#' @param lab the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.
+#' @param quantiles a vector of quantiles to plot, without 0 and 1. Default is \code{c(0.03, 0.1, 0.15, 0.25, 0.35, 0.5, 0.65, 0.75, 0.85, 0.9, 0.97)}. Note that if \code{reference="Clalit-demo"}, quantiles below 0.05 and above 0.95 would be rounded to 0.05 and 0.95 respectively, and the same would be done for quantiles below 0.01 and above 0.99 when the high-resolution version is available.
 #' @param pal a vector of colors to use for the quantiles. Should be of length \code{length(quantiles) - 1}.
 #' @param sex Plot only a single sex ("male" or "female"). If NULL - \code{ggplot2::facet_grid} would be used to plot both sexes. Default is NULL.
 #' @param patients (optional) a data frame of patients to plot as dots over the distribution. See the \code{df} parameter of \code{ln_normalize_multi} for details.
@@ -13,10 +13,10 @@
 #' @return a \code{ggplot2} object
 #'
 #' @examples
-#' \dontshow{
-#' set.seed(60427)
-#' }
 #'
+#' set.seed(60427)
+#'
+#' \donttest{
 #' ln_plot_dist("Hemoglobin")
 #'
 #' # Plot only females
@@ -40,9 +40,20 @@
 #'     pal = c("red", "orange", "yellow", "green", "blue", "purple")
 #' )
 #'
+#' # Change the reference distribution
+#' ln_plot_dist("Hemoglobin", reference = "UKBB")
+#' }
+#'
+#' # on the demo data
+#' \dontshow{
+#' ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
+#' }
+#'
+#' @inheritParams ln_normalize
 #' @export
 ln_plot_dist <- function(lab,
                          quantiles = c(0.03, 0.1, 0.15, 0.25, 0.35, 0.65, 0.75, 0.85, 0.9, 0.97),
+                         reference = "Clalit",
                          pal = c("#D7DCE7", "#B0B9D0", "#8997B9", "#6274A2", "#3B528B", "#6274A2", "#8997B9", "#B0B9D0", "#D7DCE7"),
                          sex = NULL,
                          patients = NULL,
@@ -53,12 +64,12 @@ ln_plot_dist <- function(lab,
     validate_lab(lab)
     validate_quantiles(quantiles)
 
-    if (ln_is_high_res()) {
-        min_q <- 0.01
-        max_q <- 0.99
-    } else {
+    if (reference == "Clalit-demo") {
         min_q <- 0.05
         max_q <- 0.95
+    } else {
+        min_q <- 0.01
+        max_q <- 0.99
     }
     quantiles <- pmin(max_q, pmax(min_q, quantiles))
 
@@ -81,9 +92,14 @@ ln_plot_dist <- function(lab,
     }
 
     quantiles <- sort(quantiles)
+    if (reference %in% c("Clalit", "Clalit-demo")) {
+        ages <- 20:89
+    } else {
+        ages <- 35:80
+    }
 
     # get the data
-    df_full <- ln_quantile_value(sort(unique(c(min_q, quantiles, 0.5, max_q))), 20:89, c("male", "female"), lab)
+    df_full <- ln_quantile_value(sort(unique(c(min_q, quantiles, 0.5, max_q))), ages, c("male", "female"), lab, reference = reference)
 
     # get reference ranges
     lab_info <- get_lab_info(lab)
@@ -171,7 +187,7 @@ ln_plot_dist <- function(lab,
     }
 
     if (!is.null(patients)) {
-        patients <- validate_patients_df(patients, lab)
+        patients <- validate_patients_df(patients, lab, reference)
         p <- p +
             geom_point(
                 data = patients,
@@ -187,14 +203,15 @@ ln_plot_dist <- function(lab,
     return(p)
 }
 
-validate_patients_df <- function(df, lab) {
+validate_patients_df <- function(df, lab, reference) {
     validate_lab(lab)
     lab_info <- get_lab_info(lab)
     if (!is.data.frame(df)) {
         cli::cli_abort("The {.field patients} should be a data frame.")
     }
 
-    validate_age_and_sex(df$age, df$sex)
+    validate_age_and_sex(df$age, df$sex, reference)
+
     if (is.null(df$units)) {
         df$units <- lab_info$default_units
     }
@@ -204,6 +221,9 @@ validate_patients_df <- function(df, lab) {
 
     # convert units if needed
     df$value <- ln_convert_units(df$value, df$units, lab)
+
+
+    df$age[!age_in_range(df$age, reference)] <- NA
 
     return(df)
 }
