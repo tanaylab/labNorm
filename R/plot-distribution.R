@@ -13,9 +13,8 @@
 #' @return a \code{ggplot2} object
 #'
 #' @examples
-#' \dontshow{
+#'
 #' set.seed(60427)
-#' }
 #'
 #' \donttest{
 #' ln_plot_dist("Hemoglobin")
@@ -45,6 +44,7 @@
 #' ln_plot_dist("Hemoglobin", reference = "UKBB")
 #' }
 #'
+#' # on the demo data
 #' \dontshow{
 #' ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
 #' }
@@ -211,6 +211,7 @@ validate_patients_df <- function(df, lab, reference) {
     }
 
     validate_age_and_sex(df$age, df$sex, reference)
+
     if (is.null(df$units)) {
         df$units <- lab_info$default_units
     }
@@ -220,6 +221,9 @@ validate_patients_df <- function(df, lab, reference) {
 
     # convert units if needed
     df$value <- ln_convert_units(df$value, df$units, lab)
+
+
+    df$age[!age_in_range(df$age, reference)] <- NA
 
     return(df)
 }

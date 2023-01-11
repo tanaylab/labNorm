@@ -9,7 +9,7 @@ setup_test <- function(...) {
     }
 
     withr::defer(pkgenv$yesno2 <- yesno::yesno2)
-    pkgenv$yesno2 <- function(prompt) TRUE
+    pkgenv$yesno2 <- function(prompt) FALSE
 
     # Test function
     ln_download_data(...)

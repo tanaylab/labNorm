@@ -27,18 +27,18 @@ ln_normalize_multi(labs_df, reference = "Clalit")
 \value{
 a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_data_downloaded()}. \cr
 You can force the function to use the lower resolution distribution by setting \code{options(labNorm.use_low_res = TRUE)}. \cr
-If the quantile information is not available (e.g. "Estradiol" for male patients), then the function will return \code{NA}.
+If the quantile information is not available (e.g. "Estradiol" for male patients, various labs which are not available in the UKBB data), then the function will return \code{NA}.
 }
 \description{
-Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr
-The "Clalit" reference distributions are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution. \cr
+Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr \cr
+The "Clalit" reference distributions are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution. \cr \cr
 The "UKBB" reference distributions are based on the UK-Biobank, a large-scale population-based cohort study of 500K individuals, which underwent the same filtering process as the "Clalit" reference distributions.
-\cr
+\cr \cr
 The list of supported labs can be found below or by running \code{LAB_DETAILS$short_name}.
 }
 \section{reference distribution}{
 
-It is highly reccomended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. \cr
+It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. \cr
 }
 
 \section{labs}{
@@ -175,6 +175,7 @@ hemoglobin_data_ukbb \%>\%
     theme_classic()
 }
 
+# examples on the demo data
 \dontshow{
 hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$value,
@@ -194,6 +195,8 @@ multi_labs_df <- bind_rows(
 \donttest{
 multi_labs_df$quantile <- ln_normalize_multi(multi_labs_df)
 }
+
+# on the demo data
 \dontshow{
 multi_labs_df$quantile <- ln_normalize_multi(multi_labs_df, reference = "Clalit-demo")
 }

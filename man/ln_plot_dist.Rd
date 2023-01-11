@@ -46,9 +46,8 @@ a \code{ggplot2} object
 Plot age-sex distribution of a lab
 }
 \examples{
-\dontshow{
+
 set.seed(60427)
-}
 
 \donttest{
 ln_plot_dist("Hemoglobin")
@@ -78,6 +77,7 @@ ln_plot_dist(
 ln_plot_dist("Hemoglobin", reference = "UKBB")
 }
 
+# on the demo data
 \dontshow{
 ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
 }

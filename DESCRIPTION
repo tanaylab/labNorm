@@ -12,6 +12,7 @@ Suggests:
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Config/testthat/start-first: download
 Encoding: UTF-8
 Language: en-US
 Roxygen: list(markdown = TRUE)

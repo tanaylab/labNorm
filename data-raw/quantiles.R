@@ -304,10 +304,10 @@ plot_all_large_vs_small <- function(raw_quantiles_dir = "/net/mraid14/export/tgd
     return(stats)
 }
 
-# import_all_labs_clalit()
+import_all_labs_clalit()
 import_all_labs_ukbb()
-# create_labs_data()
-# create_lab_info()
-# create_high_res_labs_data()
+create_labs_data()
+create_lab_info()
+create_high_res_labs_data()
 create_ukbb_labs_data()
 # plot_all_large_vs_small()

@@ -35,6 +35,7 @@
 #' )
 #' }
 #'
+#' # on the demo data
 #' \dontshow{
 #' ln_quantile_value(c(0.05, 0.5, 0.95), 50, "male", "WBC", reference = "Clalit-demo")
 #' }
@@ -67,19 +68,23 @@ ln_quantile_value <- function(quantiles, age, sex, lab, reference = "Clalit", al
     res <- params %>%
         purrr::pmap_dfr(function(...) {
             .x <- tibble(...)
-            func <- get_norm_func(lab, .x$age, .x$sex, reference)
-            if (is.function(func)) {
-                func_env <- environment(func)
-                all_vals <- func_env$x
-                all_quants <- func_env$y
-                func_quant_to_val <- approxfun(x = all_quants, y = all_vals, rule = 2)
-                values <- func_quant_to_val(quantiles)
-            } else {
+            if (!age_in_range(.x$age, reference)) {
                 values <- rep(NA, length(quantiles))
-            }
+            } else {
+                func <- get_norm_func(lab, .x$age, .x$sex, reference)
+                if (is.function(func)) {
+                    func_env <- environment(func)
+                    all_vals <- func_env$x
+                    all_quants <- func_env$y
+                    func_quant_to_val <- approxfun(x = all_quants, y = all_vals, rule = 2)
+                    values <- func_quant_to_val(quantiles)
+                } else {
+                    values <- rep(NA, length(quantiles))
+                }
 
-            if (!allow_edge_quantiles) {
-                values[quantiles < min_q | quantiles > max_q] <- NA
+                if (!allow_edge_quantiles) {
+                    values[quantiles < min_q | quantiles > max_q] <- NA
+                }
             }
 
             data.frame(age = .x$age, sex = .x$sex, quantile = quantiles, value = values, unit = ln_lab_default_units(lab), lab = lab)

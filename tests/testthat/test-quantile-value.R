@@ -6,9 +6,13 @@ test_that("quantile greater than 1 throws error", {
     expect_error(ln_quantile_value(1.01, 50, "male", "WBC"))
 })
 
-test_that("invalid age or sex throws error", {
-    expect_error(ln_quantile_value(c(0.25, 0.5, 0.75), -10, "male", "WBC"))
+test_that("invalid sex throws error", {
     expect_error(ln_quantile_value(c(0.25, 0.5, 0.75), 50, "other", "WBC"))
+})
+
+test_that("invalide age throws warning and returns NA", {
+    expect_warning(a <- ln_quantile_value(c(0.25, 0.5, 0.75), -10, "male", "WBC"))
+    expect_true(all(is.na(a$value)))
 })
 
 test_that("correct number of rows returned for multiple quantiles and ages/sexes", {

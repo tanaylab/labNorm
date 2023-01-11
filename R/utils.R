@@ -14,16 +14,12 @@ validate_units <- function(units, lab) {
 }
 
 validate_age_and_sex <- function(age, sex, reference) {
-    if (reference %in% c("Clalit", "Clalit-demo")) {
-        if (any(age < 20 | age > 89)) {
-            cli::cli_abort("Invalid age. Age must be between 20 and 89.", call = parent.frame(1))
-        }
-    } else if (reference == "UKBB") {
-        if (any(age < 35 | age > 80)) {
-            cli::cli_abort("Invalid age. Age must be between 35 and 80.", call = parent.frame(1))
-        }
+    if (any(age < pkgenv$age_limits[[reference]][1])) {
+        cli::cli_warn("Age must be at least {.val {pkgenv$age_limits[[reference]][1]}} for {.field {reference}}.", call = parent.frame(1))
     }
-
+    if (any(age > pkgenv$age_limits[[reference]][2])) {
+        cli::cli_warn("Age must be at most {.val {pkgenv$age_limits[[reference]][2]}} for {.field {reference}}.", call = parent.frame(1))
+    }
 
     if (!all(sex %in% c("male", "female"))) {
         bad_values <- unique(sex[sex %in% c("male", "female")])
@@ -33,6 +29,10 @@ validate_age_and_sex <- function(age, sex, reference) {
     if (length(age) != length(sex)) {
         cli::cli_abort("The length of {.field age} must be the same as the length of {.field sex}.", call = parent.frame(1))
     }
+}
+
+age_in_range <- function(age, reference) {
+    return(age >= pkgenv$age_limits[[reference]][1] & age <= pkgenv$age_limits[[reference]][2])
 }
 
 validate_quantiles <- function(quantiles) {

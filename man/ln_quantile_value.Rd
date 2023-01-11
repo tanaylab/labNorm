@@ -55,6 +55,7 @@ ln_quantile_value(
 )
 }
 
+# on the demo data
 \dontshow{
 ln_quantile_value(c(0.05, 0.5, 0.95), 50, "male", "WBC", reference = "Clalit-demo")
 }

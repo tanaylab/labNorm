@@ -33,6 +33,11 @@ test_that("ln_normalize works", {
     expect_equal(q, LAB_QUANTILES[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
 })
 
+test_that("ln_normalize returns NA when age is out of range", {
+    expect_warning(q <- ln_normalize(c(1:10), 5:14, "male", "Hemoglobin", reference = "Clalit-demo"))
+    expect_true(all(is.na(q)))
+})
+
 test_that("normalization works with different units", {
     hemoglobin_50 <- hemoglobin_data %>%
         filter(age == 50, sex == "male")

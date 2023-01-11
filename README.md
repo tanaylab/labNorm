@@ -46,6 +46,9 @@ hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$sex,
     "Hemoglobin"
 )
+#> → Downloading to a temporary directory '/tmp/Rtmp6lhnUs'.
+#> ✔ Data downloaded succesfully to /tmp/Rtmp6lhnUs.
+#> → Loading the data into the environment.
 
 head(hemoglobin_data)
 #>   age    sex value   quantile
