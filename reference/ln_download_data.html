@@ -66,7 +66,7 @@ Default directories are:</p><ul><li><p>Unix: ~/.local/share/LabNorm</p></li>
 </ul></div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ln_download_data</span><span class="op">(</span>dir <span class="op">=</span> <span class="cn">NULL</span>, load <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ln_download_data</span><span class="op">(</span>dir <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ln_data_downloaded</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -75,10 +75,6 @@ Default directories are:</p><ul><li><p>Unix: ~/.local/share/LabNorm</p></li>
     <h2>Arguments</h2>
     <dl><dt>dir</dt>
 <dd><p>the directory to download the data to. If <code>NULL</code> and the user approves, the data will be downloaded to the package directory, using <code>rappdirs::user_data_dir("labnorm")</code>, otherwise - a temporary directory would be used.</p></dd>
-
-
-<dt>load</dt>
-<dd><p>load the data after downloading it.</p></dd>
 
 </dl></div>
     <div id="value">
@@ -95,9 +91,9 @@ Default directories are:</p><ul><li><p>Unix: ~/.local/share/LabNorm</p></li>
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="fu">ln_download_data</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Downloading to a temporary directory <span style="color: #0000BB;">/tmp/RtmpSnPR22</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Data downloaded succesfully to <span style="color: #00BB00;">/tmp/RtmpSnPR22</span>.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> → Loading the data into the environment.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Downloading to a temporary directory <span style="color: #0000BB;">/var/folders/kh/nhxf88ld5xb0g23l88y1w9x80000gp/T//RtmppZulir</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Extracting data to <span style="color: #0000BB;">/var/folders/kh/nhxf88ld5xb0g23l88y1w9x80000gp/T//RtmppZulir</span>.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Extracting data to <span style="color: #0000BB;">/var/folders/kh/nhxf88ld5xb0g23l88y1w9x80000gp/T//RtmppZulir</span>.</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">ln_data_downloaded</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -117,7 +113,7 @@ Default directories are:</p><ul><li><p>Unix: ~/.local/share/LabNorm</p></li>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

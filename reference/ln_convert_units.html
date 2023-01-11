@@ -78,16 +78,16 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">hemoglobin_diff_units</span> <span class="op">&lt;-</span> <span class="va">hemoglobin_data</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># first 500 values will be in mg/ML</span></span></span>
-<span class="r-in"><span><span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">500</span><span class="op">]</span> <span class="op">*</span> <span class="fl">10</span></span></span>
+<span class="r-in"><span><span class="co"># first 50 values will be in mg/ML</span></span></span>
+<span class="r-in"><span><span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">50</span><span class="op">]</span> <span class="op">*</span> <span class="fl">10</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># last 500 values will be in mmol/L</span></span></span>
-<span class="r-in"><span><span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">501</span><span class="op">:</span><span class="fl">1000</span><span class="op">]</span> <span class="op">/</span> <span class="fl">1.61</span></span></span>
+<span class="r-in"><span><span class="co"># last 50 values will be in mmol/L</span></span></span>
+<span class="r-in"><span><span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">51</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">51</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span> <span class="op">/</span> <span class="fl">1.61</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">converted</span> <span class="op">&lt;-</span> <span class="fu">ln_convert_units</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span>,</span></span>
-<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"mg/mL"</span>, <span class="fl">500</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"mmol/L"</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>    <span class="va">hemoglobin_diff_units</span><span class="op">$</span><span class="va">value</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">]</span>,</span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"mg/mL"</span>, <span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"mmol/L"</span>, <span class="fl">50</span><span class="op">)</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Hemoglobin"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Converting <span style="color: #00BB00;">mg/mL</span> to <span style="color: #00BB00;">g/dL</span> for lab <span style="color: #00BB00;">Hemoglobin</span>. Using the formula `0.1 * x`.</span>
@@ -111,7 +111,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
