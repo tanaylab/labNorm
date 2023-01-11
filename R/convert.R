@@ -12,16 +12,16 @@
 #'
 #' hemoglobin_diff_units <- hemoglobin_data
 #'
-#' # first 500 values will be in mg/ML
-#' hemoglobin_diff_units$value[1:500] <- hemoglobin_diff_units$value[1:500] * 10
+#' # first 50 values will be in mg/ML
+#' hemoglobin_diff_units$value[1:50] <- hemoglobin_diff_units$value[1:50] * 10
 #'
-#' # last 500 values will be in mmol/L
-#' hemoglobin_diff_units$value[501:1000] <- hemoglobin_diff_units$value[501:1000] / 1.61
+#' # last 50 values will be in mmol/L
+#' hemoglobin_diff_units$value[51:100] <- hemoglobin_diff_units$value[51:100] / 1.61
 #'
 #'
 #' converted <- ln_convert_units(
-#'     hemoglobin_diff_units$value,
-#'     c(rep("mg/mL", 500), rep("mmol/L", 500)),
+#'     hemoglobin_diff_units$value[1:100],
+#'     c(rep("mg/mL", 50), rep("mmol/L", 50)),
 #'     "Hemoglobin"
 #' )
 #'

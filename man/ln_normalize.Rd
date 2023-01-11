@@ -30,7 +30,7 @@ You can force the function to use the lower resolution distribution by setting \
 If the quantile information is not available (e.g. "Estradiol" for male patients, various labs which are not available in the UKBB data), then the function will return \code{NA}.
 }
 \description{
-Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \url{doi:10.1038/s41591-021-01468-6}. \cr \cr
+Normalize standard laboratory measurements (e.g. hemoglobin, cholesterol levels) according to age and sex, based on the algorithms described in "Personalized lab test models to quantify disease potentials in healthy individuals" \doi{10.1038/s41591-021-01468-6}. \cr \cr
 The "Clalit" reference distributions are based on 2.1B lab measurements taken from 2.8M individuals between 2002-2019, filtered to exclude severe chronic diseases and medication effects. The resulting normalized value is a quantile between 0 and 1, representing the value's position in the reference distribution. \cr \cr
 The "UKBB" reference distributions are based on the UK-Biobank, a large-scale population-based cohort study of 500K individuals, which underwent the same filtering process as the "Clalit" reference distributions.
 \cr \cr

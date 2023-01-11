@@ -79,7 +79,7 @@ ln_plot_dist("Hemoglobin", reference = "UKBB")
 
 # on the demo data
 \dontshow{
-ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
+p <- ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
 }
 
 }
