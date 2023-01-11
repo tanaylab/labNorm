@@ -9,6 +9,9 @@
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
+[![Codecov test
+coverage](https://codecov.io/gh/tanaylab/labNorm/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tanaylab/labNorm?branch=main)
+[![R-CMD-check](https://github.com/tanaylab/labNorm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tanaylab/labNorm/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 `labNorm` provides functions for normalizing standard laboratory
@@ -46,9 +49,9 @@ hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$sex,
     "Hemoglobin"
 )
-#> → Downloading to a temporary directory '/tmp/Rtmp6lhnUs'.
-#> ✔ Data downloaded succesfully to /tmp/Rtmp6lhnUs.
-#> → Loading the data into the environment.
+#> → Downloading to a temporary directory '/tmp/RtmpKoRSfO'.
+#> → Extracting data to '/tmp/RtmpKoRSfO'.
+#> → Extracting data to '/tmp/RtmpKoRSfO'.
 
 head(hemoglobin_data)
 #>   age    sex value   quantile
