@@ -1,66 +1,94 @@
-"quantile_file","feature_name","full_name","units","default_units","conversion"
-"WBC","WBC","White Blood Cells (WBC)","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"RBC","RBC","Red Blood Cells (RBC)","x10E6/uL|""""x10E3/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E6/uL","x|0.001*x|0.001*x|x"
-"HGB","Hemoglobin","Hemoglobin","mmol/L|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","1.61*x|x|0.1*x|0.1*x"
-"HCT","Hematocrit","Hematocrit","|""""ratio units""""|""""L/L""""|""""%""""","%","x|x|x|x"
-"PLT","Platelets","Platelets","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"MCV","MCV","Mean Corpuscular Volume (MCV)","fL","fL","x"
-"MCH","MCH","Mean Corpuscular Hemoglobin (MCH)","fmol|""""pg""""","pg","16.114*x| x"
-"MCHC","MCHC","Mean Corpuscular Hemoglobin Concentration (MCHC)","mmol/L|""""umol/L""""|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","1.6114*x|0.0016114*x|x|0.1*x|0.1*x"
-"RDW","RDW","Red cell Distribution Width (RDW)","%","%","x"
-"MPV","MPV","Mean Platelet Volume (MPV)","fL","fL","x"
-"ALBUMIN","Albumin","Albumin","mmol/L|""""umol/L""""|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","6.646*x|0.006646*x|x|0.1*x|0.1*x"
-"CHOLESTEROL","Total Cholesterol","Total Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x"
-"TRIGLYCERIDES","Triglycerides","Triglycerides","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","88.5*x|0.0885*x|x|0.1*x|0.1*x"
-"BMI","BMI","Body Mass Index (BMI)","kg/m2","kg/m2","x"
-"IRON","Iron","Iron","umol/L|""""mmol/L""""|""""ug/dL""""|""""ug/L""""|""""ng/mL""""|""""mg/L""""","ug/dL","5.5845*x|5584*x|x|0.1*x|0.1*x|100*x"
-"TRANSFERRIN","Transferrin","Transferrin","umol/L|""""mg/dL""""|""""mg/mL""""|""""g/L""""","mg/dL","7.96*x|x|0.01*x|0.01*x"
-"FERRITIN","Ferritin","Ferritin","nmol/L|""""pmol/L""""|""""ng/mL""""|""""ug/L""""|""""ug/dL""""","ng/mL","445*x|0.445*x|x|x|10*x"
-"GLOBULIN","Total Globulin","Total Globulin","g/dL|""""g/L""""","g/dL","x|10*x"
-"FIBRINOGEN","Fibrinogen","Fibrinogen","g/L|""""mg/dL""""|mg/L""""|""""ug/mL""""","mg/dL","100*x|x|0.1*x|0.1*x"
-"LYMP(abs)","Lymphocytes, Abs","Lymphocytes, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"LYMperc","Lymphocytes, %","Lymphocytes, %","%","%","x"
-"NEUT(abs)","Neutrophils, Abs","Neutrophils, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"NEUTperc","Neutrophils, %","Neutrophils, %","%","%","x"
-"MONO(abs)","Monocytes, Abs","Monocytes, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"MONperc","Monocytes, %","Monocytes, %","%","%","x"
-"EOS(abs)","Eosinophils, Abs","Eosinophils, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"EOS_perc","Eosinophils, %","Eosinophils, %","%","%","x"
-"BASOPHILES_abs","Basophils, Abs","Basophils, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x"
-"BASO_perc","Basophils, %","Basophils, %","%","%","x"
-"GLUCOSE_BLOOD","Glucose","Glucose, Fasting","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","18.016*x|0.018016*x|x|0.1*x|0.1*x"
-"UREA_BLOOD","Urea","Urea","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","6.006*x|0.006*x|x|0.1*x|0.1*x"
-"CREATININE_BLOOD","Creatinine","Creatinine","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","11.312*x|0.011312*x|x|0.1*x|0.1*x"
-"URIC_ACID_BLOOD","Uric Acid","Uric Acid","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","16.811*x|0.016811*x|x|0.1*x|0.1*x"
-"CALCIUM_BLOOD","Calcium","Calcium","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","4.0078*x|0.00401*x|x|0.1*x|0.1*x"
-"PHOSPHORUS_BLOOD","Phosphorus","Phosphorus","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","3.1*x|0.0031*x|x|0.1*x|0.1*x"
-"PROTEIN_TOTAL_BLOOD","Total Protein","Total Protein","g/L|""""g/dL""""|""""mg/mL""""","g/dL","10*x|x|0.1*x"
-"CHOLESTEROL_HDL","HDL Cholesterol","HDL Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x"
-"CHOLESTEROL_LDL","LDL Cholesterol","LDL Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x"
-"PHOSPHATASE_ALKALINE","Alk. Phosphatase","Alkaline Phosphatase (AP)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"GLUTAMIC_OXALOACETIC_TRANSAMINASE","AST","Aspartate aminotransferase (AST)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"GLUTAMIC_PYRUVIC_TRANSAMINASE","ALT","Alanine aminotransferase (ALT)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"GAMMA_GLUTAMYL_TRANSPEPTIDASE","GGT","Gamma-glutamyltransferase (GGT)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"LACTIC_DEHYDROGENASE_LDH__BLOOD","LDH","Lactate dehydrogenase (LDH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"CK_CREAT.KINASE_CPK","CPK","Creatine Phospho-Kinase (CPK)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"BILIRUBIN_TOTAL","Total Bilirubin","Total Bilirubin","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","58.467*x|0.058467*x|x|0.1*x|0.1*x"
-"BILIRUBIN_DIRECT","Direct Bilirubin","Direct Bilirubin","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","58.467*x|0.058467*x|x|0.1*x|0.1*x"
-"HEMOGLOBIN_A1C_CALCULATED","Hemoglobin A1c","Hemoglobin A1c","%|""""mmol/mol""""","%","x | 10.929 * (x - 2.15)"
-"SODIUM","Sodium","Sodium","mmol/L|""""mEq/L""""","mmol/L","x|x"
-"POTASSIUM","Potassium","Potassium","mmol/L|""""mEq/L""""","mmol/L","x|x"
-"VITAMIN_D3_25_0H_RIA","Vitamin D (25-OH)","Vitamin D, 25-Hydroxy","nmol/L|""""ng/mL""""|""""ug/L""""|""""ug/dL""""","nmol/L","x|2.496*x|2.496*x|24.96*x"
-"TSH_THYROID_STIMULATING_HORMONE","TSH","Thyroid-Stimulating Hormone (TSH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","mIU/L","1000*x|1000000*x|x|1000*x|x|1000*x|1000000*x|x|1000*x|x"
-"T3_FREE","T3, Free","Triiodothyronine (T3), Free","pmol/L|""""pg/mL""""|""""pg/dL""""|""""ng/dL""""|""""ng/L""""","pmol/L","x|1.5361*x|0.0154*x|15.361*x|1.5361*x"
-"T4_FREE","T4, Free","Thyroxine (T4), Free (Direct)","pmol/L|""""pg/mL""""|""""ng/mL""""|""""ng/dL""""|""""ng/L""""","pmol/L","x|1.2872*x|1287.2*x|12.872*x|1.2872*x"
-"BP SYSTOLIC","Blood Pressure, Systolic","Systolic Blood Pressure","mmHg","mmHg","x"
-"BP DIASTOLIC","Blood Pressure, Diastolic","Diastolic Blood Pressure","mmHg","mmHg","x"
-"VITAMIN_B12","Vitamin B12","Vitamin B12","pmol/L|""""pg/mL""""|""""pg/dL""""|""""pg/L""""|""""ng/L""""","pmol/L","x|0.7378*x|0.0074*x|0.00074*x|0.7378*x"
-"PSA_PROSTATIC_SPECIFIC_ANTIGEN","PSA","Prostate Specific Antigen (PSA)","""""ng/dL""""|""""ng/mL""""|""""ng/L""""|""""ug/L""""","ng/mL","0.01*x|x|0.001*x|x"
-"SEDIMENTATION_RATE","ESR","Erythrocyte Sedimentation Rate (ESR)","mm/h","mm/h","x"
-"C_REACTIVE_PROTEIN_CRP","CRP","C-Reactive Protein, Quant (CRP)","nmol/L|""""mg/L""""|""""mg/dL""""|""""ug/mL""""|""""g/L""""","mg/dL","0.0105*x|0.1*x|x|0.1*x|100*x"
-"AMYLASE_BLOOD","Amylase","Amylase","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"FOLIC_ACID","Folic Acid","Folic Acid","nmol/L|""""pmol/L""""|""""ng/mL""""|""""ng/dL""""|""""ng/L""""|""""ug/L""""","nmol/L","x|0.001*x|2.2655*x|0.022655*x|0.0023*x|2.2655*x"
-"MAGNESIUM_BLOOD","Magnesium","Magnesium","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","2.4305*x|0.00243*x|x|0.1*x|0.1*x"
-"BILIRUBIN_INDIRECT","Indirect Bilirubin","Indirect Bilirubin","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","58.467*x|0.058467*x|x|0.1*x|0.1*x"
-"LH_LUTEINIZING_HORMONE","LH","Luteinizing Hormone (LH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x"
-"ESTRADIOL_E_2","Estradiol","Estradiol (E2)","pmol/L|""""pg/mL""""|""""pg/dL""""|""""pg/L""""|""""ng/L""""","pmol/L","1|3.6713*x|0.0367*x|0.0037*x|3.6713*x"
+"quantile_file","short_name","full_name","units","default_units","conversion","lab","low_male","high_male","low_female","high_female"
+"WBC","WBC","White Blood Cells (WBC)","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.101",4.4,11,4.4,11
+"RBC","RBC","Red Blood Cells (RBC)","x10E6/uL|""""x10E3/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E6/uL","x|0.001*x|0.001*x|x","lab.102",4.5,5.9,4.1,5.1
+"HGB","Hemoglobin","Hemoglobin","mmol/L|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","1.61*x|x|0.1*x|0.1*x","lab.103",14,18,12,16
+"HCT","Hematocrit","Hematocrit",""""ratio units""""|""""L/L""""|""""%"""","%","x|x|x","lab.104",42,50,37,47
+"PLT","Platelets","Platelets","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.105",150,450,150,450
+"MCV","MCV","Mean Corpuscular Volume (MCV)","fL","fL","x","lab.106",80,96,80,96
+"MCH","MCH","Mean Corpuscular Hemoglobin (MCH)","fmol|""""pg""""","pg","16.114*x| x","lab.107",28,33,28,33
+"MCHC","MCHC","Mean Corpuscular Hemoglobin Concentration (MCHC)","mmol/L|""""umol/L""""|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","1.6114*x|0.0016114*x|x|0.1*x|0.1*x","lab.108",33,36,33,36
+"RDW","RDW","Red cell Distribution Width (RDW)","%","%","x","lab.109",12,15,12,15
+"MPV","MPV","Mean Platelet Volume (MPV)","fL","fL","x","lab.110",9,10,9,10
+"LUC","Large unstained cells, Abs","Large Unstained Cells, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.123",NA,NA,NA,NA
+"ALBUMIN","Albumin","Albumin","mmol/L|""""umol/L""""|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","6.646*x|0.006646*x|x|0.1*x|0.1*x","lab.21100",3.5,5.5,3.5,5.5
+"CHOLESTEROL","Total Cholesterol","Total Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x","lab.21200",NA,200,NA,200
+"TRIGLYCERIDES","Triglycerides","Triglycerides","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","88.5*x|0.0885*x|x|0.1*x|0.1*x","lab.21300",NA,150,NA,150
+"BMI","BMI","Body Mass Index (BMI)","kg/m2","kg/m2","x","marker.BMI",NA,NA,NA,NA
+"IRON","Iron","Iron","umol/L|""""mmol/L""""|""""ug/dL""""|""""ug/L""""|""""ng/mL""""|""""mg/L""""","ug/dL","5.5845*x|5584*x|x|0.1*x|0.1*x|100*x","lab.23100",50,150,50,150
+"TRANSFERRIN","Transferrin","Transferrin","umol/L|""""mg/dL""""|""""mg/mL""""|""""g/L""""","mg/dL","7.96*x|x|0.01*x|0.01*x","lab.23200",200,400,200,400
+"FERRITIN","Ferritin","Ferritin","nmol/L|""""pmol/L""""|""""ng/mL""""|""""ug/L""""|""""ug/dL""""","ng/mL","445*x|0.445*x|x|x|10*x","lab.91200",24,336,11,307
+"PDW","PDW","Platelet Distribution Width (PDW)","%","%","x","lab.112",NA,NA,NA,NA
+"MPXI","MPXI","MPXI","index","index","x","lab.124",NA,NA,NA,NA
+"GLOBULIN","Total Globulin","Total Globulin","g/dL|""""g/L""""","g/dL","x|10*x","lab.36400",2,3.5,2,3.5
+"PCT","PCT","Procalcitonin (PCT)","%","%","x","lab.111",NA,NA,NA,NA
+"HDW","HDW","Hemoglobin Distribution Width (HDW)","mmol/L|""""g/dL""""|""""g/L""""|""""mg/mL""""","g/dL","1.61*x|x|0.1*x|0.1*x","lab.117",NA,NA,NA,NA
+"FIBRINOGEN","Fibrinogen","Fibrinogen","g/L|""""mg/dL""""|mg/L""""|""""ug/mL""""","mg/dL","100*x|x|0.1*x|0.1*x","lab.17704",200,400,200,400
+"CH","CH","CH","pg","pg","x","lab.166",NA,NA,NA,NA
+"Cl","Chloride","Chloride","mmol/L|""""mEq/L""""","mmol/L","x|x","lab.25403",NA,NA,NA,NA
+"LUC","Large unstained cells, %","Large Unstained Cells, %","%","%","x","lab.122",NA,NA,NA,NA
+"MACROperc","Macrocytic","Macrocytic","%","%","x","lab.126",NA,NA,NA,NA
+"MICR_perc","Microcytic","Microcytic","%","%","x","lab.127",NA,NA,NA,NA
+"HYPERperc","Hyperchromic","Hyperchromic","%","%","x","lab.128",NA,NA,NA,NA
+"HYPO_perc","Hypochromic","Hypochromic","%","%","x","lab.129",NA,NA,NA,NA
+"LYMP(abs)","Lymphocytes, Abs","Lymphocytes, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.140",1,4,1,4
+"LYMperc","Lymphocytes, %","Lymphocytes, %","%","%","x","lab.141",30,45,30,45
+"NEUT(abs)","Neutrophils, Abs","Neutrophils, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.142",2,8.25,2,8.25
+"NEUTperc","Neutrophils, %","Neutrophils, %","%","%","x","lab.143",50,70,50,70
+"MONO(abs)","Monocytes, Abs","Monocytes, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.144",NA,NA,NA,NA
+"MONperc","Monocytes, %","Monocytes, %","%","%","x","lab.145",0,6,0,6
+"EOS(abs)","Eosinophils, Abs","Eosinophils, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.146",0,0.5,0,0.5
+"EOS_perc","Eosinophils, %","Eosinophils, %","%","%","x","lab.147",0,3,0,3
+"BASOPHILES_abs","Basophils, Abs","Basophils, Absolute","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x","lab.148",NA,NA,NA,NA
+"BASO_perc","Basophils, %","Basophils, %","%","%","x","lab.149",0,1,0,1
+"MICROperc_HYPOperc","Microcytic:Hypochromic","Microcytic/Hypochromic Ratio",""""ratio units"""","ratio units","x","lab.172",NA,NA,NA,NA
+"GLUCOSE_BLOOD","Glucose","Glucose, Fasting","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","18.016*x|0.018016*x|x|0.1*x|0.1*x","lab.20100",70,99,70,99
+"UREA_BLOOD","Urea","Urea","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","6.006*x|0.006*x|x|0.1*x|0.1*x","lab.20200",7,28,7,28
+"CREATININE_BLOOD","Creatinine","Creatinine","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","11.312*x|0.011312*x|x|0.1*x|0.1*x","lab.20300",0.7,1.3,0.5,1.1
+"URIC_ACID_BLOOD","Uric Acid","Uric Acid","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","16.811*x|0.016811*x|x|0.1*x|0.1*x","lab.20400",3,7,3,7
+"CALCIUM_BLOOD","Calcium","Calcium","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","4.0078*x|0.00401*x|x|0.1*x|0.1*x","lab.20800",8.6,10.2,8.6,10.2
+"PHOSPHORUS_BLOOD","Phosphorus","Phosphorus","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","3.1*x|0.0031*x|x|0.1*x|0.1*x","lab.20900",3,4.5,3,4.5
+"PROTEIN_TOTAL_BLOOD","Total Protein","Total Protein","g/L|""""g/dL""""|""""mg/mL""""","g/dL","10*x|x|0.1*x","lab.21000",5.5,9,5.5,9
+"CHOLESTEROL_HDL","HDL Cholesterol","HDL Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x","lab.21400",NA,40,NA,50
+"CHOLESTEROL_LDL","LDL Cholesterol","LDL Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x","lab.21500",NA,100,NA,100
+"PHOSPHATASE_ALKALINE","Alk. Phosphatase","Alkaline Phosphatase (AP)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.21800",30,120,30,120
+"GLUTAMIC_OXALOACETIC_TRANSAMINASE","AST","Aspartate aminotransferase (AST)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.22000",10,40,10,40
+"GLUTAMIC_PYRUVIC_TRANSAMINASE","ALT","Alanine aminotransferase (ALT)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.22100",10,40,10,40
+"GAMMA_GLUTAMYL_TRANSPEPTIDASE","GGT","Gamma-glutamyltransferase (GGT)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.22200",9,50,8,40
+"LACTIC_DEHYDROGENASE_LDH__BLOOD","LDH","Lactate dehydrogenase (LDH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.22300",105,333,105,333
+"CK_CREAT.KINASE_CPK","CPK","Creatine Phospho-Kinase (CPK)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.22500",55,170,30,135
+"BILIRUBIN_TOTAL","Total Bilirubin","Total Bilirubin","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","58.467*x|0.058467*x|x|0.1*x|0.1*x","lab.23300",0.3,1,0.3,1
+"BILIRUBIN_DIRECT","Direct Bilirubin","Direct Bilirubin","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","58.467*x|0.058467*x|x|0.1*x|0.1*x","lab.23400",0.1,0.3,0.1,0.3
+"HEMOGLOBIN_A1C_CALCULATED","Hemoglobin A1c","Hemoglobin A1c","%|""""mmol/mol""""","%","x | 10.929 * (x - 2.15)","lab.25203",4,5.6,4,5.6
+"SODIUM","Sodium","Sodium","mmol/L|""""mEq/L""""","mmol/L","x|x","lab.25401",136,145,136,145
+"POTASSIUM","Potassium","Potassium","mmol/L|""""mEq/L""""","mmol/L","x|x","lab.25402",3.5,5,3.5,5
+"VITAMIN_D3_25_0H_RIA","Vitamin D (25-OH)","Vitamin D, 25-Hydroxy","nmol/L|""""ng/mL""""|""""ug/L""""|""""ug/dL""""","nmol/L","x|2.496*x|2.496*x|24.96*x","lab.27300",30,60,30,60
+"M.ALBUM_CREAT_RATIO","Microalbumin:Creatinine","Microalbumin/Creatinine Ratio","ug/mg|""""mg/g""""|""""mg/mg""""|""""ug/g""""","ug/mg","x|x|1000*x|0.001*x","lab.35000",NA,30,NA,30
+"CREATININE_URINE_SAMPLE","Urine Creatinine","Creatinine (Urine)","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","11.312*x|0.011312*x|x|0.1*x|0.1*x","lab.41500",NA,NA,NA,NA
+"MICROALBU_U_SAMP","Urine Microalbumin","Microalbumin (Urine)","""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/L","10*x|x|x","lab.46700",NA,NA,NA,NA
+"NON_HDL_CHOLESTEROL","Non-HDL","Non-HDL Cholesterol","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","38.665*x|0.038665*x|x|0.1*x|0.1*x","lab.520706",NA,NA,NA,NA
+"TSH_THYROID_STIMULATING_HORMONE","TSH","Thyroid-Stimulating Hormone (TSH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","mIU/L","1000*x|1000000*x|x|1000*x|x|1000*x|1000000*x|x|1000*x|x","lab.102100",0.5,4,0.5,4
+"T3_FREE","T3, Free","Triiodothyronine (T3), Free","pmol/L|""""pg/mL""""|""""pg/dL""""|""""ng/dL""""|""""ng/L""""","pmol/L","x|1.5361*x|0.0154*x|15.361*x|1.5361*x","lab.102300",3.5,6.5,3.5,6.5
+"T4_FREE","T4, Free","Thyroxine (T4), Free (Direct)","pmol/L|""""pg/mL""""|""""ng/mL""""|""""ng/dL""""|""""ng/L""""","pmol/L","x|1.2872*x|1287.2*x|12.872*x|1.2872*x","lab.102500",10.3,23.2,10.3,23.2
+"BP SYSTOLIC","Blood Pressure, Systolic","Systolic Blood Pressure","mmHg","mmHg","x","marker.bp.high",NA,130,NA,130
+"BP DIASTOLIC","Blood Pressure, Diastolic","Diastolic Blood Pressure","mmHg","mmHg","x","marker.bp.low",NA,NA,NA,NA
+"SPECIFIC_GRAVITY","Urine Specific Gravity","Specific Gravity (Urine)","fL","fL","x","lab.9904",1.002,1.03,1.002,1.03
+"PH_u","Urine pH","pH","""""/uL""""","/uL","x","lab.9911",4.5,8,4.5,8
+"PT_INR","PT, INR","Prothrombin Time (PT), INR","INR","INR","x","lab.17601",0.8,1.2,0.8,1.2
+"PT_SEC","PT, sec","Prothrombin Time (PT), seconds","seconds","seconds","x","lab.17602",NA,NA,NA,NA
+"PT_perc","PT, %","Prothrombin Time (PT), %","%","%","x","lab.17603",NA,NA,NA,NA
+"VITAMIN_B12","Vitamin B12","Vitamin B12","pmol/L|""""pg/mL""""|""""pg/dL""""|""""pg/L""""|""""ng/L""""","pmol/L","x|0.7378*x|0.0074*x|0.00074*x|0.7378*x","lab.27100",200,800,200,800
+"PSA_PROSTATIC_SPECIFIC_ANTIGEN","PSA","Prostate Specific Antigen (PSA)","""""ng/dL""""|""""ng/mL""""|""""ng/L""""|""""ug/L""""","ng/mL","0.01*x|x|0.001*x|x","lab.91900",0,3.5,0,3.5
+"SEDIMENTATION_RATE","ESR","Erythrocyte Sedimentation Rate (ESR)","mm/h","mm/h","x","lab.400",0,15,0,20
+"APTT_sec","aPTT, sec","aPTT, seconds","seconds","seconds","x","lab.17702",25,35,25,35
+"C_REACTIVE_PROTEIN_CRP","CRP","C-Reactive Protein, Quant (CRP)","nmol/L|""""mg/L""""|""""mg/dL""""|""""ug/mL""""|""""g/L""""","mg/dL","0.0105*x|0.1*x|x|0.1*x|100*x","lab.60200",NA,0.8,NA,0.8
+"AMYLASE_BLOOD","Amylase","Amylase","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.23000",25,125,25,125
+"FOLIC_ACID","Folic Acid","Folic Acid","nmol/L|""""pmol/L""""|""""ng/mL""""|""""ng/dL""""|""""ng/L""""|""""ug/L""""","nmol/L","x|0.001*x|2.2655*x|0.022655*x|0.0023*x|2.2655*x","lab.31400",4.1,20.4,4.1,20.4
+"CHOLESTEROL_HDL_RATIO","Total:HDL","Total/HDL Cholesterol Ratio",""""ratio units"""","ratio units","x","lab.33300",NA,NA,NA,NA
+"HCT_HGB_RATIO","Hematocrit:Hemoglobin","Hematocrit/Hemoglobin Ratio",""""ratio units"""","ratio units","x","lab.150",NA,NA,NA,NA
+"MAGNESIUM_BLOOD","Magnesium","Magnesium","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","2.4305*x|0.00243*x|x|0.1*x|0.1*x","lab.24500",1.2,2.6,1.2,2.6
+"APTT_R","aPTT, ratio","aPTT, ratio",""""ratio units"""","ratio units","x","lab.17703",NA,NA,NA,NA
+"BILIRUBIN_INDIRECT","Indirect Bilirubin","Indirect Bilirubin","mmol/L|""""umol/L""""|""""mg/dL""""|""""mg/L""""|""""ug/mL""""","mg/dL","58.467*x|0.058467*x|x|0.1*x|0.1*x","lab.36200",0.2,0.7,0.2,0.7
+"RDW_SD","RDW-SD","RDW-SD","FL","FL","x","lab.151",NA,NA,NA,NA
+"RDW_CV","RDW-CV","RDW-CV","%","%","","lab.152",NA,NA,NA,NA
+"LH_LUTEINIZING_HORMONE","LH","Luteinizing Hormone (LH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.100800",2,9,NA,NA
+"ESTRADIOL_E_2","Estradiol","Estradiol (E2)","pmol/L|""""pg/mL""""|""""pg/dL""""|""""pg/L""""|""""ng/L""""","pmol/L","1|3.6713*x|0.0367*x|0.0037*x|3.6713*x","lab.100500",73.4,184,36.7,660

@@ -1,4 +1,4 @@
-"feature_name","low_male","high_male","low_female","high_female"
+"short_name","low_male","high_male","low_female","high_female"
 "WBC",4.4,11,4.4,11
 "RBC",4.5,5.9,4.1,5.1
 "Hemoglobin",14,18,12,16
@@ -12,7 +12,6 @@
 "Albumin",3.5,5.5,3.5,5.5
 "Total Cholesterol",NA,200,NA,200
 "Triglycerides",NA,150,NA,150
-"BMI",NA,NA,NA,NA
 "Iron",50,150,50,150
 "Transferrin",200,400,200,400
 "Ferritin",24,336,11,307
@@ -22,11 +21,9 @@
 "Lymphocytes, %",30,45,30,45
 "Neutrophils, Abs",2,8.25,2,8.25
 "Neutrophils, %",50,70,50,70
-"Monocytes, Abs",NA,NA,NA,NA
 "Monocytes, %",0,6,0,6
 "Eosinophils, Abs",0,0.5,0,0.5
 "Eosinophils, %",0,3,0,3
-"Basophils, Abs",NA,NA,NA,NA
 "Basophils, %",0,1,0,1
 "Glucose",70,99,70,99
 "Urea",7,28,7,28
@@ -49,14 +46,18 @@
 "Sodium",136,145,136,145
 "Potassium",3.5,5,3.5,5
 "Vitamin D (25-OH)",30,60,30,60
+"Microalbumin:Creatinine",NA,30,NA,30
 "TSH",0.5,4,0.5,4
 "T3, Free",3.5,6.5,3.5,6.5
 "T4, Free",10.3,23.2,10.3,23.2
 "Blood Pressure, Systolic",NA,130,NA,130
-"Blood Pressure, Diastolic",NA,NA,NA,NA
+"Urine Specific Gravity",1.002,1.03,1.002,1.03
+"Urine pH",4.5,8,4.5,8
+"PT, INR",0.8,1.2,0.8,1.2
 "Vitamin B12",200,800,200,800
 "PSA",0,3.5,0,3.5
 "ESR",0,15,0,20
+"aPTT, sec",25,35,25,35
 "CRP",NA,0.8,NA,0.8
 "Amylase",25,125,25,125
 "Folic Acid",4.1,20.4,4.1,20.4

@@ -1,17 +1,19 @@
 
+# run "prepare-metadata.R" before running this script
+
 library(tidyverse)
 library(glue)
 
-features <- readr::read_csv("data-raw/quantile2feature.csv", show_col_types = FALSE) %>%
-    mutate(feature_name = ifelse(is.na(feature_name), quantile_file, feature_name)) %>%
-    mutate(feature_name = ifelse(feature_name == "", quantile_file, feature_name)) %>%
-    mutate(full_name = ifelse(is.na(full_name), feature_name, full_name)) %>%
-    left_join(readr::read_csv("data-raw/reference-ranges.csv", show_col_types = FALSE))
-
+features <- readr::read_csv("data-raw/quantile2feature.csv", show_col_types = FALSE)
 features$units <- strsplit(features$units, "\\|")
 features$units <- lapply(features$units, function(x) gsub("\"", "", x))
 features$default_units <- gsub("\"", "", features$default_units)
 features$conversion <- strsplit(features$conversion, "\\|")
+
+example_labs <- readr::read_csv("data-raw/example-labs.csv", show_col_types = FALSE)
+example_features <- features %>% filter(short_name %in% example_labs$short_name)
+
+
 
 ## Import the quantile files
 
@@ -19,7 +21,7 @@ features$conversion <- strsplit(features$conversion, "\\|")
 #'
 #' @param lab the lab to import
 #' @param raw_quantiles_dir the directory containing the raw quantiles
-#' @param small_size the number of points to use for the small dataset
+#' @param small_size the number of points to use for the Clalit-demo dataset
 #' @param min_n minimal number of values in order to use the quantile
 #'
 #' @return an rds file with the quantiles
@@ -35,8 +37,8 @@ import_lab_clalit <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tgda
         ) %>%
         as.data.frame()
 
-    out_fn_large <- file.path("data-raw", "large", paste0(lab, ".rds"))
-    out_fn_small <- file.path("data-raw", "small", paste0(lab, ".rds"))
+    out_fn_large <- file.path("data-raw", "Clalit", paste0(lab, ".rds"))
+    out_fn_small <- file.path("data-raw", "Clalit-demo", paste0(lab, ".rds"))
 
     # create directories if they don't exist
     dir.create(dirname(out_fn_large), showWarnings = FALSE, recursive = TRUE)
@@ -111,7 +113,7 @@ import_all_labs_clalit <- function(raw_quantiles_dir = "/net/mraid14/export/tgda
     plyr::l_ply(labs, import_lab_clalit, raw_quantiles_dir = raw_quantiles_dir, small_size = small_size, .parallel = parallel)
 
 
-    cli::cli_alert_success("Done importing all labs. Size of small dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/small')$size))}}. Size of large dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/large')$size))}}")
+    cli::cli_alert_success("Done importing all labs. Size of Clalit-demo dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/Clalit-demo')$size))}}. Size of Clalit dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/Clalit')$size))}}")
 }
 
 #' Import quantiles from raw data
@@ -130,7 +132,7 @@ import_lab_ukbb <- function(lab, raw_quantiles_dir = "/net/mraid14/export/data/u
         ) %>%
         as.data.frame()
 
-    out_fn <- file.path("data-raw", "ukbb", paste0(lab, ".rds"))
+    out_fn <- file.path("data-raw", "UKBB", paste0(lab, ".rds"))
 
     # create directories if they don't exist
     dir.create(dirname(out_fn), showWarnings = FALSE, recursive = TRUE)
@@ -177,70 +179,58 @@ import_all_labs_ukbb <- function(raw_quantiles_dir = "/net/mraid14/export/data/u
     plyr::l_ply(labs_ukbb, import_lab_ukbb, raw_quantiles_dir = raw_quantiles_dir, .parallel = parallel)
 
 
-    cli::cli_alert_success("Done importing all ukbb labs. Size of dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/ukbb')$size))}}.")
+    cli::cli_alert_success("Done importing all ukbb labs. Size of dir is {.val {fs::fs_bytes(sum(fs::dir_info('data-raw/UKBB')$size))}}.")
 }
 
 
 ## Create package data
 
 create_labs_data <- function() {
-    LAB_QUANTILES <- plyr::llply(features$quantile_file, function(lab) {
-        readr::read_rds(file.path("data-raw", "small", paste0(lab, ".rds")))
+    LAB_QUANTILES <- plyr::llply(example_features$quantile_file, function(lab) {
+        readr::read_rds(file.path("data-raw", "Clalit-demo", paste0(lab, ".rds")))
     })
 
-    names(LAB_QUANTILES) <- features$feature_name
+    names(LAB_QUANTILES) <- example_features$short_name
 
-    UNITS_CONVERSION <- map(features$feature_name, function(feature) {
+    UNITS_CONVERSION <- map(features$short_name, function(feature) {
         units <- features %>%
-            filter(feature_name == feature) %>%
+            filter(short_name == feature) %>%
             pull(units)
         conversion <- features %>%
-            filter(feature_name == feature) %>%
+            filter(short_name == feature) %>%
             pull(conversion)
-
         res <- map(conversion[[1]], ~ eval(parse(text = glue("function(x) {.x}"))))
         names(res) <- units[[1]]
         return(res)
     })
-    names(UNITS_CONVERSION) <- features$feature_name
+    names(UNITS_CONVERSION) <- features$short_name
 
-    usethis::use_data(LAB_QUANTILES, UNITS_CONVERSION, overwrite = TRUE, internal = TRUE, compress = "xz")
+    LAB_TO_FILENAME <- features %>%
+        select(short_name, quantile_file) %>%
+        tibble::deframe()
+
+    usethis::use_data(LAB_QUANTILES, UNITS_CONVERSION, LAB_TO_FILENAME, overwrite = TRUE, internal = TRUE, compress = "xz")
 }
 
 create_high_res_labs_data <- function() {
-    LAB_QUANTILES <- plyr::llply(features$quantile_file, function(lab) {
-        readr::read_rds(file.path("data-raw", "large", paste0(lab, ".rds")))
-    })
-
-    names(LAB_QUANTILES) <- features$feature_name
-
-    readr::write_rds(LAB_QUANTILES, "data-raw/Clalit.rds", compress = "xz", compression = 9)
+    system(glue("tar -czf data-raw/Clalit.tar.gz -C data-raw Clalit"))
 }
 
 create_ukbb_labs_data <- function() {
-    LAB_QUANTILES <- plyr::llply(labs_ukbb, function(lab) {
-        readr::read_rds(file.path("data-raw", "ukbb", paste0(lab, ".rds")))
-    })
-
-    names(LAB_QUANTILES) <- features$feature_name[features$quantile_file %in% labs_ukbb]
-
-    readr::write_rds(LAB_QUANTILES, "data-raw/UKBB.rds", compress = "xz", compression = 9)
+    system(glue("tar -czf data-raw/UKBB.tar.gz -C data-raw UKBB"))
 }
 
 create_lab_info <- function() {
     LAB_DETAILS <- as.data.frame(features) %>%
-        select(short_name = feature_name, long_name = full_name, units, default_units, low_male, high_male, low_female, high_female)
+        select(short_name = short_name, long_name = full_name, units, default_units, low_male, high_male, low_female, high_female)
 
     usethis::use_data(LAB_DETAILS, overwrite = TRUE, internal = FALSE, compress = "xz")
 }
 
-
-
-
 ## Diagnostics
 
 compute_large_vs_small <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tgdata/users/aviezerl/src/mldpEHR-app/backend/rawdata/lab_quantiles_raw") {
-    quantiles_small <- readr::read_rds(file.path("data-raw", "small", paste0(lab, ".rds")))
+    quantiles_small <- readr::read_rds(file.path("data-raw", "Clalit-demo", paste0(lab, ".rds")))
 
     raw_quantiles <- readr::read_csv(file.path(raw_quantiles_dir, paste0(lab, ".csv")), show_col_types = FALSE) %>%
         mutate(
@@ -265,7 +255,7 @@ plot_large_vs_small <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tg
     mse_f <- function(x, y) mean((x - y)^2)
     mse <- mse_f(df$quant, df$quant_small)
     max_diff <- max(abs(df$quant - df$quant_small))
-    cli::cli_alert_info("MSE between large and small quantiles is {.val {mse}}. Max difference is {.val {max_diff}}")
+    cli::cli_alert_info("MSE between large and Clalit-demo quantiles is {.val {mse}}. Max difference is {.val {max_diff}}")
 
     p <- df %>%
         ggplot(aes(x = quant, y = quant_small)) +
@@ -304,10 +294,10 @@ plot_all_large_vs_small <- function(raw_quantiles_dir = "/net/mraid14/export/tgd
     return(stats)
 }
 
-import_all_labs_clalit()
-import_all_labs_ukbb()
+# import_all_labs_clalit()
+# import_all_labs_ukbb()
 create_labs_data()
-create_lab_info()
+# create_lab_info()
 create_high_res_labs_data()
 create_ukbb_labs_data()
 # plot_all_large_vs_small()

@@ -5,14 +5,12 @@
 \alias{ln_data_downloaded}
 \title{Download high-resolution reference distributions}
 \usage{
-ln_download_data(dir = NULL, load = TRUE)
+ln_download_data(dir = NULL)
 
 ln_data_downloaded()
 }
 \arguments{
 \item{dir}{the directory to download the data to. If \code{NULL} and the user approves, the data will be downloaded to the package directory, using \code{rappdirs::user_data_dir("labnorm")}, otherwise - a temporary directory would be used.}
-
-\item{load}{load the data after downloading it.}
 }
 \value{
 None.

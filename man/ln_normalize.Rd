@@ -38,12 +38,12 @@ The list of supported labs can be found below or by running \code{LAB_DETAILS$sh
 }
 \section{reference distribution}{
 
-It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 percentiles (0.05), particularly at the edges of the distribution. \cr
+It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which doesn't include all the labs, and has a resolution of 20 quantile bins and therefore may have an error of up to 5 percentiles (0.05), particularly at the edges of the distribution. \cr
 }
 
 \section{labs}{
 
-The following labs are supported (note that some labs are missing from the UKBB quantiles): \cr
+The following labs are supported in the "Clalit" reference (some labs are missing from the UKBB reference): \cr
 \itemize{
 \item WBC
 \item RBC
@@ -55,6 +55,7 @@ The following labs are supported (note that some labs are missing from the UKBB 
 \item MCHC
 \item RDW
 \item MPV
+\item Large unstained cells, Abs
 \item Albumin
 \item Total Cholesterol
 \item Triglycerides
@@ -62,8 +63,19 @@ The following labs are supported (note that some labs are missing from the UKBB 
 \item Iron
 \item Transferrin
 \item Ferritin
+\item PDW
+\item MPXI
 \item Total Globulin
+\item PCT
+\item HDW
 \item Fibrinogen
+\item CH
+\item Chloride
+\item Large unstained cells, \%
+\item Macrocytic
+\item Microcytic
+\item Hyperchromic
+\item Hypochromic
 \item Lymphocytes, Abs
 \item Lymphocytes, \%
 \item Neutrophils, Abs
@@ -74,6 +86,7 @@ The following labs are supported (note that some labs are missing from the UKBB 
 \item Eosinophils, \%
 \item Basophils, Abs
 \item Basophils, \%
+\item Microcytic:Hypochromic
 \item Glucose
 \item Urea
 \item Creatinine
@@ -95,19 +108,34 @@ The following labs are supported (note that some labs are missing from the UKBB 
 \item Sodium
 \item Potassium
 \item Vitamin D (25-OH)
+\item Microalbumin:Creatinine
+\item Urine Creatinine
+\item Urine Microalbumin
+\item Non-HDL
 \item TSH
 \item T3, Free
 \item T4, Free
 \item Blood Pressure, Systolic
 \item Blood Pressure, Diastolic
+\item Urine Specific Gravity
+\item Urine pH
+\item PT, INR
+\item PT, sec
+\item PT, \%
 \item Vitamin B12
 \item PSA
 \item ESR
+\item aPTT, sec
 \item CRP
 \item Amylase
 \item Folic Acid
+\item Total:HDL
+\item Hematocrit:Hemoglobin
 \item Magnesium
+\item aPTT, ratio
 \item Indirect Bilirubin
+\item RDW-SD
+\item RDW-CV
 \item LH
 \item Estradiol
 }

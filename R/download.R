@@ -14,7 +14,6 @@
 #'
 #'
 #' @param dir the directory to download the data to. If \code{NULL} and the user approves, the data will be downloaded to the package directory, using \code{rappdirs::user_data_dir("labnorm")}, otherwise - a temporary directory would be used.
-#' @param load load the data after downloading it.
 #'
 #' @return None.
 #'
@@ -24,7 +23,7 @@
 #' }
 #'
 #' @export
-ln_download_data <- function(dir = NULL, load = TRUE) {
+ln_download_data <- function(dir = NULL) {
     default_dir <- FALSE
     if (is.null(dir)) {
         dir <- rappdirs::user_data_dir("labNorm")
@@ -47,20 +46,18 @@ ln_download_data <- function(dir = NULL, load = TRUE) {
 
     options(labNorm.dir = dir)
 
-    if (load) {
-        cli::cli_alert("Loading the data into the environment.")
-        pkgenv$Clalit <- readRDS(file.path(dir, "Clalit.rds"))
-        pkgenv$UKBB <- readRDS(file.path(dir, "UKBB.rds"))
-    }
+    init_reference("Clalit")
+    init_reference("UKBB")
 }
 
 download_reference_distributions <- function(dir, reference) {
     withr::local_options(timeout = 2 * 60 * 60)
+    temp_file <- tempfile()
     tryCatch(
         {
             status <- download.file(
-                glue::glue("https://labnorm.s3.eu-west-1.amazonaws.com/{reference}.rds"),
-                file.path(dir, glue::glue("{reference}.rds"))
+                glue::glue("https://labnorm.s3.eu-west-1.amazonaws.com/{reference}.tar.gz"),
+                temp_file
             )
         },
         error = function(e) {
@@ -69,6 +66,17 @@ download_reference_distributions <- function(dir, reference) {
     )
 
     if (status != 0) {
+        cli::cli_abort("There was an error downloading the data. Please check your internet connection and try again.", frame = parent.frame(1))
+    }
+
+    if (!dir.exists(file.path(dir, reference))) {
+        dir.create(file.path(dir, reference), recursive = TRUE)
+    }
+
+    cli::cli_alert("Extracting data to {.file {dir}}.")
+    utils::untar(temp_file, exdir = dir)
+
+    if (!file.exists(file.path(dir, reference, "WBC.rds"))) {
         cli::cli_abort("There was an error downloading the data. Please check your internet connection and try again.", frame = parent.frame(1))
     }
 }

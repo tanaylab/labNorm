@@ -1,5 +1,5 @@
 test_that("LAB_DETAILS and LAB_QUANTILES match", {
-    expect_true(all.equal(LAB_DETAILS$short_name, names(LAB_QUANTILES)))
+    expect_true(all(names(LAB_QUANTILES) %in% LAB_DETAILS$short_name))
 })
 
 test_that("LAB_QUANTILES are valid", {
@@ -31,9 +31,8 @@ test_that("Clalit data is valid", {
         mutate(s = paste0(age, ".", sex)) %>%
         pull(s)
 
-    quantiles <- pkgenv[["Clalit"]]
-
-    purrr::map(quantiles, function(x) {
+    purrr::map(LAB_DETAILS$short_name, function(lab) {
+        x <- load_quantiles("Clalit", lab)
         expect_true(all(names(x) %in% field_names))
         expect_true(all(field_names %in% names(x)))
         purrr::walk(x, function(y) {
@@ -44,6 +43,11 @@ test_that("Clalit data is valid", {
             }
         })
     })
+
+    quantiles <- pkgenv[["Clalit"]]
+
+    expect_true(all(names(quantiles) %in% LAB_DETAILS$short_name))
+    expect_true(all(LAB_DETAILS$short_name %in% names(quantiles)))
 })
 
 test_that("UKBB data is valid", {
@@ -57,9 +61,23 @@ test_that("UKBB data is valid", {
         mutate(s = paste0(age, ".", sex)) %>%
         pull(s)
 
-    quantiles <- pkgenv[["UKBB"]]
+    ukbb_labs <- c(
+        "Albumin", "Basophils, %", "Basophils, Abs", "Direct Bilirubin",
+        "Total Bilirubin", "BMI", "Blood Pressure, Diastolic", "Blood Pressure, Systolic",
+        "CRP", "Calcium", "HDL Cholesterol", "LDL Cholesterol", "Total Cholesterol",
+        "Creatinine", "Urine Creatinine", "Eosinophils, %", "Eosinophils, Abs",
+        "Estradiol", "GGT", "Glucose", "AST", "ALT", "Hematocrit", "Hemoglobin A1c",
+        "Hemoglobin", "Lymphocytes, Abs", "Lymphocytes, %", "MCH", "MCHC",
+        "MCV", "Monocytes, Abs", "Monocytes, %", "MPV", "Neutrophils, Abs",
+        "Neutrophils, %", "PCT", "PDW", "Alk. Phosphatase", "Phosphorus",
+        "Platelets", "Total Protein", "RBC", "RDW", "Triglycerides",
+        "Urea", "Vitamin D (25-OH)", "WBC"
+    )
 
-    purrr::map(quantiles, function(x) {
+
+
+    purrr::map(ukbb_labs, function(lab) {
+        x <- load_quantiles("UKBB", lab)
         expect_true(all(names(x) %in% field_names))
         expect_true(all(field_names %in% names(x)))
         purrr::walk(x, function(y) {
@@ -70,6 +88,10 @@ test_that("UKBB data is valid", {
             }
         })
     })
+
+    quantiles <- pkgenv[["UKBB"]]
+
+    expect_true(all(names(quantiles) %in% LAB_DETAILS$short_name))
 })
 
 test_that("all default units are in units", {
@@ -89,11 +111,6 @@ test_that("UNITS_CONVERSION are valid", {
     purrr::map(UNITS_CONVERSION, function(x) {
         expect_true(all(sapply(x, is.function)))
     })
-})
-
-test_that("all labs have quantiles", {
-    expect_true(all(names(LAB_QUANTILES) %in% LAB_DETAILS$short_name))
-    expect_true(all(LAB_DETAILS$short_name %in% names(LAB_QUANTILES)))
 })
 
 test_that("all labs have units conversion", {

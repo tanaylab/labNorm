@@ -7,11 +7,11 @@
 #' The list of supported labs can be found below or by running \code{LAB_DETAILS$short_name}.
 #'
 #' @section reference distribution:
-#' It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 percentiles (0.05), particularly at the edges of the distribution. \cr
+#' It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which doesn't include all the labs, and has a resolution of 20 quantile bins and therefore may have an error of up to 5 percentiles (0.05), particularly at the edges of the distribution. \cr
 #'
 #'
 #' @section labs:
-#' The following labs are supported (note that some labs are missing from the UKBB quantiles): \cr
+#' The following labs are supported in the "Clalit" reference (some labs are missing from the UKBB reference): \cr
 #'
 #'   * WBC
 #'   * RBC
@@ -23,6 +23,7 @@
 #'   * MCHC
 #'   * RDW
 #'   * MPV
+#'   * Large unstained cells, Abs
 #'   * Albumin
 #'   * Total Cholesterol
 #'   * Triglycerides
@@ -30,8 +31,19 @@
 #'   * Iron
 #'   * Transferrin
 #'   * Ferritin
+#'   * PDW
+#'   * MPXI
 #'   * Total Globulin
+#'   * PCT
+#'   * HDW
 #'   * Fibrinogen
+#'   * CH
+#'   * Chloride
+#'   * Large unstained cells, %
+#'   * Macrocytic
+#'   * Microcytic
+#'   * Hyperchromic
+#'   * Hypochromic
 #'   * Lymphocytes, Abs
 #'   * Lymphocytes, %
 #'   * Neutrophils, Abs
@@ -42,6 +54,7 @@
 #'   * Eosinophils, %
 #'   * Basophils, Abs
 #'   * Basophils, %
+#'   * Microcytic:Hypochromic
 #'   * Glucose
 #'   * Urea
 #'   * Creatinine
@@ -63,19 +76,34 @@
 #'   * Sodium
 #'   * Potassium
 #'   * Vitamin D (25-OH)
+#'   * Microalbumin:Creatinine
+#'   * Urine Creatinine
+#'   * Urine Microalbumin
+#'   * Non-HDL
 #'   * TSH
 #'   * T3, Free
 #'   * T4, Free
 #'   * Blood Pressure, Systolic
 #'   * Blood Pressure, Diastolic
+#'   * Urine Specific Gravity
+#'   * Urine pH
+#'   * PT, INR
+#'   * PT, sec
+#'   * PT, %
 #'   * Vitamin B12
 #'   * PSA
 #'   * ESR
+#'   * aPTT, sec
 #'   * CRP
 #'   * Amylase
 #'   * Folic Acid
+#'   * Total:HDL
+#'   * Hematocrit:Hemoglobin
 #'   * Magnesium
+#'   * aPTT, ratio
 #'   * Indirect Bilirubin
+#'   * RDW-SD
+#'   * RDW-CV
 #'   * LH
 #'   * Estradiol
 #'

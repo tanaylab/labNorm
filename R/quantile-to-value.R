@@ -47,7 +47,7 @@ ln_quantile_value <- function(quantiles, age, sex, lab, reference = "Clalit", al
 
     validate_quantiles(quantiles)
 
-    params <- expand.grid(age = age, sex = sex)
+    params <- expand.grid(age = unique(age), sex = unique(sex))
 
     validate_age_and_sex(params$age, params$sex, reference)
 

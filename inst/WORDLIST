@@ -16,8 +16,12 @@ Fibrinogen
 GGT
 Gabi
 HDL
+HDW
 Hematocrit
 Hoichman
+Hyperchromic
+Hypochromic
+INR
 Jaschek
 LDH
 LDL
@@ -29,10 +33,15 @@ MCH
 MCHC
 MCV
 MPV
+MPXI
+Macrocytic
 Mendelson
+Microalbumin
+Microcytic
 Monocytes
 Neutrophils
 Omer
+PDW
 PSA
 Phosphatase
 RBC
@@ -45,6 +54,7 @@ Transferrin
 UKBB
 WBC
 XP
+aPTT
 doi
 https
 il

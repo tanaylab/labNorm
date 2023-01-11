@@ -3,7 +3,7 @@
 #' Names of the labs available in the package.
 #'
 #' @format ## `LAB_DETAILS`
-#' A data frame with 65 rows and 4 columns:
+#' A data frame with 95 rows and 4 columns:
 #' \describe{
 #'   \item{short_name}{Short lab name}
 #'   \item{long_name}{Long lab name}
