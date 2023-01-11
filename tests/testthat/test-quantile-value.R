@@ -11,7 +11,7 @@ test_that("invalid sex throws error", {
 })
 
 test_that("invalide age throws warning and returns NA", {
-    expect_warning(a <- ln_quantile_value(c(0.25, 0.5, 0.75), -10, "male", "WBC"))
+    expect_warning(a <- ln_quantile_value(c(0.25, 0.5, 0.75), -10, "male", "WBC", reference = "Clalit-demo"))
     expect_true(all(is.na(a$value)))
 })
 
@@ -44,4 +44,27 @@ test_that("correct lab name is returned", {
 test_that("NAs are returned for edge quantiles", {
     res <- ln_quantile_value(c(0, 1), 50, "male", "WBC", reference = "Clalit-demo")
     expect_equal(res$value, as.numeric(c(NA, NA)))
+})
+
+test_that("ln_patients_quantile_value returns correct values", {
+    skip_on_cran()
+    if (!ln_data_downloaded()) {
+        pkgenv$yesno2 <- function(prompt) FALSE
+        withr::defer(pkgenv$yesno2 <- yesno::yesno2)
+        ln_download_data()
+    }
+    hemoglobin_data$quantile <- ln_normalize(
+        hemoglobin_data$value,
+        hemoglobin_data$age,
+        hemoglobin_data$sex,
+        "Hemoglobin"
+    )
+    hemoglobin_data$value1 <- ln_patients_quantile_value(
+        hemoglobin_data$quantile,
+        hemoglobin_data$age,
+        hemoglobin_data$sex,
+        "Hemoglobin",
+        allow_edge_quantiles = TRUE
+    )
+    expect_equal(hemoglobin_data$value, hemoglobin_data$value1, tolerance = 1e-5, ignore_attr = TRUE)
 })

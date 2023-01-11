@@ -2,6 +2,7 @@
 % Please edit documentation in R/quantile-to-value.R
 \name{ln_quantile_value}
 \alias{ln_quantile_value}
+\alias{ln_patients_quantile_value}
 \title{Compute the lab value for a given quantile}
 \usage{
 ln_quantile_value(
@@ -12,13 +13,22 @@ ln_quantile_value(
   reference = "Clalit",
   allow_edge_quantiles = FALSE
 )
+
+ln_patients_quantile_value(
+  quantiles,
+  age,
+  sex,
+  lab,
+  reference = "Clalit",
+  allow_edge_quantiles = FALSE
+)
 }
 \arguments{
-\item{quantiles}{a vector of quantiles (in the range 0-1) to compute the lab value for.}
+\item{quantiles}{a vector of quantiles (in the range 0-1) to compute the lab value for, or a vector with a quantile for each patient when running \code{ln_patients_quantile_value}.}
 
-\item{age}{a vector of ages between 20-89 for "Clalit" reference and 35-80 for "UKBB". Can be a single value if all values are the same age.}
+\item{age}{a vector of ages to compute the lab values for or a vector with an age for each patient when running \code{ln_patients_quantile_value}.}
 
-\item{sex}{a vector of either "male" or "female". Can be a single value if all values are the same sex.}
+\item{sex}{the sexes to compute the lab values for, or a vector with a sex for ecah patient when running \code{ln_patients_quantile_value}. Note that for \code{ln_quantile_value} this parameter can only be either: "male", "female" or c("male", "female")}
 
 \item{lab}{The lab name.}
 
@@ -27,7 +37,7 @@ ln_quantile_value(
 \item{allow_edge_quantiles}{If \code{TRUE} (default) then the function will return the value for the edge quantiles (<0.01 or >0.99) even though they are not reliable. If \code{FALSE} then the function will return \code{NA} for those quantiles. Note that for the "Clalit-demo" reference, the threshold would be <0.05 or >0.95.}
 }
 \value{
-a data frame which contains the values for each combination of quantile, age and sex.
+\code{ln_quantile_value} returns a data frame which contains the values for each combination of quantile, age and sex.
 The data frame has the the following columns:
 
 \itemize{
@@ -38,10 +48,16 @@ The data frame has the the following columns:
 \item{unit: }{the lab unit}
 \item{lab: }{the lab name}
 }
+
+\code{ln_patients_quantile_value} returns a vector of value per patient.
 }
 \description{
-This function computes the lab value for given quantiles in the default units for the lab. Default units can be found using the function \code{ln_lab_default_units}. In case where no quantile is available for a given lab, age, and sex the function returns \code{NA}. \cr
-Note that the values of very high or low quantiles (e.g. >0.95,<0.05 on the low resolution version, >0.99,<0.01 on the high resolution version) are not reliable as they can represent technical outliers of the data.
+The function \code{ln_quantile_value} calculates lab values at a specified quantile, using the default units for that lab. The function \code{ln_patients_quantile_value} does the same calculation for a specific group of patients. \cr
+Default units for a lab can be obtained using \code{ln_lab_default_units}. \cr
+If no quantile data is available for a particular lab, age, and sex, the function returns 'NA'. \cr
+It should be noted that the values of extreme quantiles (e.g. >0.95 or <0.05 on low resolution, >0.99 or <0.01 on high resolution) may not be reliable, as they may represent outliers in the data. \cr \cr
+
+Note that \code{ln_quantile_value} returns values for all combinations of age, sex, and lab, while \code{ln_patients_quantile_value} returns values for a specific set of patients, similar to \code{ln_normalize}.
 }
 \examples{
 \donttest{
@@ -58,6 +74,42 @@ ln_quantile_value(
 # on the demo data
 \dontshow{
 ln_quantile_value(c(0.05, 0.5, 0.95), 50, "male", "WBC", reference = "Clalit-demo")
+}
+
+\donttest{
+hemoglobin_data$quantile <- ln_normalize(
+    hemoglobin_data$value,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin"
+)
+
+hemoglobin_data$value1 <- ln_patients_quantile_value(
+    hemoglobin_data$quantile,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin"
+)
+head(hemoglobin_data)
+}
+
+\dontshow{
+hemoglobin_data$quantile <- ln_normalize(
+    hemoglobin_data$value,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin",
+    reference = "Clalit-demo"
+)
+
+hemoglobin_data$value1 <- ln_patients_quantile_value(
+    hemoglobin_data$quantile,
+    hemoglobin_data$age,
+    hemoglobin_data$sex,
+    "Hemoglobin",
+    reference = "Clalit-demo"
+)
+head(hemoglobin_data)
 }
 
 }

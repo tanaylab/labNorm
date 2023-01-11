@@ -17,7 +17,7 @@ load_quantiles <- function(reference, lab, alert = FALSE) {
 
     fn <- LAB_TO_FILENAME[lab]
     if (is.na(fn)) {
-        cli::cli_abort("Invalid lab name {.value lab}.")
+        cli::cli_abort("Invalid lab name {.val lab}.")
     }
     full_fn <- file.path(getOption("labNorm.dir"), file.path(reference, glue("{fn}.rds")))
     if (!file.exists(full_fn)) {
