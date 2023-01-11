@@ -38,7 +38,7 @@ The list of supported labs can be found below or by running \code{LAB_DETAILS$sh
 }
 \section{reference distribution}{
 
-It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 quantiles (0.05), particularly at the edges of the distribution. \cr
+It is highly recommended to use \code{ln_download_data} to download the "Clalit" and "UKBB" reference distributions. If you choose not to download the data, the package will use the demo reference distributions included in the package ("Clalit-demo"), which have a resolution of 20 quantile bins and therefore may have an error of up to 5 percentiles (0.05), particularly at the edges of the distribution. \cr
 }
 
 \section{labs}{
