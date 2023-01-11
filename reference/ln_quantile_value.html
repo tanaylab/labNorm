@@ -190,15 +190,14 @@ The data frame has the the following columns:</p>
 <span class="r-in"><span>    <span class="va">hemoglobin_data</span><span class="op">$</span><span class="va">sex</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"Hemoglobin"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ln_patients_quantile_value(hemoglobin_data$quantile, hemoglobin_data$age,     hemoglobin_data$sex, "Hemoglobin"):</span> could not find function "ln_patients_quantile_value"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hemoglobin_data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   age    sex value   quantile</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  20   male  9.39 0.01882213</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  20   male 14.03 0.18674720</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  20   male 14.44 0.27947363</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  20   male 15.80 0.75195053</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  20 female 12.06 0.24249167</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  20 female 12.89 0.57451617</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   age    sex value   quantile value1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  20   male  9.39 0.01882213   9.39</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  20   male 14.03 0.18674720  14.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  20   male 14.44 0.27947363  14.44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  20   male 15.80 0.75195053  15.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  20 female 12.06 0.24249167  12.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  20 female 12.89 0.57451617  12.89</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \dontshow{</span></span></span>
@@ -217,15 +216,14 @@ The data frame has the the following columns:</p>
 <span class="r-in"><span>    <span class="st">"Hemoglobin"</span>,</span></span>
 <span class="r-in"><span>    reference <span class="op">=</span> <span class="st">"Clalit-demo"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in ln_patients_quantile_value(hemoglobin_data$quantile, hemoglobin_data$age,     hemoglobin_data$sex, "Hemoglobin", reference = "Clalit-demo"):</span> could not find function "ln_patients_quantile_value"</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">hemoglobin_data</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   age    sex value   quantile</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  20   male  9.39 0.03838718</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  20   male 14.03 0.18914947</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  20   male 14.44 0.28589076</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4  20   male 15.80 0.75032395</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  20 female 12.06 0.24222206</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  20 female 12.89 0.55270091</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   age    sex value   quantile value1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  20   male  9.39 0.03838718     NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  20   male 14.03 0.18914947  14.03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  20   male 14.44 0.28589076  14.44</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4  20   male 15.80 0.75032395  15.80</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  20 female 12.06 0.24222206  12.06</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  20 female 12.89 0.55270091  12.89</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
@@ -242,7 +240,7 @@ The data frame has the the following columns:</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
