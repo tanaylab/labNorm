@@ -56,13 +56,13 @@ ln_quantile_value <- function(quantiles, age, sex, lab, reference = "Clalit", al
 
     validate_quantiles(quantiles)
     if (length(unique(quantiles)) != length(quantiles)) {
-        cli::cli_alert_warning("The quantiles vector contains duplicate values. Did you mean to use ln_patients_quantile_value?")
+        cli::cli_warn("The quantiles vector contains duplicate values. Did you mean to use ln_patients_quantile_value?")
     }
 
     age <- floor(age)
 
     if (length(unique(age)) != length(age)) {
-        cli::cli_alert_warning("The age vector contains duplicate values. Did you mean to use ln_patients_quantile_value?")
+        cli::cli_warn("The age vector contains duplicate values. Did you mean to use ln_patients_quantile_value?")
     }
 
     if (length(sex) > 2) {

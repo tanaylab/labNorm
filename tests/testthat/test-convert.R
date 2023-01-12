@@ -96,3 +96,13 @@ test_that("unit conversion handles invalid input", {
         "savta"
     ))
 })
+
+test_that("ln_lab_units() throws an error if the lab parameter is not valid", {
+    expect_error(ln_lab_units("InvalidLab"))
+})
+
+test_that("ln_lab_units() returns a vector of available units for the lab", {
+    units <- ln_lab_units("Hemoglobin")
+    expect_true(is.character(units))
+    expect_true(length(units) > 0)
+})

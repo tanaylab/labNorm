@@ -67,6 +67,9 @@ test_that("ln_normalize_multi fails with missing columns", {
 test_that("ln_normalize returns NA when age is out of range", {
     expect_warning(q <- ln_normalize(c(1:10), 5:14, "male", "Hemoglobin", reference = "Clalit-demo"))
     expect_true(all(is.na(q)))
+
+    expect_warning(q <- ln_normalize(c(1:10), 125:134, "male", "Hemoglobin", reference = "Clalit-demo"))
+    expect_true(all(is.na(q)))
 })
 
 test_that("ln_normalize fails on NA values when na.rm=FALSE", {

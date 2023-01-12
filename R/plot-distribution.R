@@ -64,6 +64,10 @@ ln_plot_dist <- function(lab,
     validate_lab(lab)
     validate_quantiles(quantiles)
 
+    if (1 %in% quantiles || 0 %in% quantiles) {
+        cli::cli_warn("The {.field quantiles} should not contain 0 or 1. (The 0 and 1 quantiles are always plotted.)")
+    }
+
     if (reference == "Clalit-demo") {
         min_q <- 0.05
         max_q <- 0.95
@@ -85,10 +89,6 @@ ln_plot_dist <- function(lab,
 
     if (!is.null(sex) && !(sex %in% c("male", "female"))) {
         cli::cli_abort("The {.field sex} can be either {.val male} or {.val female}")
-    }
-
-    if (1 %in% quantiles || 0 %in% quantiles) {
-        cli::cli_abort("The {.field quantiles} should not contain 0 or 1. (The 0 and 1 quantiles are always plotted.)")
     }
 
     quantiles <- sort(quantiles)
