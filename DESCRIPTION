@@ -10,6 +10,7 @@ Description: Provides functions for normalizing standard laboratory measurements
 License: MIT + file LICENSE
 Suggests: 
     covr,
+    mockery,
     spelling,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

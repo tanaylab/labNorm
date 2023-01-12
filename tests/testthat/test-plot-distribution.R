@@ -62,10 +62,16 @@ test_that("ln_plot_dist() can change the colors", {
     expect_true("ggplot" %in% class(p6))
 })
 
-test_that("ln_plot_dist() can change the reference distribution", {
+test_that("ln_plot_dist() can change the reference distribution to Clalit", {
     skip_on_cran()
-    withr::defer(pkgenv$yesno2 <- yesno::yesno2)
-    pkgenv$yesno2 <- function(prompt) TRUE
+    mockery::stub(ln_plot_dist, "yesno2", FALSE, depth = 3)
+    p7 <- ln_plot_dist("Hemoglobin", reference = "Clalit")
+    expect_true("ggplot" %in% class(p7))
+})
+
+test_that("ln_plot_dist() can change the reference distribution to UKBB", {
+    skip_on_cran()
+    mockery::stub(ln_plot_dist, "yesno2", FALSE, depth = 3)
     p7 <- ln_plot_dist("Hemoglobin", reference = "UKBB")
     expect_true("ggplot" %in% class(p7))
 })

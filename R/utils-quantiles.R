@@ -19,6 +19,11 @@ load_quantiles <- function(reference, lab, alert = FALSE) {
     if (is.na(fn)) {
         cli::cli_abort("Invalid lab name {.val lab}.")
     }
+
+    if (is.null(getOption("labNorm.dir"))) {
+        cli::cli_abort("The {.field labNorm.dir} option is not set. Please run {.code ln_download_data()} to download the data.")
+    }
+
     full_fn <- file.path(getOption("labNorm.dir"), file.path(reference, glue("{fn}.rds")))
     if (!file.exists(full_fn)) {
         cli::cli_abort("File {.file {full_fn}} does not exist. Please run {.code ln_download_data()} to download the data.")

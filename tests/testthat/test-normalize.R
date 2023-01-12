@@ -183,12 +183,12 @@ test_that("normalization works with different units", {
 
 test_that("ln_normalize works with high resolution", {
     skip_on_cran()
+    clean_downloaded_data()
 
     hemoglobin_50 <- hemoglobin_data %>%
         filter(age == 50, sex == "male")
 
-    withr::defer(pkgenv$yesno2 <- yesno::yesno2)
-    pkgenv$yesno2 <- function(prompt) TRUE
+    mockery::stub(ln_normalize, "yesno2", FALSE, depth = 2)
 
     q <- ln_normalize(
         hemoglobin_50$value,
@@ -198,18 +198,18 @@ test_that("ln_normalize works with high resolution", {
         reference = "Clalit"
     )
 
+
     expect_equal(q, pkgenv$Clalit[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
 })
 
 test_that("ln_normalize works with UKBB", {
     skip_on_cran()
+    clean_downloaded_data()
 
     hemoglobin_50 <- hemoglobin_data %>%
         filter(age == 50, sex == "male")
 
-    withr::defer(pkgenv$yesno2 <- yesno::yesno2)
-    pkgenv$yesno2 <- function(prompt) TRUE
-
+    mockery::stub(ln_normalize, "yesno2", FALSE, depth = 2)
     q <- ln_normalize(
         hemoglobin_50$value,
         hemoglobin_50$age,

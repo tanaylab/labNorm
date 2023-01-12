@@ -40,6 +40,7 @@ test_that("ln_quantile_value() throws a warning if the age parameter is not uniq
 
 test_that("ln_quantile_value() throws an error if the sex parameter is not 'male' or 'female'", {
     expect_error(ln_quantile_value(c(0.5), 25, "invalid", "Hemoglobin", reference = "Clalit-demo"))
+    expect_error(ln_quantile_value(c(0.5), 25, rep("male", 3), "Hemoglobin", reference = "Clalit-demo"))
 })
 
 test_that("correct lab values are returned for multiple quantiles", {
@@ -71,17 +72,18 @@ test_that("age is floored to the nearest integer", {
 
 test_that("ln_patients_quantile_value returns correct values", {
     skip_on_cran()
-    if (!ln_data_downloaded()) {
-        pkgenv$yesno2 <- function(prompt) FALSE
-        withr::defer(pkgenv$yesno2 <- yesno::yesno2)
-        ln_download_data()
-    }
+    clean_downloaded_data()
+
+    mockery::stub(ln_normalize, "yesno2", FALSE, depth = 2)
     hemoglobin_data$quantile <- ln_normalize(
         hemoglobin_data$value,
         hemoglobin_data$age,
         hemoglobin_data$sex,
         "Hemoglobin"
     )
+
+    clean_downloaded_data()
+    mockery::stub(ln_patients_quantile_value, "yesno2", FALSE, depth = 2)
     hemoglobin_data$value1 <- ln_patients_quantile_value(
         hemoglobin_data$quantile,
         hemoglobin_data$age,

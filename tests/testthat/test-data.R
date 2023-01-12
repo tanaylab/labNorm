@@ -23,8 +23,7 @@ test_that("LAB_QUANTILES are valid", {
 test_that("Clalit data is valid", {
     skip_on_cran()
     if (!ln_data_downloaded()) {
-        pkgenv$yesno2 <- function(prompt) FALSE
-        withr::defer(pkgenv$yesno2 <- yesno::yesno2)
+        mockery::stub(ln_download_data, "yesno2", FALSE, depth = 1)
         ln_download_data()
     }
     field_names <- expand.grid(sex = c("female", "male"), age = 20:89) %>%
@@ -53,8 +52,7 @@ test_that("Clalit data is valid", {
 test_that("UKBB data is valid", {
     skip_on_cran()
     if (!ln_data_downloaded()) {
-        pkgenv$yesno2 <- function(prompt) FALSE
-        withr::defer(pkgenv$yesno2 <- yesno::yesno2)
+        mockery::stub(ln_download_data, "yesno2", FALSE, depth = 1)
         ln_download_data()
     }
     field_names <- expand.grid(sex = c("male", "female"), age = levels(cut(35:80, seq(35, 80, 5), right = FALSE))) %>%
