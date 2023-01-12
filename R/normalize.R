@@ -114,6 +114,7 @@
 #' @param lab the lab name. See \code{LAB_DETAILS$short_name} for a list of available labs.
 #' @param units the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{ln_lab_default_units(lab)}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.
 #' @param reference the reference distribution to use. Can be either "Clalit" or "UKBB" or "Clalit-demo". Please download the Clalit and UKBB reference distributions using \code{ln_download_data()}.
+#' @param na.rm if \code{TRUE}, then \code{NA} in age, sex or values will be ignored and 'NA' would be returned. Otherwise, an error will be thrown.
 #'
 #' @return a vector of normalized values. If \code{ln_download_data()} was not run, a lower resolution reference distribution will be used, which can have an error of up to 5 quantiles (0.05). Otherwise, the full reference distribution will be used. You can check if the high resolution data was downloaded using \code{ln_data_downloaded()}. \cr
 #' You can force the function to use the lower resolution distribution by setting \code{options(labNorm.use_low_res = TRUE)}. \cr
@@ -194,7 +195,11 @@
 #' }
 #'
 #' @export
-ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clalit") {
+ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clalit", na.rm = FALSE) {
+    if (na.rm == FALSE) {
+        validate_na(age, sex, values)
+    }
+
     # check inputs
 
     lab_info <- get_lab_info(lab)
@@ -206,6 +211,8 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
     if (length(sex) == 1) {
         sex <- rep(sex, length(values))
     }
+
+    age <- floor(age)
 
     validate_age_and_sex(age, sex, reference)
 
@@ -222,10 +229,14 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
     # convert units if needed
     values <- ln_convert_units(values, units, lab)
 
+    f_good <- !is.na(values) & !is.na(age) & !is.na(sex) & !is.na(units)
+    normalized <- rep(NA, length(values[f_good]))
+    good_values <- values[f_good]
+
     # normalize
-    ages <- unique(age)
-    sexes <- unique(sex)
-    normalized <- rep(NA, length(values))
+    ages <- unique(age[f_good])
+    sexes <- unique(sex[f_good])
+
 
     if (reference %in% c("Clalit", "UKBB")) {
         if (!has_reference(reference)) {
@@ -236,22 +247,25 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
     for (cur_age in ages) {
         for (cur_sex in sexes) {
             if (!age_in_range(cur_age, reference)) {
-                normalized[age == cur_age & sex == cur_sex] <- NA
+                normalized[age[f_good] == cur_age & sex[f_good] == cur_sex] <- NA
             } else {
                 func <- get_norm_func(lab, cur_age, cur_sex, reference)
 
                 # test if func is a function
-                cur_values <- values[age == cur_age & sex == cur_sex]
+                cur_values <- good_values[age[f_good] == cur_age & sex[f_good] == cur_sex]
                 if (is.function(func)) {
-                    normalized[age == cur_age & sex == cur_sex] <- func(cur_values)
+                    normalized[age[f_good] == cur_age & sex[f_good] == cur_sex] <- func(cur_values)
                 } else {
-                    normalized[age == cur_age & sex == cur_sex] <- NA
+                    normalized[age[f_good] == cur_age & sex[f_good] == cur_sex] <- NA
                 }
             }
         }
     }
 
-    return(normalized)
+    normalized_full <- rep(NA, length(values))
+    normalized_full[f_good] <- normalized
+
+    return(normalized_full)
 }
 
 #' Normalize multiple labs for age and sex
@@ -278,7 +292,7 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
 #'
 #' @rdname ln_normalize
 #' @export
-ln_normalize_multi <- function(labs_df, reference = "Clalit") {
+ln_normalize_multi <- function(labs_df, reference = "Clalit", na.rm = FALSE) {
     # validate that labs_df has the right columns
     required_columns <- c("value", "age", "sex", "lab")
     purrr::walk(required_columns, function(col) {
@@ -297,7 +311,8 @@ ln_normalize_multi <- function(labs_df, reference = "Clalit") {
             lab_df$sex,
             lab,
             lab_df$units, # units can be NULL
-            reference = reference
+            reference = reference,
+            na.rm = na.rm
         )
     }
 

@@ -13,15 +13,27 @@ validate_units <- function(units, lab) {
     }
 }
 
+validate_na <- function(age, sex, values) {
+    if (any(is.na(age))) {
+        cli::cli_abort("Missing values in {.field age}.", call = parent.frame(1))
+    }
+    if (any(is.na(sex))) {
+        cli::cli_abort("Missing values in {.field age}.", call = parent.frame(1))
+    }
+    if (any(is.na(values))) {
+        cli::cli_abort("Missing values in {.field values}.", call = parent.frame(1))
+    }
+}
+
 validate_age_and_sex <- function(age, sex, reference) {
-    if (any(age < pkgenv$age_limits[[reference]][1])) {
+    if (any(!is.na(age) & age < pkgenv$age_limits[[reference]][1])) {
         cli::cli_warn("Age must be at least {.val {pkgenv$age_limits[[reference]][1]}} for {.field {reference}}.", call = parent.frame(1))
     }
-    if (any(age > pkgenv$age_limits[[reference]][2])) {
+    if (any(!is.na(age) & age > pkgenv$age_limits[[reference]][2])) {
         cli::cli_warn("Age must be at most {.val {pkgenv$age_limits[[reference]][2]}} for {.field {reference}}.", call = parent.frame(1))
     }
 
-    if (!all(sex %in% c("male", "female"))) {
+    if (!all(sex[!is.na(sex)] %in% c("male", "female"))) {
         bad_values <- unique(sex[sex %in% c("male", "female")])
         cli::cli_abort("Invalid sex values: {.val {bad_values}}. Sex can only be {.val male} or {.val female}", call = parent.frame(1))
     }

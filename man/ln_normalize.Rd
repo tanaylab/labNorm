@@ -5,9 +5,17 @@
 \alias{ln_normalize_multi}
 \title{Normalize lab values to age and sex}
 \usage{
-ln_normalize(values, age, sex, lab, units = NULL, reference = "Clalit")
+ln_normalize(
+  values,
+  age,
+  sex,
+  lab,
+  units = NULL,
+  reference = "Clalit",
+  na.rm = FALSE
+)
 
-ln_normalize_multi(labs_df, reference = "Clalit")
+ln_normalize_multi(labs_df, reference = "Clalit", na.rm = FALSE)
 }
 \arguments{
 \item{values}{a vector of lab values}
@@ -21,6 +29,8 @@ ln_normalize_multi(labs_df, reference = "Clalit")
 \item{units}{the units of the lab values. See \code{ln_lab_units(lab)} for a list of available units for each lab. If \code{NULL} then the default units (\code{ln_lab_default_units(lab)}) for the lab will be used. If different values have different units then this should be a vector of the same length as \code{values}.}
 
 \item{reference}{the reference distribution to use. Can be either "Clalit" or "UKBB" or "Clalit-demo". Please download the Clalit and UKBB reference distributions using \code{ln_download_data()}.}
+
+\item{na.rm}{if \code{TRUE}, then \code{NA} in age, sex or values will be ignored and 'NA' would be returned. Otherwise, an error will be thrown.}
 
 \item{labs_df}{a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.}
 }

@@ -26,7 +26,7 @@ ln_patients_quantile_value(
 \arguments{
 \item{quantiles}{a vector of quantiles (in the range 0-1) to compute the lab value for, or a vector with a quantile for each patient when running \code{ln_patients_quantile_value}.}
 
-\item{age}{a vector of ages to compute the lab values for or a vector with an age for each patient when running \code{ln_patients_quantile_value}.}
+\item{age}{a vector of ages to compute the lab values for or a vector with an age for each patient when running \code{ln_patients_quantile_value}. Note that the age should be in years, and would be floored to the nearest integer.}
 
 \item{sex}{the sexes to compute the lab values for, or a vector with a sex for each patient when running \code{ln_patients_quantile_value}. Note that for \code{ln_quantile_value} this parameter can only be either: "male", "female" or c("male", "female")}
 
