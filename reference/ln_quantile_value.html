@@ -21,7 +21,7 @@ Note that ln_quantile_value returns values for all combinations of age, sex, and
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">labNorm</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.0.9000</span>
       </span>
     </div>
 
@@ -81,7 +81,7 @@ It should be noted that the values of extreme quantiles (e.g. &gt;0.95 or &lt;0.
 
 
 <dt>age</dt>
-<dd><p>a vector of ages to compute the lab values for or a vector with an age for each patient when running <code>ln_patients_quantile_value</code>.</p></dd>
+<dd><p>a vector of ages to compute the lab values for or a vector with an age for each patient when running <code>ln_patients_quantile_value</code>. Note that the age should be in years, and would be floored to the nearest integer.</p></dd>
 
 
 <dt>sex</dt>
