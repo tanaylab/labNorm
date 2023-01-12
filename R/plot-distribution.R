@@ -210,6 +210,8 @@ validate_patients_df <- function(df, lab, reference) {
         cli::cli_abort("The {.field patients} should be a data frame.")
     }
 
+    df$age <- floor(df$age)
+
     validate_age_and_sex(df$age, df$sex, reference)
 
     if (is.null(df$units)) {

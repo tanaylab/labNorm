@@ -207,6 +207,8 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
         sex <- rep(sex, length(values))
     }
 
+    age <- floor(age)
+
     validate_age_and_sex(age, sex, reference)
 
     if (length(values) != length(age)) {

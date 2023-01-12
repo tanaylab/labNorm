@@ -46,6 +46,12 @@ test_that("NAs are returned for edge quantiles", {
     expect_equal(res$value, as.numeric(c(NA, NA)))
 })
 
+test_that("age is floored to the nearest integer", {
+    res <- ln_quantile_value(0.5, 50.3, "male", "WBC", reference = "Clalit-demo")
+    expect_equal(res$value[1], 7.182971, tolerance = 1e-5)
+    expect_equal(res$age[1], 50, tolerance = 1e-5)
+})
+
 test_that("ln_patients_quantile_value returns correct values", {
     skip_on_cran()
     if (!ln_data_downloaded()) {

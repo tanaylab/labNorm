@@ -48,6 +48,8 @@ ln_download_data <- function(dir = NULL) {
 
     init_reference("Clalit")
     init_reference("UKBB")
+
+    cli::cli_alert_success("Data downloaded successfully.")
 }
 
 download_reference_distributions <- function(dir, reference) {

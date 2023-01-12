@@ -11,7 +11,7 @@
 #'
 #'
 #' @param quantiles a vector of quantiles (in the range 0-1) to compute the lab value for, or a vector with a quantile for each patient when running \code{ln_patients_quantile_value}.
-#' @param age a vector of ages to compute the lab values for or a vector with an age for each patient when running \code{ln_patients_quantile_value}.
+#' @param age a vector of ages to compute the lab values for or a vector with an age for each patient when running \code{ln_patients_quantile_value}. Note that the age should be in years, and would be floored to the nearest integer.
 #' @param sex the sexes to compute the lab values for, or a vector with a sex for each patient when running \code{ln_patients_quantile_value}. Note that for \code{ln_quantile_value} this parameter can only be either: "male", "female" or c("male", "female")
 #' @param lab The lab name.
 #' @param allow_edge_quantiles If \code{TRUE} (default) then the function will return the value for the edge quantiles (<0.01 or >0.99) even though they are not reliable. If \code{FALSE} then the function will return \code{NA} for those quantiles. Note that for the "Clalit-demo" reference, the threshold would be <0.05 or >0.95.
@@ -58,6 +58,8 @@ ln_quantile_value <- function(quantiles, age, sex, lab, reference = "Clalit", al
     if (length(unique(quantiles)) != length(quantiles)) {
         cli::cli_alert_warning("The quantiles vector contains duplicate values. Did you mean to use ln_patients_quantile_value?")
     }
+
+    age <- floor(age)
 
     if (length(unique(age)) != length(age)) {
         cli::cli_alert_warning("The age vector contains duplicate values. Did you mean to use ln_patients_quantile_value?")
@@ -146,6 +148,8 @@ ln_patients_quantile_value <- function(quantiles, age, sex, lab, reference = "Cl
     if (length(sex) == 1) {
         sex <- rep(sex, length(quantiles))
     }
+
+    age <- floor(age)
 
     validate_age_and_sex(age, sex, reference)
 
