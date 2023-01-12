@@ -49,3 +49,12 @@ test_that("ln_download_data downloads to temp dir if not approved or if dir not 
     expect_equal(load_quantiles("Clalit", "WBC"), readRDS(file.path(getOption("labNorm.dir"), "Clalit", "WBC.rds")))
     expect_equal(load_quantiles("UKBB", "WBC"), readRDS(file.path(getOption("labNorm.dir"), "UKBB", "WBC.rds")))
 })
+
+test_that("ln_data_downloaded works", {
+    skip_on_cran()
+    clean_downloaded_data()
+    expect_false(ln_data_downloaded())
+
+    setup_test()
+    expect_true(ln_data_downloaded())
+})

@@ -103,3 +103,12 @@ test_that("ln_patients_quantile_value returns correct values", {
         )
     )
 })
+
+test_that("ln_quantile_value downloads data if needed", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    mockery::stub(ln_quantile_value, "yesno2", FALSE, depth = 2)
+    res <- ln_quantile_value(0.5, 50, "male", "WBC", reference = "Clalit")
+    expect_equal(res$value[1], 7.182971, tolerance = 1e-5)
+})
