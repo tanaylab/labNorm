@@ -51,6 +51,8 @@ ln_download_data <- function(dir = NULL) {
 }
 
 download_reference_distributions <- function(dir, reference) {
+    dir <- normalizePath(dir)
+
     withr::local_options(timeout = 2 * 60 * 60)
     temp_file <- tempfile()
     tryCatch(
