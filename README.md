@@ -8,6 +8,9 @@
 [![R-CMD-check](https://github.com/tanaylab/labNorm/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/tanaylab/labNorm/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/tanaylab/labNorm/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tanaylab/labNorm?branch=main)
+![GitHub issues](https://img.shields.io/github/issues/tanaylab/labNorm)
+![GitHub R package
+version](https://img.shields.io/github/r-package/v/tanaylab/labNorm)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/labNorm)](https://CRAN.R-project.org/package=labNorm)
 <!-- badges: end -->
@@ -47,9 +50,10 @@ hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$sex,
     "Hemoglobin"
 )
-#> → Downloading to a temporary directory '/tmp/RtmpE0Zjbs'.
-#> → Extracting data to '/tmp/RtmpE0Zjbs'.
-#> → Extracting data to '/tmp/RtmpE0Zjbs'.
+#> → Downloading to a temporary directory '/tmp/RtmpnrSi5j'.
+#> → Extracting data to '/tmp/RtmpnrSi5j'.
+#> → Extracting data to '/tmp/RtmpnrSi5j'.
+#> ✔ Data downloaded successfully.
 
 head(hemoglobin_data)
 #>   age    sex value   quantile
