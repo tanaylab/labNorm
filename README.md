@@ -29,11 +29,17 @@ information go to: <https://tanaylab.weizmann.ac.il/labs/>
 
 ## Installation
 
-You can install the development version of `labNorm` from GitHub using
-the `remotes` package:
+You can install `labNorm` from CRAN like so:
 
 ``` r
-retmotes::install_github("tanaylab/labNorm")
+install.packages("labNorm")
+```
+
+Or you can install the development version from GitHub using the
+`remotes` package:
+
+``` r
+remotes::install_github("tanaylab/labNorm")
 ```
 
 ## Example
@@ -50,9 +56,9 @@ hemoglobin_data$quantile <- ln_normalize(
     hemoglobin_data$sex,
     "Hemoglobin"
 )
-#> → Downloading to a temporary directory '/tmp/RtmpnrSi5j'.
-#> → Extracting data to '/tmp/RtmpnrSi5j'.
-#> → Extracting data to '/tmp/RtmpnrSi5j'.
+#> → Downloading to a temporary directory '/tmp/RtmpQybCtj'.
+#> → Extracting data to '/tmp/RtmpQybCtj'.
+#> → Extracting data to '/tmp/RtmpQybCtj'.
 #> ✔ Data downloaded successfully.
 
 head(hemoglobin_data)
