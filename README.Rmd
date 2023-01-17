@@ -29,10 +29,16 @@ This package allows users to easily obtain normalized values for their lab resul
 
 ## Installation
 
-You can install the development version of `labNorm` from GitHub using the `remotes` package:
+You can install `labNorm` from CRAN like so:
 
 ``` r
-retmotes::install_github("tanaylab/labNorm")
+install.packages("labNorm")
+```
+
+Or you can install the development version from GitHub using the `remotes` package:
+
+``` r
+remotes::install_github("tanaylab/labNorm")
 ```
 
 ## Example
