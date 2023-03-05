@@ -29,7 +29,14 @@ lab_info <- lab_info %>%
     mutate(full_name = ifelse(is.na(full_name), short_name, full_name)) %>%
     left_join(readr::read_csv("data-raw/reference-ranges.csv", show_col_types = FALSE))
 
+# cp /net/mraid14/export/data/users/nettam/projects/emr/ukbiobank/clalit_conversion_data/ukbb_lab_field_to_clalit_lab.csv data-raw/
+ukbb_to_clalit <- fread("data-raw/ukbb_lab_field_to_clalit_lab.csv")
+
+lab_info <- lab_info %>%
+    left_join(ukbb_to_clalit %>% select(ukbb_code = field, ukbb_units, lab = track))
+
 fwrite(lab_info, "/home/aviezerl/src/labNorm/data-raw/quantile2feature.csv")
+
 
 example_labs <- c(
     "WBC", "RBC", "Hemoglobin", "Hematocrit", "Platelets", "MCV",

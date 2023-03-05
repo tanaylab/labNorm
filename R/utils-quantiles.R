@@ -42,10 +42,10 @@ has_reference <- function(reference) {
         return(TRUE)
     }
     if (is.null(pkgenv[[reference]])) {
-        if (is.null(options("labNorm.dir"))) {
+        if (is.null(getOption("labNorm.dir"))) {
             return(FALSE)
         }
-        if (!dir.exists(file.path(options("labNorm.dir"), "reference"))) {
+        if (!dir.exists(file.path(getOption("labNorm.dir"), "reference"))) {
             return(FALSE)
         } else {
             return(TRUE)

@@ -1,3 +1,8 @@
+# labNorm 1.0.2
+
+* Added `ln_normalize_ukbb` and `ln_normalize_clalit` utility function for normalizing using lab codes. 
+* Fixed the wrong formula for converting hemoglobin A1C from mmol/mol to % 
+
 # labNorm 1.0.1
 
 * Fixed an issue with downloading to home directory in unix (#4)

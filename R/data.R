@@ -10,6 +10,7 @@
 #'   \item{units}{a list column with all the units available for the lab}
 #'   \item{default_units}{the default units for the lab}
 #'   \item{low_male,high_male,low_female,high_female}{the reference ranges for the lab, taken from the American Board of Internal Medicine. Can be NA if the lab does not have reference ranges.}
+#'   \item{clalit_code, ukbb_code}{the codes for the lab in the Clalit and UKBB databases}
 #' }
 #' @source  American Board of Internal Medicine. ABIM Laboratory Test Reference Ranges — July 2021. <https://www.abim.org/~/media/ABIM%20Public/Files/pdf/exam/laboratory-reference-ranges.pdf> (2021).
 #' @examples

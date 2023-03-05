@@ -14,6 +14,7 @@ A data frame with 95 rows and 4 columns:
 \item{units}{a list column with all the units available for the lab}
 \item{default_units}{the default units for the lab}
 \item{low_male,high_male,low_female,high_female}{the reference ranges for the lab, taken from the American Board of Internal Medicine. Can be NA if the lab does not have reference ranges.}
+\item{clalit_code, ukbb_code}{the codes for the lab in the Clalit and UKBB databases}
 }
 }
 }

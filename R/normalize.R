@@ -270,7 +270,7 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
 
 #' Normalize multiple labs for age and sex
 #'
-#' @param labs_df a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns.
+#' @param labs_df a data frame with the columns "value", "age", "sex", "units", and "lab". The "lab" column should be a vector with the lab name per row. See \code{ln_normalize} for details on the other columns. For \code{ln_normalize_multi_ukbb} and \code{ln_normalize_multi_clalit}, a column named "lab_code" should be added with the lab code instead of the "lab" column.
 #'
 #' @examples
 #' library(dplyr)

@@ -15,5 +15,5 @@
 ## usethis namespace: end
 NULL
 
-globals <- c("LAB_DETAILS", "age", "Age", "median", "Median", "Percentile", "quantile", "strata_value", "transparent", "value", "yintercept")
+globals <- c("LAB_DETAILS", "age", "Age", "median", "Median", "Percentile", "quantile", "strata_value", "transparent", "value", "yintercept", "clalit_code", "short_name", "long_name", "ukbb_code", "ukbb_units", "default_units")
 utils::globalVariables(globals)

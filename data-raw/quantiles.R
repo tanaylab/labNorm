@@ -222,7 +222,8 @@ create_ukbb_labs_data <- function() {
 
 create_lab_info <- function() {
     LAB_DETAILS <- as.data.frame(features) %>%
-        select(short_name = short_name, long_name = full_name, units, default_units, low_male, high_male, low_female, high_female)
+        select(short_name = short_name, long_name = full_name, units, default_units, low_male, high_male, low_female, high_female, clalit_code = lab, ukbb_code, ukbb_units) %>%
+        mutate(ukbb_code = as.character(ukbb_code))
 
     usethis::use_data(LAB_DETAILS, overwrite = TRUE, internal = FALSE, compress = "xz")
 }
@@ -296,8 +297,8 @@ plot_all_large_vs_small <- function(raw_quantiles_dir = "/net/mraid14/export/tgd
 
 # import_all_labs_clalit()
 # import_all_labs_ukbb()
-create_labs_data()
-# create_lab_info()
-create_high_res_labs_data()
-create_ukbb_labs_data()
+# create_labs_data()
+create_lab_info()
+# create_high_res_labs_data()
+# create_ukbb_labs_data()
 # plot_all_large_vs_small()

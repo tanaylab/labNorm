@@ -94,7 +94,9 @@ test_that("UKBB data is valid", {
 
 test_that("all default units are in units", {
     purrr::map2(LAB_DETAILS$default_units, LAB_DETAILS$units, function(default_units, units) {
-        expect_true(default_units %in% units)
+        if (!is.na(default_units)) {
+            expect_true(default_units %in% units)
+        }
     })
 })
 

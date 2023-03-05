@@ -220,3 +220,94 @@ test_that("ln_normalize works with UKBB", {
 
     expect_equal(q, pkgenv$UKBB[["Hemoglobin"]][["[50,55).male"]](hemoglobin_50$value))
 })
+
+
+test_that("ln_normalize_ukbb works", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    hemoglobin_50 <- hemoglobin_data %>%
+        filter(age == 50, sex == "male")
+
+    mockery::stub(ln_normalize_ukbb, "yesno2", FALSE, depth = 2)
+    q <- ln_normalize_ukbb(
+        hemoglobin_50$value,
+        hemoglobin_50$age,
+        hemoglobin_50$sex,
+        "30020"
+    )
+
+    expect_equal(q, pkgenv$UKBB[["Hemoglobin"]][["[50,55).male"]](hemoglobin_50$value))
+})
+
+test_that("ln_normalize_clalit works", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    hemoglobin_50 <- hemoglobin_data %>%
+        filter(age == 50, sex == "male")
+
+    mockery::stub(ln_normalize_clalit, "yesno2", FALSE, depth = 2)
+    q <- ln_normalize_clalit(
+        hemoglobin_50$value,
+        hemoglobin_50$age,
+        hemoglobin_50$sex,
+        "lab.103"
+    )
+
+    expect_equal(q, pkgenv$Clalit[["Hemoglobin"]][["50.male"]](hemoglobin_50$value))
+})
+
+test_that("ln_normalize_multi_clalit works", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    multi_labs_df <- bind_rows(
+        hemoglobin_data %>% mutate(lab_code = "lab.103"),
+        creatinine_data %>% mutate(lab_code = "lab.20300")
+    ) %>%
+        filter(age == 50, sex == "male")
+
+    mockery::stub(ln_normalize_multi_clalit, "yesno2", FALSE, depth = 2)
+
+    multi_labs_df$quantile <- ln_normalize_multi_clalit(
+        multi_labs_df
+    )
+
+    expect_equal(
+        multi_labs_df$quantile[multi_labs_df$lab_code == "lab.103"],
+        pkgenv$Clalit[["Hemoglobin"]][["50.male"]](multi_labs_df$value[multi_labs_df$lab_code == "lab.103"])
+    )
+
+    expect_equal(
+        multi_labs_df$quantile[multi_labs_df$lab_code == "lab.20300"],
+        pkgenv$Clalit[["Creatinine"]][["50.male"]](multi_labs_df$value[multi_labs_df$lab_code == "lab.20300"])
+    )
+})
+
+test_that("ln_normalize_multi_ukbb works", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    multi_labs_df <- bind_rows(
+        hemoglobin_data %>% mutate(lab_code = "30020"),
+        creatinine_data %>% mutate(lab_code = "30700")
+    ) %>%
+        filter(age == 50, sex == "male")
+
+    mockery::stub(ln_normalize_multi_ukbb, "yesno2", FALSE, depth = 2)
+
+    multi_labs_df$quantile <- ln_normalize_multi_ukbb(
+        multi_labs_df
+    )
+
+    expect_equal(
+        multi_labs_df$quantile[multi_labs_df$lab_code == "30020"],
+        pkgenv$UKBB[["Hemoglobin"]][["[50,55).male"]](multi_labs_df$value[multi_labs_df$lab_code == "30020"])
+    )
+
+    expect_equal(
+        multi_labs_df$quantile[multi_labs_df$lab_code == "30700"],
+        pkgenv$UKBB[["Creatinine"]][["[50,55).male"]](ln_convert_units(multi_labs_df$value[multi_labs_df$lab_code == "30700"], units = "umol/L", lab = "Creatinine"))
+    )
+})
