@@ -1,3 +1,7 @@
+# labNorm 1.0.3
+
+* Fix: `ln_normalize_ukbb` and `ln_normalize_clalit` now work return NA when the lab code is not found in the reference table.
+
 # labNorm 1.0.2
 
 * Added `ln_normalize_ukbb` and `ln_normalize_clalit` utility function for normalizing using lab codes. 

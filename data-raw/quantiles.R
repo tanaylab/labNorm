@@ -109,7 +109,7 @@ import_lab_clalit <- function(lab, raw_quantiles_dir = "/net/mraid14/export/tgda
 import_all_labs_clalit <- function(raw_quantiles_dir = "/net/mraid14/export/tgdata/users/aviezerl/src/mldpEHR-app/backend/rawdata/lab_quantiles_raw", small_size = 21, ncores = 40, parallel = TRUE) {
     doMC::registerDoMC(ncores)
 
-    labs <- features$quantile_file
+    labs <- features$quantile_file[!is.na(features$lab)]
     plyr::l_ply(labs, import_lab_clalit, raw_quantiles_dir = raw_quantiles_dir, small_size = small_size, .parallel = parallel)
 
 
@@ -295,10 +295,10 @@ plot_all_large_vs_small <- function(raw_quantiles_dir = "/net/mraid14/export/tgd
     return(stats)
 }
 
-# import_all_labs_clalit()
-# import_all_labs_ukbb()
-# create_labs_data()
+import_all_labs_clalit()
+import_all_labs_ukbb()
+create_labs_data()
 create_lab_info()
-# create_high_res_labs_data()
-# create_ukbb_labs_data()
+create_high_res_labs_data()
+create_ukbb_labs_data()
 # plot_all_large_vs_small()
