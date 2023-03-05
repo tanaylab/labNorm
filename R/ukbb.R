@@ -5,12 +5,16 @@
 #'
 #' @examples
 #' \dontrun{
-#' hemoglobin_data$quantile <- ln_normalize_ukbb(
-#'     hemoglobin_data$value,
-#'     hemoglobin_data$age,
-#'     hemoglobin_data$sex,
+#' hemoglobin_data1 <- hemoglobin_data
+#' hemoglobin_data1$age <- 50
+#' hemoglobin_data1$quantile <- ln_normalize_ukbb(
+#'     hemoglobin_data1$value,
+#'     hemoglobin_data1$age,
+#'     hemoglobin_data1$sex,
 #'     "30020"
 #' )
+#'
+#' head(hemoglobin_data1)
 #' }
 #'
 #' @export
@@ -25,8 +29,8 @@ ln_normalize_ukbb <- function(values, age, sex, lab_code, reference = "UKBB", na
 #' \dontrun{
 #' library(dplyr)
 #' multi_labs_df <- bind_rows(
-#'     hemoglobin_data %>% mutate(lab_code = "30020"),
-#'     creatinine_data %>% mutate(lab_code = "30700")
+#'     hemoglobin_data %>% mutate(age = 50, lab_code = "30020"),
+#'     creatinine_data %>% mutate(age = 50, lab_code = "30700")
 #' )
 #'
 #'

@@ -271,19 +271,23 @@ multi_labs_df$quantile <- ln_normalize_multi(multi_labs_df, reference = "Clalit-
 head(multi_labs_df)
 
 \dontrun{
-hemoglobin_data$quantile <- ln_normalize_ukbb(
-    hemoglobin_data$value,
-    hemoglobin_data$age,
-    hemoglobin_data$sex,
+hemoglobin_data1 <- hemoglobin_data
+hemoglobin_data1$age <- 50
+hemoglobin_data1$quantile <- ln_normalize_ukbb(
+    hemoglobin_data1$value,
+    hemoglobin_data1$age,
+    hemoglobin_data1$sex,
     "30020"
 )
+
+head(hemoglobin_data1)
 }
 
 \dontrun{
 library(dplyr)
 multi_labs_df <- bind_rows(
-    hemoglobin_data \%>\% mutate(lab_code = "30020"),
-    creatinine_data \%>\% mutate(lab_code = "30700")
+    hemoglobin_data \%>\% mutate(age = 50, lab_code = "30020"),
+    creatinine_data \%>\% mutate(age = 50, lab_code = "30700")
 )
 
 
