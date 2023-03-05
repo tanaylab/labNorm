@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">labNorm</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.2</span>
       </span>
     </div>
 
@@ -72,6 +72,9 @@
 <dt>low_male,high_male,low_female,high_female</dt>
 <dd><p>the reference ranges for the lab, taken from the American Board of Internal Medicine. Can be NA if the lab does not have reference ranges.</p></dd>
 
+<dt>clalit_code, ukbb_code</dt>
+<dd><p>the codes for the lab in the Clalit and UKBB databases</p></dd>
+
 
 </dl></div>
 
@@ -95,16 +98,16 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 1 x10E3/uL, x10E6/uL, x10E9/L, x10E12/L      x10E3/uL      4.4      11.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2 x10E6/uL, x10E3/uL, x10E9/L, x10E12/L      x10E6/uL      4.5       5.9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3              mmol/L, g/dL, g/L, mg/mL          g/dL     14.0      18.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                   ratio units, L/L, %             %     42.0      50.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                 , ratio units, L/L, %             %     42.0      50.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 5 x10E3/uL, x10E6/uL, x10E9/L, x10E12/L      x10E3/uL    150.0     450.0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 6                                    fL            fL     80.0      96.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   low_female high_female</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1        4.4        11.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2        4.1         5.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3       12.0        16.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4       37.0        47.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5      150.0       450.0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6       80.0        96.0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   low_female high_female clalit_code ukbb_code ukbb_units</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1        4.4        11.0     lab.101     30000   x10E3/uL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2        4.1         5.1     lab.102     30010   x10E6/uL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3       12.0        16.0     lab.103     30020       g/dL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4       37.0        47.0     lab.104     30030          %</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5      150.0       450.0     lab.105     30080   x10E3/uL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6       80.0        96.0     lab.106     30040         fL</span>
 </code></pre></div>
     </div>
   </div>
