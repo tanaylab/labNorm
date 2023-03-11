@@ -311,3 +311,39 @@ test_that("ln_normalize_multi_ukbb works", {
         pkgenv$UKBB[["Creatinine"]][["[50,55).male"]](ln_convert_units(multi_labs_df$value[multi_labs_df$lab_code == "30700"], units = "umol/L", lab = "Creatinine"))
     )
 })
+
+test_that("ln_normalize_ukbb returns NA when code doesn't exist", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    hemoglobin_50 <- hemoglobin_data %>%
+        filter(age == 50, sex == "male")
+
+    mockery::stub(ln_normalize_ukbb, "yesno2", FALSE, depth = 2)
+    expect_warning(q <- ln_normalize_ukbb(
+        hemoglobin_50$value,
+        hemoglobin_50$age,
+        hemoglobin_50$sex,
+        "30"
+    ))
+
+    expect_equal(q, rep(NA, length(hemoglobin_50$value)))
+})
+
+test_that("ln_normalize_clalit returns NA when code doesn't exist", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    hemoglobin_50 <- hemoglobin_data %>%
+        filter(age == 50, sex == "male")
+
+    mockery::stub(ln_normalize_clalit, "yesno2", FALSE, depth = 2)
+    expect_warning(q <- ln_normalize_clalit(
+        hemoglobin_50$value,
+        hemoglobin_50$age,
+        hemoglobin_50$sex,
+        "30"
+    ))
+
+    expect_equal(q, rep(NA, length(hemoglobin_50$value)))
+})

@@ -20,6 +20,10 @@
 #' @export
 #' @rdname ln_normalize
 ln_normalize_ukbb <- function(values, age, sex, lab_code, reference = "UKBB", na.rm = FALSE) {
+    if (!ln_ukbb_lab_code_exists(lab_code)) {
+        cli::cli_warn("Lab code {lab_code} does not exist in the UKBB reference. Returning NA.")
+        return(rep(NA, length(values)))
+    }
     ln_normalize(values = values, age = age, sex = sex, units = ln_ukbb_units(lab_code), lab = ln_ukbb_name(lab_code), reference = reference, na.rm = na.rm)
 }
 
@@ -124,6 +128,14 @@ ln_ukbb_name <- function(lab_code) {
         pull(short_name)
 }
 
+ln_ukbb_lab_code_exists <- function(lab_code) {
+    lab_code %in% LAB_DETAILS$ukbb_code
+}
+
+ln_clalit_lab_code_exists <- function(lab_code) {
+    lab_code %in% LAB_DETAILS$clalit_code
+}
+
 #' Get available UKBB labs
 #'
 #' @return A data frame with the available UKBB labs.
@@ -155,6 +167,10 @@ ln_ukbb_labs <- function() {
 #' @export
 #' @rdname ln_normalize
 ln_normalize_clalit <- function(values, age, sex, lab_code, reference = "Clalit", na.rm = FALSE) {
+    if (!ln_clalit_lab_code_exists(lab_code)) {
+        cli::cli_warn("Lab code {lab_code} does not exist in the Clalit reference. Returning NA.")
+        return(rep(NA, length(values)))
+    }
     # deafult units are based on clalit units
     ln_normalize(values = values, age = age, sex = sex, lab = ln_clalit_name(lab_code), reference = reference, na.rm = na.rm)
 }
