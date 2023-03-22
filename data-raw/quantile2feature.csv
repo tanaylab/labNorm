@@ -92,3 +92,4 @@
 "RDW_CV","RDW-CV","RDW-CV","","","","lab.152",NA,NA,NA,NA,NA,NA
 "LH_LUTEINIZING_HORMONE","LH","Luteinizing Hormone (LH)","IU/L|""""IU/mL""""|""""mIU/L""""|""""mIU/mL""""|""""uIU/mL""""|""""U/L""""|""""U/mL""""|""""mU/L""""|""""mU/mL""""|""""uU/mL""""","U/L","x|1000*x|0.001*x|x|0.001*x|x|1000*x|0.001*x|x|0.001*x","lab.100800",2,9,NA,NA,NA,NA
 "ESTRADIOL_E_2","Estradiol","Estradiol (E2)","pmol/L|""""pg/mL""""|""""pg/dL""""|""""pg/L""""|""""ng/L""""","pmol/L","1|3.6713*x|0.0367*x|0.0037*x|3.6713*x","lab.100500",73.4,184,36.7,660,30800,"pmol/L"
+"NRBC","NRBC","Nucleated Red Blood Cells (NRBC)","x10E3/uL|""""x10E6/uL""""|""""x10E9/L""""|""""x10E12/L""""","x10E3/uL","x|1000*x|x|1000*x",NA,0,0,0,0,30170,"x10E3/uL"

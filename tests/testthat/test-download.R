@@ -38,12 +38,12 @@ test_that("ln_download_data downloads to temp dir if not approved or if dir not 
         "MCH", "MCHC", "MCV", "MONO(abs)", "MONperc", "MPV", "NEUT(abs)",
         "NEUTperc", "PCT", "PDW", "PHOSPHATASE_ALKALINE", "PHOSPHORUS_BLOOD",
         "PLT", "PROTEIN_TOTAL_BLOOD", "RBC", "RDW", "TRIGLYCERIDES",
-        "UREA_BLOOD", "VITAMIN_D3_25_0H_RIA", "WBC"
+        "UREA_BLOOD", "VITAMIN_D3_25_0H_RIA", "WBC", "NRBC"
     )
 
     expect_true(all(file.exists(file.path(getOption("labNorm.dir"), "UKBB", paste0(ukbb_labs, ".rds")))))
 
-    expect_true(all(file.exists(file.path(getOption("labNorm.dir"), "Clalit", paste0(LAB_TO_FILENAME, ".rds")))))
+    expect_true(all(file.exists(file.path(getOption("labNorm.dir"), "Clalit", paste0(LAB_TO_FILENAME[LAB_TO_FILENAME != "NRBC"], ".rds")))))
 
     # Check that the quantile data was read and stored correctly
     expect_equal(load_quantiles("Clalit", "WBC"), readRDS(file.path(getOption("labNorm.dir"), "Clalit", "WBC.rds")))

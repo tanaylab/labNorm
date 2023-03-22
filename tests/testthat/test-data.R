@@ -30,7 +30,7 @@ test_that("Clalit data is valid", {
         mutate(s = paste0(age, ".", sex)) %>%
         pull(s)
 
-    purrr::map(LAB_DETAILS$short_name, function(lab) {
+    purrr::map(LAB_DETAILS$short_name[!is.na(LAB_DETAILS$clalit_code)], function(lab) {
         x <- load_quantiles("Clalit", lab)
         expect_true(all(names(x) %in% field_names))
         expect_true(all(field_names %in% names(x)))
@@ -45,8 +45,8 @@ test_that("Clalit data is valid", {
 
     quantiles <- pkgenv[["Clalit"]]
 
-    expect_true(all(names(quantiles) %in% LAB_DETAILS$short_name))
-    expect_true(all(LAB_DETAILS$short_name %in% names(quantiles)))
+    expect_true(all(names(quantiles) %in% LAB_DETAILS$short_name[!is.na(LAB_DETAILS$clalit_code)]))
+    expect_true(all(LAB_DETAILS$short_name[!is.na(LAB_DETAILS$clalit_code)] %in% names(quantiles)))
 })
 
 test_that("UKBB data is valid", {
@@ -69,7 +69,7 @@ test_that("UKBB data is valid", {
         "MCV", "Monocytes, Abs", "Monocytes, %", "MPV", "Neutrophils, Abs",
         "Neutrophils, %", "PCT", "PDW", "Alk. Phosphatase", "Phosphorus",
         "Platelets", "Total Protein", "RBC", "RDW", "Triglycerides",
-        "Urea", "Vitamin D (25-OH)", "WBC"
+        "Urea", "Vitamin D (25-OH)", "WBC", "NRBC"
     )
 
 
