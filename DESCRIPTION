@@ -34,5 +34,5 @@ Imports:
     withr,
     yesno
 Depends: 
-    R (>= 2.10)
+    R (>= 4.0)
 LazyData: true
