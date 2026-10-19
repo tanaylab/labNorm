@@ -41,7 +41,7 @@ ln_convert_units <- function(values, units, lab) {
         cli::cli_abort("The number of {.field units} must be 1 or the same as the number of {.field values}.")
     }
 
-    if (!all(units == lab_info$default_units)) {
+    if (!is.na(lab_info$default_units) && !all(units == lab_info$default_units)) {
         conversion <- UNITS_CONVERSION[[lab]]
         uniq_units <- unique(units)
         uniq_units[uniq_units != lab_info$default_units]
