@@ -17,15 +17,15 @@
 #' @param allow_edge_quantiles If \code{TRUE} (default) then the function will return the value for the edge quantiles (<0.01 or >0.99) even though they are not reliable. If \code{FALSE} then the function will return \code{NA} for those quantiles. Note that for the "Clalit-demo" reference, the threshold would be <0.05 or >0.95.
 #'
 #' @return \code{ln_quantile_value} returns a data frame which contains the values for each combination of quantile, age and sex.
-#' The data frame has the the following columns:
+#' The data frame has the following columns:
 #'
-#' \itemize{
-#' \item{age: }{age in years}
-#' \item{sex: }{"male" or "female"}
-#' \item{quantile: }{he quantile}
-#' \item{value: }{the lab value}
-#' \item{unit: }{the lab unit}
-#' \item{lab: }{the lab name}
+#' \describe{
+#' \item{age}{age in years}
+#' \item{sex}{"male" or "female"}
+#' \item{quantile}{the quantile}
+#' \item{value}{the lab value}
+#' \item{unit}{the lab unit}
+#' \item{lab}{the lab name}
 #' }
 #'
 #' \code{ln_patients_quantile_value} returns a vector of value per patient.

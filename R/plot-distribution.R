@@ -167,7 +167,9 @@ ln_plot_dist <- function(lab,
         ylab(glue("{lab} ({lab_info$default_units})")) +
         xlab("Age") +
         scale_x_continuous(breaks = seq(min(df_full$age), max(df_full$age), by = 10)) +
-        scale_y_continuous(breaks = scales::extended_breaks(n = 4), minor_breaks = scales::extended_breaks(n = 20)) +
+        # minor_breaks takes only the limits: ggplot2 >= 3.5 passes the major breaks as a second
+        # argument to a two-argument function, and extended_breaks() would take them as `n`
+        scale_y_continuous(breaks = scales::extended_breaks(n = 4), minor_breaks = function(limits) scales::extended_breaks(n = 20)(limits)) +
         theme_linedraw() +
         theme(strip.background = element_blank(), panel.border = element_rect(color = "black"), strip.text = element_text(color = "black"), panel.ontop = TRUE, panel.background = element_blank())
 

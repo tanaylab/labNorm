@@ -38,15 +38,15 @@ ln_patients_quantile_value(
 }
 \value{
 \code{ln_quantile_value} returns a data frame which contains the values for each combination of quantile, age and sex.
-The data frame has the the following columns:
+The data frame has the following columns:
 
-\itemize{
-\item{age: }{age in years}
-\item{sex: }{"male" or "female"}
-\item{quantile: }{he quantile}
-\item{value: }{the lab value}
-\item{unit: }{the lab unit}
-\item{lab: }{the lab name}
+\describe{
+\item{age}{age in years}
+\item{sex}{"male" or "female"}
+\item{quantile}{the quantile}
+\item{value}{the lab value}
+\item{unit}{the lab unit}
+\item{lab}{the lab name}
 }
 
 \code{ln_patients_quantile_value} returns a vector of value per patient.
