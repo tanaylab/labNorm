@@ -347,3 +347,36 @@ test_that("ln_normalize_clalit returns NA when code doesn't exist", {
 
     expect_equal(q, rep(NA, length(hemoglobin_50$value)))
 })
+
+test_that("ln_normalize works for labs with NA default units (#11)", {
+    skip_on_cran()
+    clean_downloaded_data()
+
+    # MPXI (lab.124) has NA units and NA default units
+    mpxi_values <- c(-6, 1.3, 7.4)
+
+    mockery::stub(ln_normalize, "yesno2", FALSE, depth = 2)
+    q <- ln_normalize(mpxi_values, 50, "male", "MPXI")
+    expect_false(any(is.na(q)))
+
+    expected <- pkgenv$Clalit[["MPXI"]][["50.male"]](mpxi_values)
+    expect_equal(q, expected)
+    expect_equal(ln_normalize(mpxi_values, 50, "male", "MPXI", units = NA), expected)
+    expect_equal(ln_normalize_clalit(mpxi_values, 50, "male", "lab.124"), expected)
+    expect_equal(
+        ln_normalize_multi(data.frame(value = mpxi_values, age = 50, sex = "male", lab = "MPXI")),
+        expected
+    )
+
+    # Total:HDL (lab.33300) has "" and "ratio units" as units, and NA default units
+    ratio_values <- c(3.3, 4.8, 6.2)
+    q <- ln_normalize(ratio_values, 50, "male", "Total:HDL")
+    expect_false(any(is.na(q)))
+
+    expected <- pkgenv$Clalit[["Total:HDL"]][["50.male"]](ratio_values)
+    expect_equal(q, expected)
+    expect_equal(ln_normalize(ratio_values, 50, "male", "Total:HDL", units = NA), expected)
+    expect_equal(ln_normalize(ratio_values, 50, "male", "Total:HDL", units = "ratio units"), expected)
+    expect_equal(ln_normalize(ratio_values, 50, "male", "Total:HDL", units = c("ratio units", NA, "")), expected)
+    expect_equal(ln_normalize_clalit(ratio_values, 50, "male", "lab.33300"), expected)
+})

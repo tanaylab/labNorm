@@ -1,3 +1,7 @@
+# labNorm 1.0.4
+
+* Fix: `ln_normalize` and related functions now work for labs without default units (e.g. MPXI, `lab.124`, which used to return only NA, and ratio labs such as Total:HDL, which used to fail with an "Invalid units" error) (#11).
+
 # labNorm 1.0.3
 
 * Fix: `ln_normalize_ukbb` and `ln_normalize_clalit` now return NA when the lab code is not found in the reference table.

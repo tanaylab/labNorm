@@ -106,3 +106,17 @@ test_that("ln_lab_units() returns a vector of available units for the lab", {
     expect_true(is.character(units))
     expect_true(length(units) > 0)
 })
+
+test_that("unit conversion works for labs with NA default units (#11)", {
+    # MPXI has NA units
+    expect_equal(ln_convert_units(c(1, 2, 3), NA, "MPXI"), c(1, 2, 3))
+
+    # Total:HDL has "" and "ratio units" as units, and NA default units
+    expect_equal(ln_convert_units(c(1, 2, 3), NA, "Total:HDL"), c(1, 2, 3))
+    expect_equal(ln_convert_units(c(1, 2, 3), "ratio units", "Total:HDL"), c(1, 2, 3))
+    expect_equal(ln_convert_units(c(1, 2, 3), c("ratio units", NA, ""), "Total:HDL"), c(1, 2, 3))
+    expect_error(ln_convert_units(c(1, 2, 3), "mg/dL", "Total:HDL"))
+
+    # NA units are still invalid for labs with default units
+    expect_error(ln_convert_units(c(1, 2, 3), NA, "Hemoglobin"))
+})

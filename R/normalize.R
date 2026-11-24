@@ -229,7 +229,8 @@ ln_normalize <- function(values, age, sex, lab, units = NULL, reference = "Clali
     # convert units if needed
     values <- ln_convert_units(values, units, lab)
 
-    f_good <- !is.na(values) & !is.na(age) & !is.na(sex) & !is.na(units)
+    # units were validated above: NA units are only valid for labs without default units (e.g. MPXI), so they are not filtered out
+    f_good <- !is.na(values) & !is.na(age) & !is.na(sex)
     normalized <- rep(NA, length(values[f_good]))
     good_values <- values[f_good]
 

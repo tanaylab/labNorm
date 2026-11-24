@@ -7,8 +7,14 @@ validate_lab <- function(lab) {
 validate_units <- function(units, lab) {
     lab_info <- get_lab_info(lab)
 
-    if (!all(units %in% lab_info$units[[1]])) {
-        bad_values <- unique(units[!(units %in% lab_info$units[[1]])])
+    valid_units <- lab_info$units[[1]]
+    # labs without default units (e.g. ratios such as Total:HDL) also accept NA units
+    if (is.na(lab_info$default_units)) {
+        valid_units <- c(valid_units, NA)
+    }
+
+    if (!all(units %in% valid_units)) {
+        bad_values <- unique(units[!(units %in% valid_units)])
         cli::cli_abort("Invalid units: {.val {bad_values}} for lab {.field {lab}}. Available units are: {.val {lab_info$units[[1]]}}.", call = parent.frame(1))
     }
 }
