@@ -81,6 +81,20 @@ test_that("ln_plot_dist() can plot the demo data", {
     expect_true("ggplot" %in% class(p8))
 })
 
+test_that("ln_plot_dist() plots can be drawn", {
+    # Building the plot computes the breaks; the class checks above never did, so they
+    # missed ggplot2 passing the major breaks to minor_breaks as a second argument.
+    p <- ln_plot_dist("Hemoglobin", reference = "Clalit-demo")
+    expect_no_error(ggplot2::ggplot_build(p))
+
+    set.seed(60427)
+    p <- ln_plot_dist("Hemoglobin", patients = dplyr::sample_n(hemoglobin_data, 3), reference = "Clalit-demo")
+    expect_no_error(ggplot2::ggplot_build(p))
+
+    p <- ln_plot_dist("Creatinine", sex = "female", ylim = c(0, 2), reference = "Clalit-demo")
+    expect_no_error(ggplot2::ggplot_build(p))
+})
+
 test_that("ln_plot_dist() throws an error if the patients parameter is not a data frame", {
     expect_error(ln_plot_dist("Hemoglobin", patients = c(1, 2, 3), reference = "Clalit-demo"))
 })
