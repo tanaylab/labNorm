@@ -12,7 +12,7 @@ Suggests:
     covr,
     mockery,
     spelling,
-    testthat (>= 3.0.0)
+    testthat (>= 3.1.5)
 Config/testthat/edition: 3
 Config/testthat/start-first: download
 Encoding: UTF-8
